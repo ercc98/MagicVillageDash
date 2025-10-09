@@ -1,0 +1,80 @@
+# Magic Village Dash
+
+Magic Village Dash is a stylized three-lane endless runner built with Unity. Guide your character through a colorful village, dodge hazards, collect coins, and push for new personal bests while the environment streams endlessly toward the camera.
+
+## Project Highlights
+
+- **Responsive lane running** – `LaneRunner` combines CharacterController movement with lane snapping, jump, and slide actions for responsive touch-based play.
+- **Procedural world streaming** – The world system continuously spawns and recycles chunks while advancing them using a shared `GameSpeedController` so gameplay feels seamless.
+- **Collectible economy** – Coin prefabs spawn on rails, snap to the runner, and update the run score via the `CoinCounter` and `RunScoreSystem` components.
+- **Persistent best runs** – `RunScoreSystem` saves high scores, farthest distance, and best coin haul using the shared `SaveService` utility so players can chase long-term goals.
+- **Modular audio** – `MagicVillageDashAudioManager` provides category-aware playback helpers built on the reusable ErccDev audio toolkit.
+
+## Repository Structure
+
+```
+Assets/
+  Animations/          Animation clips, controllers, and timelines.
+  Images/, Models/,    Art assets for environments, props, and UI.
+  Prefabs/             Player, world chunks, collectibles, and UI prefabs.
+  Scenes/              `IntroScene` (title) and `RunnerScene` (core gameplay).
+  Scripts/
+    ErccDev/           Shared tooling: audio, bootstrap, save system, input glue.
+    MagicVillageDash/  Game-specific scripts (runner motor, world, UI, etc.).
+Packages/              Unity package manifest and lock file.
+ProjectSettings/       Project-wide Unity configuration.
+```
+
+## Requirements
+
+- **Unity Editor**: 6000.2.6f2 (Unity 6) or newer.
+- **Unity Input System** package enabled (already referenced in `Packages/manifest.json`).
+- Tested with URP for rendering (configured via the Universal RP package).
+
+## Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/<your-org>/MagicVillageDash.git
+   ```
+2. **Open in Unity Hub**
+   - Add the cloned folder and select the Unity 6000.2.6f2 editor (or newer 6.x release).
+3. **Install dependencies**
+   - Unity will resolve packages listed in `Packages/manifest.json` automatically. No manual imports are required for the included ErccDev tooling.
+4. **Open a scene**
+   - Start with `Assets/Scenes/IntroScene.unity` for the full title-to-run flow, or jump directly into `RunnerScene.unity` for immediate gameplay iteration.
+5. **Enter Play Mode** and test the game.
+
+## Controls
+
+The project uses the Unity Input System together with the reusable `ISwipeInput` abstraction from the ErccDev toolkit.
+
+| Action | Keyboard / Gamepad (in editor) | Touch / Mouse |
+| ------ | ------------------------------ | ------------- |
+| Move left/right | Arrow keys / A-D / gamepad d-pad or stick | Swipe left/right |
+| Jump | Space / South button | Swipe up or tap (if `tapTriggersJump` enabled) |
+| Slide | Left Ctrl / East button | Swipe down |
+
+> **Tip:** Assign an `ErccDev.Input.SwipeInputSystem` prefab to the `RunnerSwipeController` component to translate input events into runner commands.
+
+## Gameplay Loop
+
+1. Player spawns centered on the lane grid.
+2. `WorldMover` components translate environment chunks toward the camera while spawn controllers recycle new chunks ahead.
+3. Coins collected update the HUD and contribute to the score; distance traveled adds points over time.
+4. Colliding with `ObstacleHazard` prefabs ends the run; `RunScoreSystem.CommitIfBest()` persists new records.
+5. UI menus (`SimpleGameMenus`) transition between intro, gameplay, and game-over states.
+
+## Extending the Project
+
+- **Add new obstacles**: Create prefabs under `Assets/Prefabs/Obstacles`, implement the `ObstacleHazard` interface, and register them with the `ObstacleFactory` for runtime spawning.
+- **Customize scoring**: Tweak `pointsPerMeter` and `pointsPerCoin` on `RunScoreSystem` or add new score sources via its public API.
+- **Audio & VFX**: Use the audio manager helpers (`Play`, `PlayLoop`, `StopLoop`) to trigger sounds from gameplay scripts, and extend URP materials for additional polish.
+
+## Licensing
+
+Include the appropriate license information for your project or external assets here.
+
+---
+
+Magic Village Dash is a great starting point for building mobile-friendly endless runners with modular systems you can adapt to new themes and mechanics. Have fun experimenting!
