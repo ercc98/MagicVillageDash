@@ -1,0 +1,20 @@
+{
+    "name": "MagicVillageDash",
+    "rootNamespace": "MagicVillageDash",
+    "references": [
+        "ErccDev.Input",
+        "ErccDev.Core",
+        "ErccDev.Loader",
+        "Unity.TextMeshPro",
+        "ErccDev.Audio"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,3 @@
+repository "MagicVillageDash/MagicVillageDash@616181@cloud"
+  path "/"
+    smartbranch "/main/Develop"

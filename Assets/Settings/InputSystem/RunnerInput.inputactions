@@ -1,0 +1,67 @@
+{
+    "version": 1,
+    "name": "RunnerInput",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "5f9e0c25-3649-4eea-a86b-e07f96903ccb",
+            "actions": [
+                {
+                    "name": "Position",
+                    "type": "Value",
+                    "id": "0824b3e5-049e-4cdf-a895-e74d7f64e5b3",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Press",
+                    "type": "Button",
+                    "id": "53dc50db-3d35-42e6-96bf-ca1b1c0d70c9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fc840606-a328-40fb-a9a3-fa15d942623f",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";RunnerScheme",
+                    "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e983169c-fe3e-419a-afac-8aaa8a8a7119",
+                    "path": "<Pointer>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";RunnerScheme",
+                    "action": "Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "RunnerScheme",
+            "bindingGroup": "RunnerScheme",
+            "devices": [
+                {
+                    "devicePath": "<Pointer>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
