@@ -1,6 +1,5 @@
 using UnityEngine;
-using ErccDev.Audio;
-
+using ErccDev.Foundation.Audio;
 namespace MagicVillageDash.Audio
 {
     public sealed class MagicVillageDashAudioManager : AudioManagerBase

@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using ErccDev.Core.Save; // SaveService
+using ErccDev.Foundation.Core.Save; // SaveService
 using UnityEngine.Events;
 
 namespace MagicVillageDash.Score

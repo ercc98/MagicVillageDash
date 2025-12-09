@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.erccdev.foundation": {
+      "version": "https://github.com/ercc98/Foundation.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.addressables": "2.7.4"
+      },
+      "hash": "e611daab369fb59c204a15ef4eca212f6e5cb52a"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
@@ -7,8 +16,8 @@
       "dependencies": {}
     },
     "com.unity.addressables": {
-      "version": "2.7.3",
-      "depth": 0,
+      "version": "2.7.4",
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.profiling.core": "1.0.2",
@@ -17,7 +26,7 @@
         "com.unity.modules.jsonserialize": "1.0.0",
         "com.unity.modules.imageconversion": "1.0.0",
         "com.unity.modules.unitywebrequest": "1.0.0",
-        "com.unity.scriptablebuildpipeline": "2.4.2",
+        "com.unity.scriptablebuildpipeline": "2.4.3",
         "com.unity.modules.unitywebrequestassetbundle": "1.0.0"
       },
       "url": "https://packages.unity.com"
@@ -165,8 +174,8 @@
       }
     },
     "com.unity.scriptablebuildpipeline": {
-      "version": "2.4.2",
-      "depth": 1,
+      "version": "2.4.3",
+      "depth": 2,
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.4.5",

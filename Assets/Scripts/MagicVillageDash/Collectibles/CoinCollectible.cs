@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using ErccDev.Core.Gameplay;
+using ErccDev.Foundation.Core.Gameplay;
 using MagicVillageDash.Score;
 using MagicVillageDash.Audio;
 using MagicVillageDash.World;

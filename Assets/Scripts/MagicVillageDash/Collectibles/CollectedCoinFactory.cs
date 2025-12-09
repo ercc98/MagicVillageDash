@@ -1,5 +1,5 @@
 using UnityEngine;
-using ErccDev.Core.Factories;          // your generic Factory<T>
+using ErccDev.Foundation.Core.Factories;          // your generic Factory<T>
 
 namespace MagicVillageDash.Collectibles
 {

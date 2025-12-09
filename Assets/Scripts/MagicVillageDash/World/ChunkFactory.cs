@@ -1,5 +1,5 @@
 using UnityEngine;
-using ErccDev.Core.Factories;
+using ErccDev.Foundation.Core.Factories;
 
 namespace MagicVillageDash.World
 {

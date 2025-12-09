@@ -2,8 +2,8 @@
 // Glue: subscribes to ErccDev.Input.ISwipeInput and commands MagicVillageDash.Runner.LaneRunner.
 
 using UnityEngine;
-using ErccDev.Input;              // ISwipeInput (generic lib)
-using MagicVillageDash.Runner;    // LaneRunner (your player motor)
+using MagicVillageDash.Runner;
+using ErccDev.Foundation.Input.Swipe;
 
 namespace MagicVillageDash.Input
 {
@@ -12,7 +12,7 @@ namespace MagicVillageDash.Input
     public sealed class RunnerSwipeController : MonoBehaviour
     {
         [Header("Input Provider")]
-        [Tooltip("Assign a component that implements ISwipeInput (e.g., ErccDev.Input.SwipeInputSystem).")]
+        [Tooltip("Assign a component that implements ISwipeInput (e.g., ErccDev.Foundation.Input.SwipeInputSystem).")]
         [SerializeField] private MonoBehaviour swipeProvider;
 
         [Header("Options")]

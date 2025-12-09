@@ -172,7 +172,7 @@ namespace ErccDev.Bootstrap
         {
             if (preferSceneLoader)
             {
-                var loader = FindAnyObjectByType<Loader.SceneLoader>(FindObjectsInactive.Exclude);
+                var loader = FindAnyObjectByType<Foundation.Loader.SceneLoader>(FindObjectsInactive.Exclude);
                 if (loader != null)
                 {
                     loader.LoadSceneAsync(nextSceneName, additive: false);

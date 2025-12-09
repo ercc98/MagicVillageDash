@@ -2,11 +2,10 @@
     "name": "MagicVillageDash",
     "rootNamespace": "MagicVillageDash",
     "references": [
-        "ErccDev.Input",
-        "ErccDev.Core",
-        "ErccDev.Loader",
         "Unity.TextMeshPro",
-        "ErccDev.Audio"
+        "ErccDev.Foundation",
+        "Unity.InputSystem",
+        "Unity.Addressables"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
