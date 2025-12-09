@@ -33,9 +33,9 @@ namespace MagicVillageDash.Score
         public event Action<int>   BestScoreChanged;
         public event Action<float> BestDistanceChanged;
 
-        [SerializeField] private UnityEvent<int>   onScoreChanged;
-        [SerializeField] private UnityEvent<int>   onBestScoreChanged;
-        [SerializeField] private UnityEvent<float> onBestDistanceChanged;
+        [SerializeField] private Action<int>   onScoreChanged;
+        [SerializeField] private Action<int>   onBestScoreChanged;
+        [SerializeField] private Action<float> onBestDistanceChanged;
 
         const string kSaveFile = "run_stats.json";
 

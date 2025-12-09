@@ -21,7 +21,7 @@ namespace MagicVillageDash.World
         [SerializeField] bool ensureAtLeastOneSafeLane = true;
         public float ChunkLength { get; set; } = 24f;
 
-        
+
         public void Spawn()
         {
             if (lanePoints == null || lanePoints.Length == 0) return;
@@ -29,21 +29,18 @@ namespace MagicVillageDash.World
             bool[] blocked = new bool[lanePoints.Length];
 
             // obstacles
-            for (int i = 0; i < lanePoints.Length; i++)
-            {
-                if (obstacleFactories == null) break;
-                if (Random.value <= obstacleChancePerLane)
-                {
-                    var f = obstacleFactories[Random.Range(0, obstacleFactories.Length)];
-                    if (f)
-                    {
-                        f.Spawn(transform, lanePoints[i].position, lanePoints[i].rotation, true);
-                        blocked[i] = true;
-                    }
-                }
-            }
+            SpawnObstaclesInLane(blocked);
 
             // Ensure at least one safe lane
+            OneSafeLane(blocked);
+
+            float deltaCoinPosition = ChunkLength / coinLinePerChunk;
+            // 2) Coins via factory on SAFE lanes
+            //SpawnCoinsInLane(blocked, deltaCoinPosition);
+        }
+
+        private void OneSafeLane(bool[] blocked)
+        {
             if (ensureAtLeastOneSafeLane)
             {
                 bool anySafe = false;
@@ -72,12 +69,31 @@ namespace MagicVillageDash.World
                     }
                 }
             }
-            float deltaCoinPosition = ChunkLength / coinLinePerChunk;
-            // 2) Coins via factory on SAFE lanes
+        }
+        private void SpawnObstaclesInLane(bool[] blocked)
+        {
+            for (int i = 0; i < lanePoints.Length; i++)
+            {
+                if (blocked[i] || obstacleFactories == null) continue;
+
+                if (Random.value <= obstacleChancePerLane)
+                {
+                    var f = obstacleFactories[Random.Range(0, obstacleFactories.Length)];
+                    if (f)
+                    {
+                        f.Spawn(transform, lanePoints[i].position, lanePoints[i].rotation, true);
+                        blocked[i] = true;
+                    }
+                }
+            }
+        }
+        
+        private void SpawnCoinsInLane(bool[] blocked, float deltaCoinPosition)
+        {
             for (int i = 0; i < lanePoints.Length; i++)
             {
                 if (blocked[i] || !coinFactory) continue;
-                
+
                 for (int j = 0; j < coinLinePerChunk; j++) // try twice per lane
                 {
                     if (Random.value <= coinChancePerLane)
@@ -87,7 +103,6 @@ namespace MagicVillageDash.World
                         coinFactory.Spawn(transform, pos, lanePoints[i].rotation, true);
                     }
                 }
-
             }
         }
     }

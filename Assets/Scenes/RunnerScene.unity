@@ -2489,15 +2489,6 @@ MonoBehaviour:
   bestScore: 0
   bestDistanceMeters: 0
   bestCoins: 0
-  onScoreChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  onBestScoreChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  onBestDistanceChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &902161400
 Transform:
   m_ObjectHideFlags: 0
@@ -3627,6 +3618,10 @@ PrefabInstance:
       propertyPath: generator
       value: 
       objectReference: {fileID: 1927859379}
+    - target: {fileID: 7304946214920014692, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7764970446850298330, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
       propertyPath: m_Name
       value: ChunkPrefab_2
@@ -5625,6 +5620,10 @@ PrefabInstance:
       propertyPath: generator
       value: 
       objectReference: {fileID: 1927859379}
+    - target: {fileID: 7304946214920014692, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7764970446850298330, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
       propertyPath: m_Name
       value: ChunkPrefab_3
@@ -6595,6 +6594,10 @@ PrefabInstance:
       propertyPath: generator
       value: 
       objectReference: {fileID: 1927859379}
+    - target: {fileID: 7304946214920014692, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7764970446850298330, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
       propertyPath: m_Name
       value: ChunkPrefab_4
@@ -7079,8 +7082,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1674153594}
     - target: {fileID: 2566588202792660467, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
+      propertyPath: coinLinePerChunk
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566588202792660467, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
       propertyPath: coinChancePerLane
-      value: 0.186
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2566588202792660467, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
       propertyPath: 'obstacleFactories.Array.data[0]'
@@ -7126,6 +7133,10 @@ PrefabInstance:
       propertyPath: generator
       value: 
       objectReference: {fileID: 1927859379}
+    - target: {fileID: 7304946214920014692, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7764970446850298330, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
       propertyPath: m_Name
       value: ChunkPrefab
