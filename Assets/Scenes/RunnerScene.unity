@@ -2481,8 +2481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d406fa2ee7beba34bace3b6504686a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Score.RunScoreSystem
-  distance: {fileID: 1273369897}
-  coins: {fileID: 1511992652}
+  distanceProvider: {fileID: 1273369897}
+  coinsProvider: {fileID: 1511992652}
   pointsPerMeter: 1
   pointsPerCoin: 10
   currentScore: 0
