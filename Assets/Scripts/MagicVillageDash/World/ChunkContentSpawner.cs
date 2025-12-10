@@ -100,7 +100,8 @@ namespace MagicVillageDash.World
                     {
                         // Slight vertical offset so coin sits above ground
                         var pos = lanePoints[i].position + Vector3.up * 1.5f + deltaCoinPosition * j * Vector3.forward;
-                        coinFactory.Spawn(transform, pos, lanePoints[i].rotation, true);
+                        CoinCollectible thiscoin = coinFactory.Spawn( pos, lanePoints[i].rotation);
+                        thiscoin.transform.SetParent(transform, true);
                     }
                 }
             }

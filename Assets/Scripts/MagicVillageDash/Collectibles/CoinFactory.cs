@@ -16,12 +16,10 @@ namespace MagicVillageDash.Collectibles
             base.Awake();          // ensures WarmPool()
             
         }
-
-        public CoinCollectible Spawn(Transform parent, Vector3 position, Quaternion rotation, bool worldSpace = true)
+        public override CoinCollectible Spawn(Vector3 position, Quaternion rotation, Transform parent = null)
         {
             var coin = base.Spawn(position, rotation);
-            coin.transform.SetParent(parent, worldSpace);
-            
+            coin.transform.SetParent(parent, true);
             var chunk = parent.GetComponentInParent<ChunkRoot>();
             coin.Owner = chunk;
             if (chunk) chunk.Register(coin);
@@ -29,9 +27,6 @@ namespace MagicVillageDash.Collectibles
             coin.Collected += HandleCollected;
             return coin;
         }
-
-        public CoinCollectible Spawn(Transform parent)
-            => Spawn(parent, parent.position, parent.rotation, true);
 
         public override void Recycle(CoinCollectible instance)
         {

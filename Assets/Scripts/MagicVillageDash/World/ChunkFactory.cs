@@ -5,7 +5,7 @@ namespace MagicVillageDash.World
 {
     public sealed class ChunkFactory : Factory<ChunkRoot>
     {
-        public override ChunkRoot Spawn(Vector3 position, Quaternion rotation)
+        public override ChunkRoot Spawn(Vector3 position, Quaternion rotation, Transform parent = null)
         {
             var chunk = base.Spawn(position, rotation);
             return chunk;

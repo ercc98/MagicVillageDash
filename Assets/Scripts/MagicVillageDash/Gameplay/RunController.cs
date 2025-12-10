@@ -21,9 +21,8 @@ namespace MagicVillageDash.Runner
         ICoinCounter         coinCounter;
         IGameSpeedController gameSpeedController;
 
-        protected override void Awake()
+        void Awake()
         {
-            base.Awake();
             runScoreSystem = runScoreSystemProvider as IRunScoreSystem ?? FindAnyObjectByType<RunScoreSystem>(FindObjectsInactive.Exclude);
             distanceTracker = distanceTrackerProvider as IDistanceTracker ?? FindAnyObjectByType<DistanceTracker>(FindObjectsInactive.Exclude);
             coinCounter = coinCounterProvider as ICoinCounter ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
@@ -67,14 +66,12 @@ namespace MagicVillageDash.Runner
 
         protected override void OnSessionStarted()
         {
-            AudioService?.Play("run_start", SoundCategory.SFX);
         }
 
         protected override void OnSessionEnded()
         {
             runScoreSystem?.CommitIfBest();
             gameSpeedController?.SetSpeed(0f);
-            AudioService?.Play("game_over", SoundCategory.SFX);
         }
     }
 }

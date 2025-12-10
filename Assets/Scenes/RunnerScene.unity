@@ -1392,7 +1392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049a7fc901304e242b4f731ce26bf24e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Runner.RunController
-  audioProvider: {fileID: 1168325285}
   runScoreSystemProvider: {fileID: 902161399}
   distanceTrackerProvider: {fileID: 1273369897}
   coinCounterProvider: {fileID: 1511992652}
@@ -5441,7 +5440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.UI.CoinHUDText
   label: {fileID: 1873515721}
   counter: {fileID: 0}
-  format: $ {0}
+  format: '{0}'
 --- !u!1001 &1645509148
 PrefabInstance:
   m_ObjectHideFlags: 0

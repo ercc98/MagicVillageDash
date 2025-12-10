@@ -1,3 +1,4 @@
+using ErccDev.Foundation.Core.Factories;
 using UnityEngine;
 
 namespace MagicVillageDash.Collectibles
@@ -10,7 +11,8 @@ namespace MagicVillageDash.Collectibles
     public sealed class CoinRailGenerator : MonoBehaviour
     {
         [Header("Factory")]
-        [SerializeField] private CoinFactory coinFactory;
+        [SerializeField] private CoinFactory coinFactoryProvider;
+        IFactory<CoinCollectible> iCoinFactory;
 
         [Header("Lanes (global, symmetric)")]
         [SerializeField, Min(2)] private int laneCount = 3;
@@ -56,7 +58,6 @@ namespace MagicVillageDash.Collectibles
         public void FillRange(Transform parent, float zStart, float zEnd)
         {
             
-            if (!coinFactory) return;
             if (!_initialized) InitializeAt(zStart);
 
             // Ensure monotonic coin Z
@@ -77,8 +78,7 @@ namespace MagicVillageDash.Collectibles
                     : Mathf.Lerp(LaneX(_currentLane), LaneX(_targetLane), Mathf.InverseLerp(_segStartZ, _segEndZ, z));
 
                 // Spawn coin at (x, coinHeight, z), parented under the chunk (worldSpace: true)
-                coinFactory.Spawn(parent, new Vector3(x, coinHeight, z), Quaternion.identity, true);
-
+                iCoinFactory.Spawn( new Vector3(x, coinHeight, z), Quaternion.identity, parent);
                 _lastCoinZ = z;
                 z += coinSpacingZ;
             }
@@ -96,6 +96,8 @@ namespace MagicVillageDash.Collectibles
             _initialized = true;
             if (_lastCoinZ == float.NegativeInfinity)
                 _lastCoinZ = startZ - coinSpacingZ;
+
+            iCoinFactory = coinFactoryProvider as IFactory<CoinCollectible> ?? FindAnyObjectByType<CoinFactory>(FindObjectsInactive.Exclude);
         }
 
         void PlanNextSegment()
