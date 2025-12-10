@@ -7,7 +7,7 @@
       "dependencies": {
         "com.unity.addressables": "2.7.4"
       },
-      "hash": "e611daab369fb59c204a15ef4eca212f6e5cb52a"
+      "hash": "91c6ade2e2fe8fe54947ee1126ba92361d36e335"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",

@@ -5,11 +5,11 @@ using ErccDev.Foundation.Core.Save; // SaveService
 namespace MagicVillageDash.Score
 {
     /// <summary>Aggregates coins + distance into a single score.</summary>
-    public sealed class RunScoreSystem : MonoBehaviour
+    public sealed class RunScoreSystem : MonoBehaviour, IRunScoreSystem
     {
         [Header("Sources")]
-        [SerializeField] private DistanceTracker distance;
-        [SerializeField] private CoinCounter     coins;
+        [SerializeField] private MonoBehaviour distanceProvider;
+        [SerializeField] private MonoBehaviour coinsProvider;
 
         [Header("Scoring")]
         [Tooltip("Points per whole meter traveled.")]
@@ -38,6 +38,9 @@ namespace MagicVillageDash.Score
 
         const string kSaveFile = "run_stats.json";
 
+        IDistanceTracker distance;
+        ICoinCounter     coins;
+
         [Serializable]
         private class RunStatsData
         {
@@ -48,8 +51,10 @@ namespace MagicVillageDash.Score
 
         void Awake()
         {
-            if (!distance) distance = FindAnyObjectByType<DistanceTracker>(FindObjectsInactive.Exclude);
-            if (!coins)    coins    = FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
+            distance = distanceProvider as IDistanceTracker
+                       ?? FindAnyObjectByType<DistanceTracker>(FindObjectsInactive.Exclude);
+            coins    = coinsProvider    as ICoinCounter
+                       ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
 
             // Load bests
             if (SaveService.TryLoadObject(kSaveFile, out RunStatsData data))
@@ -63,19 +68,19 @@ namespace MagicVillageDash.Score
         void OnEnable()
         {
             if (distance != null) distance.DistanceChanged += RecomputeScore;
-            if (coins    != null) coins.CoinsChanged       += _ => RecomputeScore(distance ? distance.DistanceMeters : 0f);
+            if (coins    != null) coins.CoinsChanged       += OnCoinsChanged;
         }
 
         void OnDisable()
         {
             if (distance != null) distance.DistanceChanged -= RecomputeScore;
-            if (coins    != null) coins.CoinsChanged       -= _ => RecomputeScore(distance ? distance.DistanceMeters : 0f);
+            if (coins    != null) coins.CoinsChanged       -= OnCoinsChanged;
         }
 
         void RecomputeScore(float meters)
         {
             int metersPoints = Mathf.FloorToInt(meters) * pointsPerMeter;
-            int coinPoints   = (coins ? coins.Coins : 0) * pointsPerCoin;
+            int coinPoints   = (coins != null ? coins.Coins : 0) * pointsPerCoin;
             int newScore     = metersPoints + coinPoints;
 
             if (newScore != currentScore)
@@ -86,11 +91,16 @@ namespace MagicVillageDash.Score
             }
         }
 
+        void OnCoinsChanged(int _)
+        {
+            RecomputeScore(distance != null ? distance.DistanceMeters : 0f);
+        }
+
         /// <summary>Call at Game Over to save bests.</summary>
         public void CommitIfBest()
         {
-            float dist = distance ? distance.DistanceMeters : 0f;
-            int   c    = coins ? coins.Coins : 0;
+            float dist = distance != null ? distance.DistanceMeters : 0f;
+            int   c    = coins != null ? coins.Coins : 0;
 
             bool changed = false;
 

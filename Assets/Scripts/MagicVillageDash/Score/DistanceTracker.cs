@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace MagicVillageDash.Score
 {
     /// <summary>Integrates world speed to meters. Player is stationary, world moves on -Z.</summary>
-    public sealed class DistanceTracker : MonoBehaviour
+    public sealed class DistanceTracker : MonoBehaviour, IDistanceTracker
     {
         [SerializeField] private GameSpeedController speedSource;
         [SerializeField] private bool autoRun = true;

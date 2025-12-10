@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace MagicVillageDash.Score
 {
-    public sealed class CoinCounter : MonoBehaviour
+    public sealed class CoinCounter : MonoBehaviour, ICoinCounter
     {
         public int Coins { get; private set; }
         // Code subscribers (typed, safe)

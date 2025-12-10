@@ -3,7 +3,7 @@ using UnityEngine;
 namespace MagicVillageDash.World
 {
     /// <summary>Holds the forward world speed. Everyone reads from here.</summary>
-    public sealed class GameSpeedController : MonoBehaviour
+    public sealed class GameSpeedController : MonoBehaviour, IGameSpeedController
     {
         [SerializeField] private float baseSpeed = 8f;
         [SerializeField] private float accelerationPerSecond = 0.15f;
