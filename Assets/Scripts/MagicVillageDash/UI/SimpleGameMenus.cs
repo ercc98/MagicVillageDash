@@ -1,9 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using ErccDev.Foundation.Core.Gameplay;
-using MagicVillageDash.Score;
-using MagicVillageDash.World;
-using ErccDev.Foundation.Loader;
 
 namespace MagicVillageDash.UI
 {
