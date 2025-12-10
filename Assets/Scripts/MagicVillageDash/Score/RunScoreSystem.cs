@@ -8,8 +8,8 @@ namespace MagicVillageDash.Score
     public sealed class RunScoreSystem : MonoBehaviour, IRunScoreSystem
     {
         [Header("Sources")]
-        [SerializeField] private MonoBehaviour distanceProvider;
-        [SerializeField] private MonoBehaviour coinsProvider;
+        [SerializeField] private MonoBehaviour distanceTrackerProvider;
+        [SerializeField] private MonoBehaviour coinCounterProvider;
 
         [Header("Scoring")]
         [Tooltip("Points per whole meter traveled.")]
@@ -38,8 +38,8 @@ namespace MagicVillageDash.Score
 
         const string kSaveFile = "run_stats.json";
 
-        IDistanceTracker distance;
-        ICoinCounter     coins;
+        IDistanceTracker distanceTracker;
+        ICoinCounter     coinCounter;
 
         [Serializable]
         private class RunStatsData
@@ -51,10 +51,8 @@ namespace MagicVillageDash.Score
 
         void Awake()
         {
-            distance = distanceProvider as IDistanceTracker
-                       ?? FindAnyObjectByType<DistanceTracker>(FindObjectsInactive.Exclude);
-            coins    = coinsProvider    as ICoinCounter
-                       ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
+            distanceTracker = distanceTrackerProvider   as IDistanceTracker     ?? FindAnyObjectByType<DistanceTracker>(FindObjectsInactive.Exclude);
+            coinCounter     = coinCounterProvider       as ICoinCounter         ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
 
             // Load bests
             if (SaveService.TryLoadObject(kSaveFile, out RunStatsData data))
@@ -67,20 +65,20 @@ namespace MagicVillageDash.Score
 
         void OnEnable()
         {
-            if (distance != null) distance.DistanceChanged += RecomputeScore;
-            if (coins    != null) coins.CoinsChanged       += OnCoinsChanged;
+            if (distanceTracker != null) distanceTracker.DistanceChanged += RecomputeScore;
+            if (coinCounter    != null) coinCounter.CoinsChanged       += OnCoinsChanged;
         }
 
         void OnDisable()
         {
-            if (distance != null) distance.DistanceChanged -= RecomputeScore;
-            if (coins    != null) coins.CoinsChanged       -= OnCoinsChanged;
+            if (distanceTracker != null) distanceTracker.DistanceChanged -= RecomputeScore;
+            if (coinCounter    != null) coinCounter.CoinsChanged       -= OnCoinsChanged;
         }
 
         void RecomputeScore(float meters)
         {
             int metersPoints = Mathf.FloorToInt(meters) * pointsPerMeter;
-            int coinPoints   = (coins != null ? coins.Coins : 0) * pointsPerCoin;
+            int coinPoints   = (coinCounter != null ? coinCounter.Coins : 0) * pointsPerCoin;
             int newScore     = metersPoints + coinPoints;
 
             if (newScore != currentScore)
@@ -93,14 +91,14 @@ namespace MagicVillageDash.Score
 
         void OnCoinsChanged(int _)
         {
-            RecomputeScore(distance != null ? distance.DistanceMeters : 0f);
+            RecomputeScore(distanceTracker != null ? distanceTracker.DistanceMeters : 0f);
         }
 
         /// <summary>Call at Game Over to save bests.</summary>
         public void CommitIfBest()
         {
-            float dist = distance != null ? distance.DistanceMeters : 0f;
-            int   c    = coins != null ? coins.Coins : 0;
+            float dist = distanceTracker != null ? distanceTracker.DistanceMeters : 0f;
+            int   c    = coinCounter != null ? coinCounter.Coins : 0;
 
             bool changed = false;
 
@@ -143,8 +141,8 @@ namespace MagicVillageDash.Score
             currentScore = 0;
             ScoreChanged?.Invoke(currentScore);
             onScoreChanged?.Invoke(currentScore);
-            coins?.ResetCoins(0);
-            distance?.ResetDistance();
+            coinCounter?.ResetCoins(0);
+            distanceTracker?.ResetDistance();
         }
     }
 }
