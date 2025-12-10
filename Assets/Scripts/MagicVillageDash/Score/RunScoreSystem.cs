@@ -65,13 +65,13 @@ namespace MagicVillageDash.Score
 
         void OnEnable()
         {
-            if (distanceTracker != null) distanceTracker.DistanceChanged += RecomputeScore;
+            if (distanceTracker != null) distanceTracker.OnDistanceChanged += RecomputeScore;
             if (coinCounter    != null) coinCounter.CoinsChanged       += OnCoinsChanged;
         }
 
         void OnDisable()
         {
-            if (distanceTracker != null) distanceTracker.DistanceChanged -= RecomputeScore;
+            if (distanceTracker != null) distanceTracker.OnDistanceChanged -= RecomputeScore;
             if (coinCounter    != null) coinCounter.CoinsChanged       -= OnCoinsChanged;
         }
 

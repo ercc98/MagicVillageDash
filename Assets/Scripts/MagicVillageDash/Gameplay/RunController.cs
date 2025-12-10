@@ -1,5 +1,7 @@
+using System;
 using ErccDev.Foundation.Audio;
 using ErccDev.Foundation.Core.Gameplay;
+using MagicVillageDash.Audio;
 using MagicVillageDash.Score;
 using MagicVillageDash.World;
 using UnityEngine;
@@ -22,10 +24,39 @@ namespace MagicVillageDash.Runner
         protected override void Awake()
         {
             base.Awake();
-            runScoreSystem      = runScoreSystemProvider    as IRunScoreSystem      ?? FindAnyObjectByType<RunScoreSystem>(FindObjectsInactive.Exclude);
-            distanceTracker     = distanceTrackerProvider   as IDistanceTracker     ?? FindAnyObjectByType<DistanceTracker>(FindObjectsInactive.Exclude);
-            coinCounter         = coinCounterProvider       as ICoinCounter         ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
-            gameSpeedController = gameSpeedProvider         as IGameSpeedController ?? FindAnyObjectByType<GameSpeedController>(FindObjectsInactive.Exclude);
+            runScoreSystem = runScoreSystemProvider as IRunScoreSystem ?? FindAnyObjectByType<RunScoreSystem>(FindObjectsInactive.Exclude);
+            distanceTracker = distanceTrackerProvider as IDistanceTracker ?? FindAnyObjectByType<DistanceTracker>(FindObjectsInactive.Exclude);
+            coinCounter = coinCounterProvider as ICoinCounter ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
+            gameSpeedController = gameSpeedProvider as IGameSpeedController ?? FindAnyObjectByType<GameSpeedController>(FindObjectsInactive.Exclude);
+            GameEvents.GameOver += OnGameOver;
+            GameEvents.GameStarted += OnGameStarted;
+        }
+
+        private void OnGameStarted()
+        {
+            coinCounter?.ResetCoins(0);
+            distanceTracker?.ResetDistance();
+            gameSpeedController?.ResetSpeed();
+            runScoreSystem?.ResetRun();
+            Time.timeScale = 1f;
+            distanceTracker?.StartRun();
+            MagicVillageDashAudioManager.Instance?.Play(MusicId.GameTheme2);
+        }
+
+
+        private void OnGameOver()
+        {            
+            distanceTracker?.StopRun();
+            runScoreSystem?.CommitIfBest();
+            MagicVillageDashAudioManager.Instance?.StopLoop(SoundCategory.Music);
+            Time.timeScale = 0f;
+        }
+
+
+        void OnDestroy()
+        {
+            GameEvents.GameOver   -= OnGameOver;
+            GameEvents.GameStarted -= OnGameStarted;
         }
 
         protected override void ResetSessionState()

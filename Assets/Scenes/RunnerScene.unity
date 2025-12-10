@@ -421,7 +421,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -3759801039292261521, guid: 7f2f8a6147374d14395d6f8925bbcfdf, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 03419c4a0cf6f4248a437982ad6ac424, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -1446,10 +1446,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.UI.SimpleGameMenus
   startPanel: {fileID: 187129427}
   gameOverPanel: {fileID: 2090966779}
-  distance: {fileID: 0}
-  coins: {fileID: 0}
-  score: {fileID: 0}
-  speed: {fileID: 0}
 --- !u!114 &432288930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3374,7 +3370,7 @@ MonoBehaviour:
   uiSource: {fileID: 1042238838}
   voiceSource: {fileID: 637776781}
   useSfxPool: 1
-  sfxVoices: 8
+  sfxVoices: 1
   audioMixer: {fileID: 24100000, guid: 7f2f8a6147374d14395d6f8925bbcfdf, type: 2}
 --- !u!4 &1168325286
 Transform:
@@ -3917,7 +3913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3346e0ff6676d4d99898dac16e32fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Score.DistanceTracker
-  speedSource: {fileID: 576670881}
+  gameSpeedProvider: {fileID: 576670881}
   autoRun: 1
   onDistanceChanged:
     m_PersistentCalls:
@@ -5409,7 +5405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1573209924
 RectTransform:
   m_ObjectHideFlags: 0

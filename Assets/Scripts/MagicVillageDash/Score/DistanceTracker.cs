@@ -14,7 +14,7 @@ namespace MagicVillageDash.Score
         public float DistanceMeters { get; private set; }
         public bool  IsRunning { get; private set; }
 
-        public event Action<float> DistanceChanged; // typed event
+        public event Action<float> OnDistanceChanged; // typed event
 
         [SerializeField] private UnityEvent<float> onDistanceChanged; // for UI via Inspector
 
@@ -34,7 +34,7 @@ namespace MagicVillageDash.Score
         {
             if (!IsRunning || gameSpeedController == null) return;
             DistanceMeters += gameSpeedController.CurrentSpeed * Time.deltaTime;
-            DistanceChanged?.Invoke(DistanceMeters);
+            OnDistanceChanged?.Invoke(DistanceMeters);
             onDistanceChanged?.Invoke(DistanceMeters);
         }
 
@@ -51,7 +51,7 @@ namespace MagicVillageDash.Score
         public void ResetDistance()
         {
             DistanceMeters = 0f;
-            DistanceChanged?.Invoke(DistanceMeters);
+            OnDistanceChanged?.Invoke(DistanceMeters);
             onDistanceChanged?.Invoke(DistanceMeters);
         }
     }

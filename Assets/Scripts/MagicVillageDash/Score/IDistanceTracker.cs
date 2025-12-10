@@ -5,7 +5,9 @@ namespace MagicVillageDash.Score
     public interface IDistanceTracker
     {
         float DistanceMeters { get; }
-        event Action<float> DistanceChanged;
+        event Action<float> OnDistanceChanged;
         void ResetDistance();
+        void StartRun();
+        void StopRun();
     }
 }

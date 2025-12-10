@@ -18,13 +18,13 @@ namespace MagicVillageDash.UI
 
         void OnEnable()
         {
-            if (distance) distance.DistanceChanged += OnDistanceChanged;
+            if (distance) distance.OnDistanceChanged += OnDistanceChanged;
             OnDistanceChanged(distance ? distance.DistanceMeters : 0f);
         }
 
         void OnDisable()
         {
-            if (distance) distance.DistanceChanged -= OnDistanceChanged;
+            if (distance) distance.OnDistanceChanged -= OnDistanceChanged;
         }
 
         void OnDistanceChanged(float meters)
