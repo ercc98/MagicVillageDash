@@ -31,7 +31,6 @@ namespace MagicVillageDash.Collectibles
                 float endZ = startZ + Mathf.Max(0.01f, chunk.ChunkLength);
                 generator.FillRange(transform, startZ, endZ);
                 spawned = true;
-                Debug.Log("CoinRailFiller OnEnable");
             }
         }
 
