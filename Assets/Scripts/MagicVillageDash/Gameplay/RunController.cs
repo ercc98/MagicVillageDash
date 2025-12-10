@@ -38,7 +38,6 @@ namespace MagicVillageDash.Runner
             distanceTracker?.ResetDistance();
             gameSpeedController?.ResetSpeed();
             runScoreSystem?.ResetRun();
-            Time.timeScale = 1f;
             distanceTracker?.StartRun();
             MagicVillageDashAudioManager.Instance?.Play(MusicId.GameTheme2);
         }
@@ -49,7 +48,6 @@ namespace MagicVillageDash.Runner
             distanceTracker?.StopRun();
             runScoreSystem?.CommitIfBest();
             MagicVillageDashAudioManager.Instance?.StopLoop(SoundCategory.Music);
-            Time.timeScale = 0f;
         }
 
 

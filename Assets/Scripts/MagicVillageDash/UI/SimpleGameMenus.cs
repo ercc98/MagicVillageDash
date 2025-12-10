@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using ErccDev.Foundation.Core.Gameplay;
 using MagicVillageDash.Score;
 using MagicVillageDash.World;
+using ErccDev.Foundation.Loader;
 
 namespace MagicVillageDash.UI
 {
@@ -12,13 +13,13 @@ namespace MagicVillageDash.UI
         [SerializeField] private GameObject startPanel;
         [SerializeField] private GameObject gameOverPanel;
 
+
         bool _started;
         bool _ended;
 
         void Awake()
         {
 
-            // Show start, hide game-over, pause time
             SetPanel(startPanel,  true);
             SetPanel(gameOverPanel, false);
             Time.timeScale = 0f;
@@ -43,10 +44,18 @@ namespace MagicVillageDash.UI
             _started = true;
             
             SetPanel(startPanel, false);
+            Time.timeScale = 1f;
 
             GameEvents.RaiseGameStarted();
         }
 
+        public void OnPressRestart()
+        {
+            // Restart current scene (use SceneLoader if you prefer)
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+            
+        }
 
         // --- Event handlers ---
         void OnGameOver()
@@ -55,7 +64,7 @@ namespace MagicVillageDash.UI
             _ended = true;
 
             SetPanel(gameOverPanel, true);
-            
+            Time.timeScale = 0f;
         }
 
         void OnGameStarted() { /* hook if you want SFX/UI, optional */ }
