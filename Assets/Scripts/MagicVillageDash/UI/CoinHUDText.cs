@@ -8,28 +8,31 @@ namespace MagicVillageDash.UI
     public sealed class CoinHUDText : MonoBehaviour
     {
         [SerializeField] private TMP_Text label;
-        [SerializeField] private CoinCounter counter;
-        [SerializeField] private string format = "$ {0}";
+        [SerializeField] private MonoBehaviour coinCounterProvider;
+        [SerializeField] private string format = "{0}";
+
+        ICoinCounter coinCounter;
 
         void Awake()
         {
             if (!label) label = GetComponent<TMP_Text>();
-            if (!counter) counter = FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
+            coinCounter = coinCounterProvider as ICoinCounter ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
+            
         }
 
         void OnEnable()
         {
-            if (counter) counter.ResetCoins(counter.Coins); // fuerza actualización
-            UpdateText(counter ? counter.Coins : 0);
-            if (counter) counter.onCoinsChanged.AddListener(UpdateText);
+            coinCounter?.ResetCoins(coinCounter.Coins); // fuerza actualización
+            UpdateText(coinCounter != null ? coinCounter.Coins : 0);
+            coinCounter.CoinsChanged += UpdateText;
         }
 
         void OnDisable()
         {
-            if (!counter) return;
-            counter.onCoinsChanged.RemoveListener(UpdateText);
+            if (coinCounter == null) return;
+            coinCounter.CoinsChanged -= UpdateText;
         }
 
-        public void UpdateText(int total) { if (label) label.text = string.Format(format, counter.Coins); }
+        public void UpdateText(int total) { if (label) label.text = string.Format(format, coinCounter.Coins); }
     }
 }
