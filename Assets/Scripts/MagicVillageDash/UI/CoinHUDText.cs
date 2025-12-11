@@ -1,6 +1,5 @@
 using UnityEngine;
 using MagicVillageDash.Score;
-using UnityEngine.Events;
 using TMPro;
 
 namespace MagicVillageDash.UI
