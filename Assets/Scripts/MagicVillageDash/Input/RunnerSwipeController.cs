@@ -21,11 +21,11 @@ namespace MagicVillageDash.Input
         [SerializeField] private bool tapTriggersJump = true;
 
         private ISwipeInput swipe;   // depends on abstraction (DIP)
-        private ILaneRunner  runner;  // game motor
+        private ILaneMover  runner;  // game motor
 
         void Awake()
         {
-            runner = laneRunnerProvider as ILaneRunner ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);
+            runner = laneRunnerProvider as ILaneMover ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);
             swipe = swipeProvider as ISwipeInput ?? FindAnyObjectByType<SwipeInputSystem>(FindObjectsInactive.Exclude);
         }
 

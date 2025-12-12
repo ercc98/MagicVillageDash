@@ -3,7 +3,7 @@ using System;
 namespace MagicVillageDash.Runner
 {
     /// Minimal lane-capability contract (SRP + ISP).
-    public interface ILaneRunner
+    public interface ILaneMover
     {
         int  CurrentLane { get; }
         int  LaneCount   { get; }

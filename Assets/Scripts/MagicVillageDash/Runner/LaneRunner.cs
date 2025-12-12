@@ -4,13 +4,15 @@ using UnityEngine;
 namespace MagicVillageDash.Runner
 {
     [RequireComponent(typeof(CharacterController))]
-    public sealed class LaneRunner : MonoBehaviour, ILaneRunner
+    public sealed class LaneRunner : MonoBehaviour, ILaneMover
     {
         [Header("Lanes")]
         [SerializeField] private int   laneCount = 3;
         [SerializeField] private float laneWidth = 2.2f;
         [Tooltip("Max horizontal speed when shifting between lanes (units/sec).")]
         [SerializeField] private float laneSpeed = 12f;
+        [Tooltip("How close to lane center to consider the change finished.")]
+        [SerializeField, Range(0.001f, 0.2f)] private float laneSnapEpsilon = 0.02f;
 
         [Header("Jump / Gravity")]
         [SerializeField] private float jumpForce = 8f;
@@ -88,26 +90,35 @@ namespace MagicVillageDash.Runner
                 slideTimer -= dt;
                 if (slideTimer <= 0f) EndSlide();
             }
+
+            // Detect arrival to target lane center and emit Changed once
+            if (Mathf.Abs(transform.position.x - targetX) <= laneSnapEpsilon)
+            {
+                // snap for stability
+                var pos = transform.position; pos.x = targetX; transform.position = pos;
+
+                int newLane = XToLane(targetX);
+                if (newLane != currentLane)
+                {
+                    int prev = currentLane;
+                    currentLane = newLane;
+                    OnLaneChanged?.Invoke(prev, currentLane);
+                }
+            }
         }
 
         // ===== Public API (called by input adapter) =====
 
         public void MoveLeft()
         {
-            if (currentLane > 0)
-            {
-                currentLane--;
-                targetX = LaneToX(currentLane);
-            }
+            if (currentLane <= 0) return;
+            RequestLane(currentLane - 1);
         }
 
         public void MoveRight()
         {
-            if (currentLane < laneCount - 1)
-            {
-                currentLane++;
-                targetX = LaneToX(currentLane);
-            }
+            if (currentLane >= laneCount - 1) return;
+            RequestLane(currentLane + 1);
         }
 
         public void Jump()
@@ -138,6 +149,13 @@ namespace MagicVillageDash.Runner
             characterController.center = originalCenter;
         }
 
+        private void RequestLane(int toLane)
+        {
+            toLane = Mathf.Clamp(toLane, 0, laneCount - 1);
+            OnLaneChangeAttempt?.Invoke(currentLane, toLane); // announce intent
+            targetX = LaneToX(toLane);                        // start sliding; 'Changed' fires on arrival
+        }
+
         private float LaneToX(int laneIndex)
         {
             // Center lane around X=0
@@ -146,7 +164,16 @@ namespace MagicVillageDash.Runner
 
         public void SnapToLane(int lane)
         {
-            throw new NotImplementedException();
+            lane = Mathf.Clamp(lane, 0, laneCount - 1);
+            currentLane = lane;
+            targetX     = LaneToX(lane);
+            var p = transform.position; p.x = targetX; transform.position = p;
+        }
+
+        private int XToLane(float xTarget)
+        {
+            float idxF = xTarget / laneWidth + (laneCount - 1) * 0.5f;
+            return Mathf.Clamp(Mathf.RoundToInt(idxF), 0, laneCount - 1);
         }
     }
 }
