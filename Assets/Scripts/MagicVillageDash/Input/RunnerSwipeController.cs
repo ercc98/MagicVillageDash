@@ -14,36 +14,19 @@ namespace MagicVillageDash.Input
         [Header("Input Provider")]
         [Tooltip("Assign a component that implements ISwipeInput (e.g., ErccDev.Foundation.Input.SwipeInputSystem).")]
         [SerializeField] private MonoBehaviour swipeProvider;
+        [SerializeField] private MonoBehaviour laneRunnerProvider;
 
         [Header("Options")]
         [Tooltip("If true, a screen tap will trigger Jump() in addition to SwipeUp.")]
         [SerializeField] private bool tapTriggersJump = true;
 
-        [Tooltip("If no provider is assigned, try to auto-find any ISwipeInput in the scene.")]
-        [SerializeField] private bool autoFindProvider = true;
-
         private ISwipeInput swipe;   // depends on abstraction (DIP)
-        private LaneRunner  runner;  // game motor
+        private ILaneRunner  runner;  // game motor
 
         void Awake()
         {
-            runner = GetComponent<LaneRunner>();
-            BindProvider(swipeProvider);
-
-            if (swipe == null && autoFindProvider)
-            {
-                // Try to locate any ISwipeInput in the scene (active or inactive)
-                var all = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-                foreach (var mb in all)
-                {
-                    if (mb is ISwipeInput candidate)
-                    {
-                        swipeProvider = mb;
-                        BindProvider(mb);
-                        break;
-                    }
-                }
-            }
+            runner = laneRunnerProvider as ILaneRunner ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);
+            swipe = swipeProvider as ISwipeInput ?? FindAnyObjectByType<SwipeInputSystem>(FindObjectsInactive.Exclude);
         }
 
         void OnEnable()
@@ -70,23 +53,6 @@ namespace MagicVillageDash.Input
 
             if (tapTriggersJump)
                 swipe.Tap -= OnTap;
-        }
-
-        private void BindProvider(MonoBehaviour provider)
-        {
-            swipe = provider as ISwipeInput;
-#if UNITY_EDITOR
-            if (provider != null && swipe == null)
-            {
-                Debug.LogWarning(
-                    $"[RunnerSwipeController] Assigned provider '{provider.GetType().Name}' " +
-                    $"does not implement {nameof(ISwipeInput)}.", this);
-            }
-            if (provider == null)
-            {
-                Debug.LogWarning("[RunnerSwipeController] No swipe provider assigned.", this);
-            }
-#endif
         }
 
         // Input handlers → thin delegates to runner motor

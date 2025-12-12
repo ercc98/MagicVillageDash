@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 namespace MagicVillageDash.Runner
 {
     [RequireComponent(typeof(CharacterController))]
-    public sealed class LaneRunner : MonoBehaviour
+    public sealed class LaneRunner : MonoBehaviour, ILaneRunner
     {
         [Header("Lanes")]
         [SerializeField] private int   laneCount = 3;
@@ -17,8 +18,9 @@ namespace MagicVillageDash.Runner
 
         [Header("Slide")]
         [SerializeField] private float slideDuration = 0.6f;
+        [SerializeField] private int initialLane = 1;
 
-        private CharacterController cc;
+        private CharacterController characterController;
 
         private int   currentLane;   // 0 .. laneCount-1
         private float targetX;       // world-space X for the current lane
@@ -31,17 +33,26 @@ namespace MagicVillageDash.Runner
         private float   originalHeight;
         private Vector3 originalCenter;
 
+        public event Action<int, int> OnLaneChangeAttempt;
+        public event Action<int, int> OnLaneChanged;
+
+        public int CurrentLane => currentLane;
+
+        public int LaneCount => laneCount;
+
+        public float LaneWidth => laneWidth;
+
         void Awake()
         {
-            cc = GetComponent<CharacterController>();
+            characterController = GetComponent<CharacterController>();
 
             // Begin centered lane
-            currentLane = laneCount / 2;
+            currentLane = initialLane;
             targetX     = LaneToX(currentLane);
 
             // Cache original collider settings
-            originalHeight = cc.height;
-            originalCenter = cc.center;
+            originalHeight = characterController.height;
+            originalCenter = characterController.center;
 
             // Optional: ensure we start slightly above ground (for isGrounded to settle)
             var p = transform.position;
@@ -62,15 +73,14 @@ namespace MagicVillageDash.Runner
             float dx    = Mathf.Clamp(targetX - transform.position.x, -dxMax, dxMax);
 
             // --- Vertical: gravity & jump ---
-            if (cc.isGrounded && verticalVel < 0f)
+            if (characterController.isGrounded && verticalVel < 0f)
                 verticalVel = -2f; // small downward bias keeps contact with ground
 
             verticalVel += gravity * dt;
             float dy = verticalVel * dt;
 
             // Compose delta (no forward Z: world moves toward player)
-            Vector3 delta = new Vector3(dx, dy, 0f);
-            cc.Move(delta);
+            characterController.Move(new Vector3(dx, dy, 0f));
 
             // --- Slide timer ---
             if (sliding)
@@ -102,20 +112,20 @@ namespace MagicVillageDash.Runner
 
         public void Jump()
         {
-            if (cc.isGrounded && !sliding)
+            if (characterController.isGrounded && !sliding)
                 verticalVel = jumpForce;
         }
 
         public void Slide()
         {
-            if (!sliding && cc.isGrounded)
+            if (!sliding && characterController.isGrounded)
             {
                 sliding   = true;
                 slideTimer = slideDuration;
 
                 // Reduce collider height safely
-                cc.height = originalHeight * 0.5f;
-                cc.center = new Vector3(originalCenter.x, cc.height * 0.5f, originalCenter.z);
+                characterController.height = originalHeight * 0.5f;
+                characterController.center = new Vector3(originalCenter.x, characterController.height * 0.5f, originalCenter.z);
             }
         }
 
@@ -124,14 +134,19 @@ namespace MagicVillageDash.Runner
         private void EndSlide()
         {
             sliding = false;
-            cc.height = originalHeight;
-            cc.center = originalCenter;
+            characterController.height = originalHeight;
+            characterController.center = originalCenter;
         }
 
         private float LaneToX(int laneIndex)
         {
             // Center lane around X=0
             return (laneIndex - (laneCount - 1) * 0.5f) * laneWidth;
+        }
+
+        public void SnapToLane(int lane)
+        {
+            throw new NotImplementedException();
         }
     }
 }
