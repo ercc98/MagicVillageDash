@@ -920,13 +920,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5481fcd74fefb144bb66dbd2d134dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Enemies.EnemySpawnManager
-  factory: {fileID: 0}
+  enemyFactory: {fileID: 0}
   laneCount: 3
-  spawnAheadZ: 40
-  minZSeparation: 12
-  playerMoverProvider: {fileID: 0}
-  playerTransform: {fileID: 0}
-  playerCharacterController: {fileID: 0}
+  initialLane: 0
+  currentLane: 0
   respawnDelay: 1.5
 --- !u!4 &220475311
 Transform:
@@ -6056,7 +6053,7 @@ MonoBehaviour:
   selfLaneMoverProvider: {fileID: 1526459266}
   playerTransform: {fileID: 1335652199}
   playerCharacterController: {fileID: 1335652203}
-  behavior: 1
+  behavior: 2
   zProximity: 10
   reactDelay: 0.06
   collisionsFailSafe: 1
@@ -8028,10 +8025,10 @@ SceneRoots:
   - {fileID: 1945466906}
   - {fileID: 73247234}
   - {fileID: 284564562}
+  - {fileID: 1526459269}
   - {fileID: 479917267}
   - {fileID: 1853823789}
   - {fileID: 432288933}
   - {fileID: 410814804}
   - {fileID: 1438927427}
-  - {fileID: 1526459269}
   - {fileID: 220475311}

@@ -13,7 +13,7 @@ namespace MagicVillageDash.Collectibles
     
         protected override void Awake()
         {
-            base.Awake();          // ensures WarmPool()
+            base.Awake(); 
             
         }
         public override CoinCollectible Spawn(Vector3 position, Quaternion rotation, Transform parent = null)
