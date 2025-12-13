@@ -45,7 +45,6 @@ namespace MagicVillageDash.Collectibles
             if (collector == null) return false;
 
             Collected?.Invoke(this, collector);
-
             
             Vector3 collectedCoinPosition = new(transform.position.x, transform.position.y, collectedCoinFactory.transform.position.z);
             collectedCoinFactory.Spawn(collectedCoinFactory.transform, collectedCoinPosition, transform.rotation);
