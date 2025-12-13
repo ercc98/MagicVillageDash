@@ -33,7 +33,9 @@ namespace MagicVillageDash.Collectibles
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(playerTag)) TryCollect(other.gameObject);
+            if (other.CompareTag(playerTag)) cachedCounter?.Add(value);
+
+            TryCollect(other.gameObject);
             
             gameObject.SetActive(false);
         }
@@ -44,13 +46,14 @@ namespace MagicVillageDash.Collectibles
 
             Collected?.Invoke(this, collector);
 
-            if (cachedCounter != null) cachedCounter.Add(value);
+            
             Vector3 collectedCoinPosition = new(transform.position.x, transform.position.y, collectedCoinFactory.transform.position.z);
             collectedCoinFactory.Spawn(collectedCoinFactory.transform, collectedCoinPosition, transform.rotation);
-            
+
             MagicVillageDashAudioManager.Instance?.Play(SfxId.Coin);
 
             return true;
         }
+
     }
 }
