@@ -4595,7 +4595,6 @@ MonoBehaviour:
   swipeProvider: {fileID: 1192672711}
   laneRunnerProvider: {fileID: 1335652202}
   tapTriggersJump: 1
-  autoFindProvider: 1
 --- !u!114 &1335652202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4611,6 +4610,7 @@ MonoBehaviour:
   laneCount: 3
   laneWidth: 2.2
   laneSpeed: 12
+  laneSnapEpsilon: 0.02
   jumpForce: 12
   gravity: -30
   slideDuration: 0.6
@@ -5863,6 +5863,7 @@ GameObject:
   - component: {fileID: 1526459268}
   - component: {fileID: 1526459267}
   - component: {fileID: 1526459266}
+  - component: {fileID: 1526459270}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -5885,6 +5886,7 @@ MonoBehaviour:
   laneCount: 3
   laneWidth: 2.2
   laneSpeed: 12
+  laneSnapEpsilon: 0.02
   jumpForce: 12
   gravity: -30
   slideDuration: 0.6
@@ -5938,6 +5940,26 @@ Transform:
   - {fileID: 600303111}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1526459270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526459265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd754c449cd149458fa96d93ed4c62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Enemy.EnemyController
+  playerLaneMoverProvider: {fileID: 1335652202}
+  playerTransform: {fileID: 1335652199}
+  playerCharacterController: {fileID: 1335652203}
+  behavior: 1
+  zProximity: 10
+  reactDelay: 0.06
+  preferLeftWhenFree: 1
+  collisionsFailSafe: 1
 --- !u!1 &1573209923
 GameObject:
   m_ObjectHideFlags: 0
