@@ -440,6 +440,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 63c51e3514d6b9c48b7e134af7858e38, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1413180751}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 63c51e3514d6b9c48b7e134af7858e38, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1413180755}
   m_SourcePrefab: {fileID: 100100000, guid: 63c51e3514d6b9c48b7e134af7858e38, type: 3}
 --- !u!1 &72770392
 GameObject:
@@ -4770,8 +4773,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe83b834e0a87614a8d65582e0e3c917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Input.RunnerSwipeController
-  swipeProvider: {fileID: 1192672711}
-  laneRunnerProvider: {fileID: 1335652202}
+  config: {fileID: 11400000, guid: 0096816f4eaa7bc4f83a901760c743c1, type: 2}
+  playerControllerProvider: {fileID: 1335652204}
   tapTriggersJump: 1
 --- !u!114 &1335652202
 MonoBehaviour:
@@ -4831,10 +4834,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Player.PlayerController
   selfLaneMoverProvider: {fileID: 1335652202}
-  selfRunnerInputProvider: {fileID: 1335652201}
-  swipeInputProvider: {fileID: 1192672711}
-  enemyLaneMoverProvider: {fileID: 0}
-  enemyTransform: {fileID: 0}
+  enemyLaneMoverProvider: {fileID: 1526459270}
+  selfAnimatorControllerProvider: {fileID: 1413180755}
+  enemyTransform: {fileID: 1526459269}
   behavior: 2
   zProximity: 10
   reactDelay: 0.06
@@ -5549,6 +5551,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 63c51e3514d6b9c48b7e134af7858e38, type: 3}
   m_PrefabInstance: {fileID: 67364478}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1413180755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413180750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae526c76df0bc8441ae87f6c1810834d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Character.CharacterAnimator.CharacterAnimatorController
+  animatorController: {fileID: 1413180751}
 --- !u!1001 &1422380090
 PrefabInstance:
   m_ObjectHideFlags: 0

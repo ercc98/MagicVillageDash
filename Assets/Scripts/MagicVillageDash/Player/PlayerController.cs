@@ -1,28 +1,25 @@
 using System;
 using System.Collections;
-using ErccDev.Foundation.Input.Swipe;
-using MagicVillageDash.Input;
+using MagicVillageDash.Character;
+using MagicVillageDash.Character.CharacterAnimator;
 using MagicVillageDash.Runner;
-using NUnit.Framework;
 using UnityEngine;
 
 namespace MagicVillageDash.Player
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerController : MonoBehaviour
+    [RequireComponent(typeof(LaneRunner))]
+    [RequireComponent(typeof(MonoBehaviour))]
+    [RequireComponent(typeof(ILaneMover))]
+    public class PlayerController : MonoBehaviour, IMovementController
     {
         public enum LaneBehavior { Yield, Block, Swap, Ignore }
-        [SerializeField] private MonoBehaviour selfLaneMoverProvider;
-        [SerializeField] private MonoBehaviour selfRunnerInputProvider;
-        [SerializeField] private MonoBehaviour swipeInputProvider;
-        [SerializeField] private MonoBehaviour enemyLaneMoverProvider;
+        [SerializeField] private CharacterAnimatorController selfAnimatorControllerProvider;
         [SerializeField] private Transform enemyTransform; 
-        private CharacterController selfCharacterController;
         private ILaneMover selfLaneMover;
-        private IRunnerInputController inputController;
-        private ISwipeInput swipeInput;
         private ILaneMover enemyLaneMover;
+        private IMovementAnimator movementAnimator;
 
         [Header("Behavior")]
         [SerializeField] private LaneBehavior behavior = LaneBehavior.Swap;
@@ -31,22 +28,13 @@ namespace MagicVillageDash.Player
 
         void Awake()
         {
-            inputController = selfRunnerInputProvider as IRunnerInputController;
-            selfLaneMover = selfLaneMoverProvider as ILaneMover;
-            swipeInput = swipeInputProvider as ISwipeInput;
-            enemyLaneMover = enemyLaneMoverProvider as ILaneMover;
-
-            selfCharacterController = GetComponent<CharacterController>();
+            selfLaneMover = GetComponent<ILaneMover>();
+            enemyLaneMover = enemyTransform as ILaneMover ?? GetComponent<MonoBehaviour>() as ILaneMover;
+            movementAnimator = selfAnimatorControllerProvider;
         }
 
         void OnEnable()
         {
-            inputController.SetMover(selfLaneMover);
-
-            inputController.SetInput(swipeInput);
-
-            inputController.Activate();
-
             if (enemyLaneMover == null) return;
             enemyLaneMover.OnLaneChangeAttempt += OnEnemyAttempt;            
             selfLaneMover.OnLaneChanged += OnSelfLaneChanged;
@@ -112,14 +100,53 @@ namespace MagicVillageDash.Player
         IEnumerator DoMirrorAfterDelay(int targetLane)
         {
             yield return new WaitForSeconds(reactDelay);
-            if (targetLane > selfLaneMover.CurrentLane) selfLaneMover.MoveRight();
-            else if (targetLane < selfLaneMover.CurrentLane) selfLaneMover.MoveLeft();
+            if (targetLane > selfLaneMover.CurrentLane)
+            {
+                selfLaneMover.MoveRight();
+                movementAnimator.TurnRight();
+            }
+            else if (targetLane < selfLaneMover.CurrentLane)
+            {
+                selfLaneMover.MoveLeft();    
+                movementAnimator.TurnLeft();
+            }
+            
         }
 
-        // Update is called once per frame
-        void Update()
+        #region IMovementController Implementation
+        public void TurnLeft()
         {
-        
+            selfLaneMover.MoveLeft();
+            movementAnimator.TurnLeft();
+            
         }
+
+        public void TurnRight()
+        {
+            selfLaneMover.MoveRight();
+            movementAnimator.TurnRight();
+        }
+
+        public void MovingSpeed(float speed)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Crouch(bool isCrouching)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Jump()
+        {
+            selfLaneMover.Jump();
+            movementAnimator.Jump();
+        }
+
+        public void Landing()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }
