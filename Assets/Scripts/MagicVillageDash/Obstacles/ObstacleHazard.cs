@@ -1,4 +1,5 @@
 using System;
+using ErccDev.Foundation.Core.Gameplay;
 using MagicVillageDash.World;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ namespace MagicVillageDash.Obstacles
         {
             if (!other.CompareTag(playerTag)) return;
             Hit?.Invoke(this, other.gameObject);
+            GameEvents.RaiseGameOver(); // <— notify UI
             gameObject.SetActive(false);
         }
     }

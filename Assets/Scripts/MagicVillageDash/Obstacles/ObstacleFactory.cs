@@ -1,7 +1,6 @@
 using UnityEngine;
 using ErccDev.Foundation.Core.Factories;
 using MagicVillageDash.World;
-using ErccDev.Foundation.Core.Gameplay;
 
 namespace MagicVillageDash.Obstacles
 {
@@ -45,8 +44,7 @@ namespace MagicVillageDash.Obstacles
 
         void HandleHit(ObstacleHazard obs, GameObject _)
         {
-            Recycle(obs);
-            GameEvents.RaiseGameOver(); // <— notify UI
+            Recycle(obs);            
         }
     }
 }
