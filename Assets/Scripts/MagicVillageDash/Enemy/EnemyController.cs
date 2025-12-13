@@ -98,7 +98,7 @@ namespace MagicVillageDash.Enemy
                     break;
                 case LaneBehavior.Block:
                     if (to != self.CurrentLane) return;
-                    StartCoroutine(DenyAfterDelay(from));
+                    StartCoroutine(DenyAfterDelay(from, to));
                     break;
                 case LaneBehavior.Swap:
                     if (to != self.CurrentLane) return;
@@ -117,13 +117,16 @@ namespace MagicVillageDash.Enemy
             throw new NotImplementedException();
         }
         
-        private IEnumerator DenyAfterDelay(int playerFromLane)
+        private IEnumerator DenyAfterDelay(int playerFromLane, int toLane)
         {
+            if (playerFromLane > self.CurrentLane) self.MoveRight();
+            else if (playerFromLane < self.CurrentLane) self.MoveLeft();
             if (reactDelay > 0f)
                 yield return new WaitForSeconds(reactDelay);
 
             // Snap the player back to their previous lane (cancel the attempt)
             player.SnapToLane(playerFromLane);
+            self.SnapToLane(toLane);
 
             // (Optional) feedback here: play "blocked" SFX/VFX/haptic via your systems
         }
@@ -134,5 +137,6 @@ namespace MagicVillageDash.Enemy
             if (targetLane > self.CurrentLane) self.MoveRight();
             else if (targetLane < self.CurrentLane) self.MoveLeft();
         }
+        
     }
 }
