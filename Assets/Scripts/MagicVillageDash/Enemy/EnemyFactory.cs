@@ -23,7 +23,6 @@ namespace MagicVillageDash.Enemy
             EnemyController spawnedEnemy = Spawn(transform, new Vector3(0f, 0f, 0f), Quaternion.identity, true);
             spawnedEnemy.SetSpawnPose(laneIndex);
             spawnedEnemy.Ondied += HandleOndied; 
-            //spawnedEnemy.transform.localPosition = new Vector3(laneIndex * -2.2f, 0f, 0f);
             return spawnedEnemy;
         }
 
