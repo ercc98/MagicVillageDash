@@ -1,77 +1,70 @@
-// Assets/Scripts/MagicVillageDash/Input/RunnerSwipeController.cs
-// Glue: subscribes to ErccDev.Input.ISwipeInput and commands MagicVillageDash.Runner.LaneRunner.
-
 using UnityEngine;
-using MagicVillageDash.Runner;
 using ErccDev.Foundation.Input.Swipe;
+using MagicVillageDash.Character;
+using MagicVillageDash.Player;
 
 namespace MagicVillageDash.Input
 {
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(LaneRunner))]
-    public sealed class RunnerSwipeController : MonoBehaviour, IRunnerInputController
+    public sealed class RunnerSwipeController : SwipeInputSystem
     {
-        [Header("Input Provider")]
-        [Tooltip("Assign a component that implements ISwipeInput (e.g., ErccDev.Foundation.Input.SwipeInputSystem).")]
-        [SerializeField] private MonoBehaviour swipeProvider;
-        [SerializeField] private MonoBehaviour laneRunnerProvider;
+        [Header("Providers")]
+        [SerializeField] private MonoBehaviour playerControllerProvider;
 
         [Header("Options")]
         [Tooltip("If true, a screen tap will trigger Jump() in addition to SwipeUp.")]
         [SerializeField] private bool tapTriggersJump = true;
 
-        private ISwipeInput swipe;   // depends on abstraction (DIP)
-        private ILaneMover runner;  // game motor
+        //private ISwipeInput swipe;   // depends on abstraction (DIP)
+        private IMovementController movementController;  // game motor
         private bool active;
-
+        public bool IsActive => active;
         public bool TapTriggersJump { get => tapTriggersJump; set => tapTriggersJump = value; }
 
-        public bool IsActive => active;
-
-        void Awake()
-        {
-            runner = laneRunnerProvider as ILaneMover ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);
-            swipe = swipeProvider as ISwipeInput ?? FindAnyObjectByType<SwipeInputSystem>(FindObjectsInactive.Exclude);
+        protected override void Awake()
+        {   
+            base.Awake();
+            movementController = playerControllerProvider as IMovementController ?? FindAnyObjectByType<PlayerController>(FindObjectsInactive.Exclude);
         }
 
-        void OnEnable()  => Activate();
-        void OnDisable() => Deactivate();
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            Activate();            
+        }
 
-        // Input handlers → thin delegates to runner motor
-        private void OnSwipeLeft()  => runner.MoveLeft();
-        private void OnSwipeRight() => runner.MoveRight();
-        private void OnSwipeUp()    => runner.Jump();
-        private void OnSwipeDown()  => runner.Slide();
-        private void OnTap()        => runner.Jump();
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            Deactivate();
+        }
 
-        public void SetInput(ISwipeInput input)  => BindInput(input);
-        public void SetMover(ILaneMover m) => runner = m;
         
-        private void BindInput(ISwipeInput input)
-        {
-            if (active) Deactivate();
-            swipe = input;
-        }
+        private void OnSwipeLeft()  => movementController.TurnLeft();
+        private void OnSwipeRight() => movementController.TurnRight();
+        private void OnSwipeUp()    => movementController.Jump();
+        private void OnSwipeDown()  => movementController.Crouch(true);
+        private void OnTap()        => movementController.Jump();
 
         public void Activate()
         {
-            if (active || swipe == null) return;
-            swipe.SwipeLeft  += OnSwipeLeft;
-            swipe.SwipeRight += OnSwipeRight;
-            swipe.SwipeUp    += OnSwipeUp;
-            swipe.SwipeDown  += OnSwipeDown;
-            if (tapTriggersJump) swipe.Tap += OnTap;
+            if (active) return;
+            SwipeLeft+= OnSwipeLeft;
+            SwipeRight += OnSwipeRight;
+            SwipeUp += OnSwipeUp;
+            SwipeDown += OnSwipeDown;
+            if (tapTriggersJump) Tap += OnTap;
             active = true;
         }
 
         public void Deactivate()
         {
-            if (!active || swipe == null) return;
-            swipe.SwipeLeft  -= OnSwipeLeft;
-            swipe.SwipeRight -= OnSwipeRight;
-            swipe.SwipeUp    -= OnSwipeUp;
-            swipe.SwipeDown  -= OnSwipeDown;
-            if (tapTriggersJump) swipe.Tap -= OnTap;
+            if (!active) return;
+            SwipeLeft -= OnSwipeLeft;
+            SwipeRight -= OnSwipeRight;
+            SwipeUp -= OnSwipeUp;
+            SwipeDown -= OnSwipeDown;
+            if (tapTriggersJump) Tap -= OnTap;
             active = false;
         }
     }
