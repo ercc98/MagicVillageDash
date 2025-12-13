@@ -13,12 +13,8 @@ namespace MagicVillageDash.Enemies
         [Header("Factory & Parent")]
         [SerializeField] private EnemyFactory enemyFactory;
 
-
         [Header("Lanes")]
-        [SerializeField] private int laneCount = 3;
         [SerializeField] private int initialLane = 0;
-        [SerializeField] private float currentLane = 0;
-
 
         [Header("Respawn")]
         [SerializeField] private float respawnDelay = 1.5f;
