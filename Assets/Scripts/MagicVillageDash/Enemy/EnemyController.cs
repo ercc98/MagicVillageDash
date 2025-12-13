@@ -16,7 +16,7 @@ namespace MagicVillageDash.Enemy
         [SerializeField] private MonoBehaviour playerLaneMoverProvider; 
         [SerializeField] private MonoBehaviour selfLaneMoverProvider; 
         [SerializeField] private Transform playerTransform; 
-        [SerializeField] private CharacterController playerCharacterController;        
+        [SerializeField] private CharacterController playerCharacterController;
         private ILaneMover player;
         private ILaneMover self;
 
@@ -31,6 +31,9 @@ namespace MagicVillageDash.Enemy
 
         private CharacterController characterController;
         private Coroutine collisionsTimeoutCo;
+
+        /// <summary>Raised when the enemy is death. Factory listens and recycles.</summary>
+        public event Action<EnemyController> Ondied;
 
         void Awake()
         {
@@ -53,9 +56,9 @@ namespace MagicVillageDash.Enemy
         void OnDisable()
         {
             if (player == null) return;
+            Ondied?.Invoke(this);
             player.OnLaneChangeAttempt -= OnPlayerAttempt;
             self.OnLaneChanged -= OnSelfLaneChanged;
-
             SetCollisions(true);
         }
 
@@ -137,6 +140,10 @@ namespace MagicVillageDash.Enemy
             if (targetLane > self.CurrentLane) self.MoveRight();
             else if (targetLane < self.CurrentLane) self.MoveLeft();
         }
-        
+
+        internal void SetSpawnPose(int laneIndex)
+        {
+            self.SnapToLane(laneIndex);
+        }
     }
 }

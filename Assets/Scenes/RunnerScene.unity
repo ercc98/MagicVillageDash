@@ -697,7 +697,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Collectibles.CoinCollectible
   value: 1
   playerTag: Player
-  enemyTag: Enemy
   collectedCoinFactory: {fileID: 1396397756}
 --- !u!114 &93842586 stripped
 MonoBehaviour:
@@ -892,6 +891,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187129427}
   m_CullTransparentMesh: 1
+--- !u!1 &220475309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 220475311}
+  - component: {fileID: 220475310}
+  m_Layer: 0
+  m_Name: EnemySpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &220475310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220475309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5481fcd74fefb144bb66dbd2d134dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Enemies.EnemySpawnManager
+  factory: {fileID: 0}
+  laneCount: 3
+  spawnAheadZ: 40
+  minZSeparation: 12
+  playerMoverProvider: {fileID: 0}
+  playerTransform: {fileID: 0}
+  playerCharacterController: {fileID: 0}
+  respawnDelay: 1.5
+--- !u!4 &220475311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220475309}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.76685, y: 0, z: 1.17455}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &241025905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2996,6 +3047,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2055136344}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &937876901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 937876903}
+  - component: {fileID: 937876902}
+  m_Layer: 0
+  m_Name: EnemyFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &937876902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937876901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9963f3de08f0284479058e2a80118ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.EnemyFactory
+  prefab: {fileID: 1526459270}
+  initialPoolSize: 2
+--- !u!4 &937876903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937876901}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2055136344}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &946084851
 GameObject:
   m_ObjectHideFlags: 0
@@ -3808,6 +3905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Obstacles.ObstacleHazard
   playerTag: Player
+  enemyTag: Enemy
 --- !u!65 &1197060792
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4467,6 +4565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Obstacles.ObstacleHazard
   playerTag: Player
+  enemyTag: Enemy
 --- !u!1001 &1328266637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5871,7 +5970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1526459266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5960,7 +6059,6 @@ MonoBehaviour:
   behavior: 1
   zProximity: 10
   reactDelay: 0.06
-  preferLeftWhenFree: 1
   collisionsFailSafe: 1
 --- !u!1 &1573209923
 GameObject:
@@ -6838,6 +6936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Obstacles.ObstacleHazard
   playerTag: Player
+  enemyTag: Enemy
 --- !u!65 &1945466903
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7428,6 +7527,7 @@ Transform:
   - {fileID: 705466808}
   - {fileID: 946088445}
   - {fileID: 1674153595}
+  - {fileID: 937876903}
   - {fileID: 1396397755}
   - {fileID: 931285026}
   - {fileID: 1936562470}
@@ -7908,7 +8008,6 @@ SceneRoots:
   - {fileID: 696472988}
   - {fileID: 407827274}
   - {fileID: 1335652199}
-  - {fileID: 1526459269}
   - {fileID: 1192672712}
   - {fileID: 576670882}
   - {fileID: 628242070}
@@ -7934,3 +8033,5 @@ SceneRoots:
   - {fileID: 432288933}
   - {fileID: 410814804}
   - {fileID: 1438927427}
+  - {fileID: 1526459269}
+  - {fileID: 220475311}

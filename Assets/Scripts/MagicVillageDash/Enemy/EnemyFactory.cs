@@ -20,6 +20,15 @@ namespace MagicVillageDash.Enemy
             return spawnedEnemy;
         }
 
+        public EnemyController Spawn(int laneIndex)
+        {
+            EnemyController spawnedEnemy = Spawn(transform, new Vector3(0f, 0f, 0f), Quaternion.identity, true);
+            spawnedEnemy.SetSpawnPose(laneIndex);
+            spawnedEnemy.Ondied += HandleOndied; 
+            //spawnedEnemy.transform.localPosition = new Vector3(laneIndex * -2.2f, 0f, 0f);
+            return spawnedEnemy;
+        }
+
         public EnemyController Spawn(Transform parent)
             => Spawn(parent, parent.position, parent.rotation, true);
 
@@ -27,7 +36,10 @@ namespace MagicVillageDash.Enemy
         {
             if (!instance) return;
             instance.transform.SetParent(_poolRoot, false);
+            instance.Ondied -= HandleOndied;
             base.Recycle(instance);
         }
+
+        void HandleOndied(EnemyController enemy) => Recycle(enemy);
     }
 }
