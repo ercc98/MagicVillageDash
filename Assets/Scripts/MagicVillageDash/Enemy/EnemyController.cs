@@ -7,14 +7,14 @@ namespace MagicVillageDash.Enemy
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(CharacterController))]
-    [RequireComponent(typeof(LaneRunner))]
     public class EnemyController : MonoBehaviour
     {
 
         public enum LaneBehavior { Yield, Block, Swap, Ignore }
 
         [Header("References")]
-        [SerializeField] private MonoBehaviour playerLaneMoverProvider; // ILaneMover
+        [SerializeField] private MonoBehaviour playerLaneMoverProvider; 
+        [SerializeField] private MonoBehaviour selfLaneMoverProvider; 
         [SerializeField] private Transform playerTransform; 
         [SerializeField] private CharacterController playerCharacterController;        
         private ILaneMover player;
@@ -24,7 +24,6 @@ namespace MagicVillageDash.Enemy
         [SerializeField] private LaneBehavior behavior = LaneBehavior.Swap;
         [SerializeField] private float zProximity = 10f;
         [SerializeField] private float reactDelay = 0.06f;
-        [SerializeField] private bool preferLeftWhenFree = true;
 
         [Header("Safety")]
         [Tooltip("Failsafe: if something goes wrong, collisions auto-reenable after this many seconds.")]
@@ -35,9 +34,9 @@ namespace MagicVillageDash.Enemy
 
         void Awake()
         {
-            self = GetComponent<ILaneMover>();
             characterController = GetComponent<CharacterController>();
             player = playerLaneMoverProvider as ILaneMover ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);            
+            self = selfLaneMoverProvider as ILaneMover ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);            
 
             if (!playerCharacterController && playerTransform)
                 playerCharacterController = playerTransform.GetComponent<CharacterController>();
@@ -46,8 +45,7 @@ namespace MagicVillageDash.Enemy
         void OnEnable()
         {
             if (player == null) return;
-            player.OnLaneChangeAttempt += OnPlayerAttempt;
-            
+            player.OnLaneChangeAttempt += OnPlayerAttempt;            
             self.OnLaneChanged += OnSelfLaneChanged;
         }
 
@@ -56,8 +54,8 @@ namespace MagicVillageDash.Enemy
         {
             if (player == null) return;
             player.OnLaneChangeAttempt -= OnPlayerAttempt;
-
             self.OnLaneChanged -= OnSelfLaneChanged;
+
             SetCollisions(true);
         }
 

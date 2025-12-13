@@ -697,6 +697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Collectibles.CoinCollectible
   value: 1
   playerTag: Player
+  enemyTag: Enemy
   collectedCoinFactory: {fileID: 1396397756}
 --- !u!114 &93842586 stripped
 MonoBehaviour:
@@ -5953,6 +5954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Enemy.EnemyController
   playerLaneMoverProvider: {fileID: 1335652202}
+  selfLaneMoverProvider: {fileID: 1526459266}
   playerTransform: {fileID: 1335652199}
   playerCharacterController: {fileID: 1335652203}
   behavior: 1
