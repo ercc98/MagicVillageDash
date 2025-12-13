@@ -51,5 +51,10 @@ namespace MagicVillageDash.Enemies
             yield return new WaitForSeconds(respawnDelay);
             SpawnOne(initialLane);
         }
+
+        void OnDestroy()
+        {
+            StopAllCoroutines();
+        }
     }
 }
