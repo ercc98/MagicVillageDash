@@ -12,7 +12,6 @@ namespace MagicVillageDash.Collectibles
     {
         [SerializeField] private CoinRailGenerator generator;
         [SerializeField] private ChunkRoot chunk;
-        private bool spawned;
 
         void Reset()
         {
@@ -30,11 +29,8 @@ namespace MagicVillageDash.Collectibles
                 float startZ = transform.position.z;
                 float endZ = startZ + Mathf.Max(0.01f, chunk.ChunkLength);
                 generator.FillRange(transform, startZ, endZ);
-                spawned = true;
             }
         }
 
-        // Called by ChunkRoot.ResetForPool() if you want a hard reset, but OnEnable() already re-spawns per activation.
-        public void ClearSpawnedFlag() => spawned = false;
     }
 }

@@ -13,7 +13,6 @@ namespace MagicVillageDash.Collectibles
         [Header("Coin")]
         [SerializeField] private int value = 1;
         [SerializeField] private string playerTag = "Player";
-        [SerializeField] private string enemyTag = "Enemy";
         [SerializeField] private CollectedCoinFactory collectedCoinFactory;
 
         // cache rápido del contador para evitar Find en cada trigger
