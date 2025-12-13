@@ -920,10 +920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5481fcd74fefb144bb66dbd2d134dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Enemies.EnemySpawnManager
-  enemyFactory: {fileID: 0}
-  laneCount: 3
+  enemyFactory: {fileID: 937876902}
   initialLane: 0
-  currentLane: 0
   respawnDelay: 1.5
 --- !u!4 &220475311
 Transform:
@@ -4644,6 +4642,7 @@ GameObject:
   - component: {fileID: 1335652199}
   - component: {fileID: 1335652198}
   - component: {fileID: 1335652203}
+  - component: {fileID: 1335652204}
   - component: {fileID: 1335652202}
   - component: {fileID: 1335652201}
   m_Layer: 0
@@ -4737,6 +4736,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1335652204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335652195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee7429231c62ef4d83dd772ea834707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Player.PlayerController
+  selfLaneMoverProvider: {fileID: 1335652202}
+  selfRunnerInputProvider: {fileID: 1335652201}
+  swipeInputProvider: {fileID: 1192672711}
 --- !u!1 &1358985080
 GameObject:
   m_ObjectHideFlags: 0
@@ -5959,8 +5973,8 @@ GameObject:
   - component: {fileID: 1526459269}
   - component: {fileID: 1526459268}
   - component: {fileID: 1526459267}
-  - component: {fileID: 1526459266}
   - component: {fileID: 1526459270}
+  - component: {fileID: 1526459266}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -8029,6 +8043,6 @@ SceneRoots:
   - {fileID: 479917267}
   - {fileID: 1853823789}
   - {fileID: 432288933}
-  - {fileID: 410814804}
   - {fileID: 1438927427}
+  - {fileID: 410814804}
   - {fileID: 220475311}
