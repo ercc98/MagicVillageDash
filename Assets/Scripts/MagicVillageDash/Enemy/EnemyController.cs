@@ -29,7 +29,7 @@ namespace MagicVillageDash.Enemy
         [Tooltip("Failsafe: if something goes wrong, collisions auto-reenable after this many seconds.")]
         [SerializeField] private float collisionsFailSafe = 1.0f;
 
-        private CharacterController characterController;
+        private CharacterController selfCharacterController;
         private Coroutine collisionsTimeoutCo;
 
         /// <summary>Raised when the enemy is death. Factory listens and recycles.</summary>
@@ -37,7 +37,7 @@ namespace MagicVillageDash.Enemy
 
         void Awake()
         {
-            characterController = GetComponent<CharacterController>();
+            selfCharacterController = GetComponent<CharacterController>();
             player = playerLaneMoverProvider as ILaneMover ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);            
             self = selfLaneMoverProvider as ILaneMover ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);            
 
@@ -79,8 +79,8 @@ namespace MagicVillageDash.Enemy
         
         private void SetCollisions(bool enabled)
         {
-            if (!characterController || !playerCharacterController) return;
-            Physics.IgnoreCollision(characterController, playerCharacterController, !enabled);
+            if (!selfCharacterController || !playerCharacterController) return;
+            Physics.IgnoreCollision(selfCharacterController, playerCharacterController, !enabled);
         }
 
         private void OnSelfLaneChanged(int arg1, int arg2)
@@ -127,7 +127,6 @@ namespace MagicVillageDash.Enemy
             if (reactDelay > 0f)
                 yield return new WaitForSeconds(reactDelay);
 
-            // Snap the player back to their previous lane (cancel the attempt)
             player.SnapToLane(playerFromLane);
             self.SnapToLane(toLane);
 
