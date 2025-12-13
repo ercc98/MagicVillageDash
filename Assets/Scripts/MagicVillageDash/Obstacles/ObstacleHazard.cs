@@ -9,6 +9,7 @@ namespace MagicVillageDash.Obstacles
     public sealed class ObstacleHazard : MonoBehaviour
     {
         [SerializeField] private string playerTag = "Player";
+        [SerializeField] private string enemyTag = "Enemy";
         [Tooltip("Auto disable on hit to avoid double-trigger; factory will recycle.")]
         public ChunkRoot Owner { get; internal set; }
 
@@ -23,9 +24,9 @@ namespace MagicVillageDash.Obstacles
 
         void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag(playerTag)) return;
+            if (other.CompareTag(playerTag)) GameEvents.RaiseGameOver(); // <— notify UI;
+            if(other.CompareTag(enemyTag))  other.gameObject.SetActive(false); // disable enemy on hit
             Hit?.Invoke(this, other.gameObject);
-            GameEvents.RaiseGameOver(); // <— notify UI
             gameObject.SetActive(false);
         }
     }
