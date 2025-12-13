@@ -8,9 +8,6 @@ using UnityEngine;
 namespace MagicVillageDash.Player
 {
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(CharacterController))]
-    [RequireComponent(typeof(LaneRunner))]
-    [RequireComponent(typeof(MonoBehaviour))]
     [RequireComponent(typeof(ILaneMover))]
     public class PlayerController : MonoBehaviour, IMovementController
     {
@@ -29,7 +26,7 @@ namespace MagicVillageDash.Player
         void Awake()
         {
             selfLaneMover = GetComponent<ILaneMover>();
-            enemyLaneMover = enemyTransform as ILaneMover ?? GetComponent<MonoBehaviour>() as ILaneMover;
+            enemyLaneMover = enemyTransform as ILaneMover ?? enemyTransform.GetComponent<ILaneMover>();
             movementAnimator = selfAnimatorControllerProvider;
         }
 

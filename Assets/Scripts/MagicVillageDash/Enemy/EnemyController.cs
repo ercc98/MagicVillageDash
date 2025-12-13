@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using MagicVillageDash.Character.CharacterAnimator;
 using MagicVillageDash.Runner;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace MagicVillageDash.Enemy
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(ILaneMover))]
     public class EnemyController : MonoBehaviour
     {
 
@@ -14,11 +16,13 @@ namespace MagicVillageDash.Enemy
 
         [Header("References")]
         [SerializeField] private MonoBehaviour playerLaneMoverProvider; 
-        [SerializeField] private MonoBehaviour selfLaneMoverProvider; 
-        [SerializeField] private Transform playerTransform; 
+        [SerializeField] private Transform playerTransform;
         [SerializeField] private CharacterController playerCharacterController;
+        [SerializeField] private CharacterAnimatorController selfAnimatorControllerProvider;
+        
         private ILaneMover player;
         private ILaneMover self;
+        private IMovementAnimator movementAnimator;
 
         [Header("Behavior")]
         [SerializeField] private LaneBehavior behavior = LaneBehavior.Swap;
@@ -38,9 +42,10 @@ namespace MagicVillageDash.Enemy
         void Awake()
         {
             selfCharacterController = GetComponent<CharacterController>();
-            player = playerLaneMoverProvider as ILaneMover ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);            
-            self = selfLaneMoverProvider as ILaneMover ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);            
-
+            self = GetComponent<ILaneMover>();
+            movementAnimator = selfAnimatorControllerProvider;
+            
+            player = playerLaneMoverProvider as ILaneMover ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);                
             if (!playerCharacterController && playerTransform)
                 playerCharacterController = playerTransform.GetComponent<CharacterController>();
         }
@@ -122,8 +127,18 @@ namespace MagicVillageDash.Enemy
         
         private IEnumerator DenyAfterDelay(int playerFromLane, int toLane)
         {
-            if (playerFromLane > self.CurrentLane) self.MoveRight();
-            else if (playerFromLane < self.CurrentLane) self.MoveLeft();
+            if (playerFromLane > self.CurrentLane)
+            {
+                self.MoveRight();
+                movementAnimator.TurnRight();
+            }
+            else if (playerFromLane < self.CurrentLane)
+            {
+                self.MoveLeft();
+                movementAnimator.TurnLeft();
+            }
+           
+            
             if (reactDelay > 0f)
                 yield return new WaitForSeconds(reactDelay);
 
@@ -136,8 +151,16 @@ namespace MagicVillageDash.Enemy
         IEnumerator DoMirrorAfterDelay(int targetLane)
         {
             yield return new WaitForSeconds(reactDelay);
-            if (targetLane > self.CurrentLane) self.MoveRight();
-            else if (targetLane < self.CurrentLane) self.MoveLeft();
+            if (targetLane > self.CurrentLane)
+            {
+                self.MoveRight();
+                movementAnimator.TurnRight();
+            }
+            else if (targetLane < self.CurrentLane)
+            {
+                self.MoveLeft();    
+                movementAnimator.TurnLeft();
+            }
         }
 
         internal void SetSpawnPose(int laneIndex)
