@@ -14,9 +14,7 @@ namespace MagicVillageDash.Input
         [Header("Options")]
         [Tooltip("If true, a screen tap will trigger Jump() in addition to SwipeUp.")]
         [SerializeField] private bool tapTriggersJump = true;
-
-        //private ISwipeInput swipe;   // depends on abstraction (DIP)
-        private IMovementController movementController;  // game motor
+        private IMovementController movementController;
         private bool active;
         public bool IsActive => active;
         public bool TapTriggersJump { get => tapTriggersJump; set => tapTriggersJump = value; }
