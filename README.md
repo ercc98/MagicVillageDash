@@ -2,6 +2,8 @@
 
 Magic Village Dash is a stylized three-lane endless runner built with Unity. Guide your character through a colorful village, dodge hazards, collect coins, and push for new personal bests while the environment streams endlessly toward the camera.
 
+This repository contains the Unity project and supporting assets required to open, run, and extend the game in the Unity Editor.
+
 ## Project Highlights
 
 - **Responsive lane running** – `LaneRunner` combines CharacterController movement with lane snapping, jump, and slide actions for responsive touch-based play.
@@ -45,6 +47,8 @@ ProjectSettings/       Project-wide Unity configuration.
    - Start with `Assets/Scenes/IntroScene.unity` for the full title-to-run flow, or jump directly into `RunnerScene.unity` for immediate gameplay iteration.
 5. **Enter Play Mode** and test the game.
 
+> **Note:** The project uses the new Unity Input System. If you see binding errors on first open, let Unity reimport packages, then reopen the scenes.
+
 ## Controls
 
 The project uses the Unity Input System together with the reusable `ISwipeInput` abstraction from the ErccDev toolkit.
@@ -71,9 +75,15 @@ The project uses the Unity Input System together with the reusable `ISwipeInput`
 - **Customize scoring**: Tweak `pointsPerMeter` and `pointsPerCoin` on `RunScoreSystem` or add new score sources via its public API.
 - **Audio & VFX**: Use the audio manager helpers (`Play`, `PlayLoop`, `StopLoop`) to trigger sounds from gameplay scripts, and extend URP materials for additional polish.
 
+## Development Tips
+
+- Keep scenes lightweight: use prefab variants for obstacles and environment chunks so changes propagate consistently.
+- When iterating on gameplay tuning, adjust `GameSpeedController` parameters and the runner acceleration curve to balance difficulty.
+- The `SaveService` writes player records to persistent data; clear it between test sessions if you need a clean slate.
+
 ## Licensing
 
-Include the appropriate license information for your project or external assets here.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for the full text. Art assets and third-party packages remain subject to their respective licenses; verify terms before redistributing them outside this repository.
 
 ---
 
