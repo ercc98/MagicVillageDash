@@ -2476,6 +2476,118 @@ MonoBehaviour:
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.World.ChunkFactory
   prefab: {fileID: 1668681631}
   initialPoolSize: 8
+--- !u!1 &723328611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 723328615}
+  - component: {fileID: 723328614}
+  - component: {fileID: 723328613}
+  - component: {fileID: 723328616}
+  m_Layer: 0
+  m_Name: CinemachineCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &723328613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723328611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBasicMultiChannelPerlin
+  NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 1
+  FrequencyGain: 1
+  m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &723328614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723328611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 0
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 5
+    NearClipPlane: 0.3
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
+--- !u!4 &723328615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723328611}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 5, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
+--- !u!114 &723328616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723328611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41685c0863d2bef4490e8e0232c91f5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Camera.CameraShaker
+  cineCam: {fileID: 723328614}
+  defaultAmplitude: 1
+  defaultFrequency: 2
+  defaultDuration: 0.25
+  intensityMultiplier: 1
+  vibrateMobile: 0
 --- !u!1001 &757442474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3075,6 +3187,7 @@ GameObject:
   - component: {fileID: 946084853}
   - component: {fileID: 946084852}
   - component: {fileID: 946084855}
+  - component: {fileID: 946084856}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3123,7 +3236,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3200,6 +3313,38 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &946084856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946084851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBrain
+  ShowDebugText: 0
+  ShowCameraFrustum: 1
+  IgnoreTimeScale: 0
+  WorldUpOverride: {fileID: 0}
+  ChannelMask: -1
+  UpdateMethod: 2
+  BlendUpdateMethod: 1
+  LensModeOverride:
+    Enabled: 0
+    DefaultMode: 2
+  DefaultBlend:
+    Style: 1
+    Time: 2
+    CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  CustomBlends: {fileID: 0}
 --- !u!1 &946088444
 GameObject:
   m_ObjectHideFlags: 0
@@ -4751,9 +4896,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee7429231c62ef4d83dd772ea834707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Player.PlayerController
+  cameraShakerProvider: {fileID: 723328616}
   selfAnimatorControllerProvider: {fileID: 1413180755}
   enemyTransform: {fileID: 1526459269}
-  behavior: 2
+  behavior: 1
   zProximity: 10
   reactDelay: 0.06
 --- !u!1 &1358985080
@@ -6081,12 +6227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd754c449cd149458fa96d93ed4c62d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Enemy.EnemyController
+  cameraShakerProvider: {fileID: 723328616}
   playerLaneMoverProvider: {fileID: 1335652202}
-  selfLaneMoverProvider: {fileID: 1526459266}
   playerTransform: {fileID: 1335652199}
   playerCharacterController: {fileID: 1335652203}
   selfAnimatorControllerProvider: {fileID: 1304641795}
-  behavior: 2
+  behavior: 1
   zProximity: 10
   reactDelay: 0.06
   collisionsFailSafe: 1
@@ -6727,7 +6873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42103f35487f254187c1d67275fb04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Collectibles.CoinRailGenerator
-  coinFactoryProvider: {fileID: 0}
+  coinFactoryProvider: {fileID: 1674153594}
   laneCount: 3
   laneWidth: 2.2
   laneCenterX: 0
@@ -8065,3 +8211,4 @@ SceneRoots:
   - {fileID: 1438927427}
   - {fileID: 410814804}
   - {fileID: 220475311}
+  - {fileID: 723328615}

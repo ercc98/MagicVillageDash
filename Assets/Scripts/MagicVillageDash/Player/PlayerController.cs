@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using ErccDev.Foundation.Camera;
+using MagicVillageDash.Camera;
 using MagicVillageDash.Character;
 using MagicVillageDash.Character.CharacterAnimator;
 using MagicVillageDash.Runner;
@@ -12,8 +14,11 @@ namespace MagicVillageDash.Player
     public class PlayerController : MonoBehaviour, IMovementController
     {
         public enum LaneBehavior { Yield, Block, Swap, Ignore }
+        [Header("References")]
+        [SerializeField] private CameraShaker cameraShakerProvider;
         [SerializeField] private CharacterAnimatorController selfAnimatorControllerProvider;
         [SerializeField] private Transform enemyTransform; 
+        private ICameraShaker cameraShaker;
         private ILaneMover selfLaneMover;
         private ILaneMover enemyLaneMover;
         private IMovementAnimator movementAnimator;
@@ -28,6 +33,7 @@ namespace MagicVillageDash.Player
             selfLaneMover = GetComponent<ILaneMover>();
             enemyLaneMover = enemyTransform as ILaneMover ?? enemyTransform.GetComponent<ILaneMover>();
             movementAnimator = selfAnimatorControllerProvider;
+            cameraShaker = cameraShakerProvider;
         }
 
         void OnEnable()
@@ -87,7 +93,7 @@ namespace MagicVillageDash.Player
             else if (playerFromLane < selfLaneMover.CurrentLane) selfLaneMover.MoveLeft();
             if (reactDelay > 0f)
                 yield return new WaitForSeconds(reactDelay);
-
+            cameraShaker.Shake(1.0f, 1.0f, 1.0f);
             enemyLaneMover.SnapToLane(playerFromLane);
             selfLaneMover.SnapToLane(toLane);
 
