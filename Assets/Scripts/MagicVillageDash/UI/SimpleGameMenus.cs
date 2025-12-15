@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using ErccDev.Foundation.Core.Gameplay;
+using MagicVillageDash.Score;
+using TMPro;
 
 namespace MagicVillageDash.UI
 {
@@ -9,13 +11,16 @@ namespace MagicVillageDash.UI
         [Header("Panels")]
         [SerializeField] private GameObject startPanel;
         [SerializeField] private GameObject gameOverPanel;
-
-
+        [SerializeField] private TMP_Text coinText;
+        [SerializeField] private CoinCounter coinCounterProvider;
+        [SerializeField] private string format = "{0}";
         bool _started;
         bool _ended;
+        ICoinCounter coinCounter;
 
         void Awake()
         {
+            coinCounter = coinCounterProvider as ICoinCounter ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
 
             SetPanel(startPanel,  true);
             SetPanel(gameOverPanel, false);
@@ -59,7 +64,7 @@ namespace MagicVillageDash.UI
         {
             if (_ended) return;
             _ended = true;
-
+            coinText.text = string.Format(format, coinCounter.Coins);
             SetPanel(gameOverPanel, true);
             Time.timeScale = 0f;
         }

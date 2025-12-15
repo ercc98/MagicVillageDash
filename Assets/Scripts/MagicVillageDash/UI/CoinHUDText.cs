@@ -7,7 +7,7 @@ namespace MagicVillageDash.UI
     public sealed class CoinHUDText : MonoBehaviour
     {
         [SerializeField] private TMP_Text label;
-        [SerializeField] private MonoBehaviour coinCounterProvider;
+        [SerializeField] private CoinCounter coinCounterProvider;
         [SerializeField] private string format = "{0}";
 
         ICoinCounter coinCounter;

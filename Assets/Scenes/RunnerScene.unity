@@ -1892,6 +1892,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.UI.SimpleGameMenus
   startPanel: {fileID: 187129427}
   gameOverPanel: {fileID: 2090966779}
+  coinText: {fileID: 304863285}
+  coinCounterProvider: {fileID: 1511992652}
+  format: +{0} Coins
 --- !u!114 &432288930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6380,9 +6383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e51856ccbb23848b88eeead8ca35b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Score.CoinCounter
-  onCoinsChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &1511992653
 Transform:
   m_ObjectHideFlags: 0
