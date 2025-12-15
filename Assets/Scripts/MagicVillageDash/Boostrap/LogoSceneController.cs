@@ -1,7 +1,7 @@
-using UnityEngine;
 using ErccDev.Foundation.Bootstrap;
+using UnityEngine;
 
-namespace ErccDev.Bootstrap
+namespace MagicVillageDash.Bootstrap
 {
     public sealed class LogoSceneController : SplashScreenControllerBase
     {
