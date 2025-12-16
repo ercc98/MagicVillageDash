@@ -22,7 +22,7 @@ namespace MagicVillageDash.Obstacles
             obs.Owner = chunk;
             if (chunk) chunk.Register(obs);
 
-            obs.Hit += HandleHit;
+            obs.Hit += OnHandleHit;
             return obs;
         }
 
@@ -32,7 +32,7 @@ namespace MagicVillageDash.Obstacles
         public override void Recycle(ObstacleHazard instance)
         {
             if (!instance) return;
-            instance.Hit -= HandleHit;
+            instance.Hit -= OnHandleHit;
 
             var chunk = instance.Owner;
             if (chunk) chunk.Unregister(instance);
@@ -42,7 +42,7 @@ namespace MagicVillageDash.Obstacles
             base.Recycle(instance);
         }
 
-        void HandleHit(ObstacleHazard obs, GameObject _)
+        void OnHandleHit(ObstacleHazard obs)
         {
             Recycle(obs);            
         }
