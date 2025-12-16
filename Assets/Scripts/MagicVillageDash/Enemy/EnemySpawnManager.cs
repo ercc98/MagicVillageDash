@@ -1,18 +1,15 @@
-// Assets/Scripts/MagicVillageDash/Enemies/EnemySpawnManager.cs
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using MagicVillageDash.Enemy;             // EnemyController, EnemyLifecycle
-using MagicVillageDash.Runner;
+using MagicVillageDash.Enemy;
+using ErccDev.Foundation.Core.Gameplay;
 using System;
-using ErccDev.Foundation.Core.Gameplay;            // LaneRunner (implements ILaneMover)
 
 namespace MagicVillageDash.Enemies
 {
-    public sealed class EnemySpawnManager : MonoBehaviour
+    public sealed class EnemySpawnManager : MonoBehaviour, IEnemySpawner
     {
         [Header("Factory & Parent")]
-        [SerializeField] private EnemyFactory enemyFactory;
+        [SerializeField] private MonoBehaviour enemyFactoryProvider;
 
         [Header("Lanes")]
         [SerializeField] private int initialLane = 0;
@@ -21,9 +18,13 @@ namespace MagicVillageDash.Enemies
         [SerializeField] private float respawnDelay = 1.5f;
 
 
+        IEnemyFactory enemyFactory;
+        private Coroutine respawnRoutine;
+        public event Action<EnemyController> OnSpawned;
+
         void Awake()
         {
-            enemyFactory = enemyFactory ? enemyFactory : FindAnyObjectByType<EnemyFactory>(FindObjectsInactive.Exclude);
+            enemyFactory = enemyFactoryProvider as IEnemyFactory ?? FindAnyObjectByType<EnemyFactory>(FindObjectsInactive.Exclude);
         }
 
         void OnEnable()
@@ -33,46 +34,38 @@ namespace MagicVillageDash.Enemies
 
         void OnDisable()
         {
-            GameEvents.GameOver   -= OnGameOver;
+            GameEvents.GameOver -= OnGameOver;
+            if (respawnRoutine != null)
+            {
+                StopCoroutine(respawnRoutine);
+                respawnRoutine = null;
+            }
         }
-
-        
-
-        void Start()
+        public void Spawn()
         {
-            SpawnOne(initialLane);            
+            respawnRoutine = StartCoroutine(SpawnEnemyAfterDelay(respawnDelay));
+        }
+        
+        IEnumerator SpawnEnemyAfterDelay(float respawnDelay)
+        {
+            yield return new WaitForSeconds(respawnDelay);
+            OnSpawned?.Invoke(Spawn(initialLane));
         }
 
-
-
-        public EnemyController SpawnOne(int laneIndex)
+        public EnemyController Spawn(int laneIndex)
         {
             EnemyController spawnedEnemy = enemyFactory.Spawn(laneIndex);
-            spawnedEnemy.Ondied += HandleOndied;
             return spawnedEnemy;
-        }
-
-        void HandleOndied(EnemyController enemy)
-        {
-            enemy.Ondied -= HandleOndied;
-            StartCoroutine(RespawnEnemyAfterDelay(respawnDelay));
-
         }
 
         private void OnGameOver()
         {
-            StopAllCoroutines();
+            if (respawnRoutine != null)
+            {
+                StopCoroutine(respawnRoutine);
+                respawnRoutine = null;
+            }
         }
 
-        IEnumerator RespawnEnemyAfterDelay(float respawnDelay)
-        {
-            yield return new WaitForSeconds(respawnDelay);
-            SpawnOne(initialLane);
-        }
-
-        void OnDestroy()
-        {
-            StopAllCoroutines();
-        }
     }
 }

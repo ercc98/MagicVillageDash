@@ -9,8 +9,8 @@ namespace MagicVillageDash.Runner
         int  LaneCount   { get; }
         float LaneWidth  { get; }
 
-        event Action<int,int> OnLaneChangeAttempt; // (from, to)
-        event Action<int,int> OnLaneChanged;       // (from, to)
+        event Action<int,int> OnLaneChangeAttempt; // (this, from, to)
+        event Action<int,int> OnLaneChanged;       // (this, from, to)
 
         void MoveLeft();
         void MoveRight();
