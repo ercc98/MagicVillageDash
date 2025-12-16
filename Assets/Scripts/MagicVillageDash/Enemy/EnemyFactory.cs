@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MagicVillageDash.Enemy
 {
-    public class EnemyFactory : Factory<EnemyController>
+    public class EnemyFactory : Factory<EnemyController>, IEnemyFactory
     {
 
         protected override void Awake()
@@ -25,9 +25,6 @@ namespace MagicVillageDash.Enemy
             spawnedEnemy.Ondied += HandleOndied; 
             return spawnedEnemy;
         }
-
-        public EnemyController Spawn(Transform parent)
-            => Spawn(parent, parent.position, parent.rotation, true);
 
         public override void Recycle(EnemyController instance)
         {
