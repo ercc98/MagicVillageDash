@@ -30,12 +30,12 @@ namespace MagicVillageDash.Character.CharacterAnimator
 
         public void TurnLeft()
         {
-            animatorController.SetTrigger("Spin");
+            animatorController.SetTrigger("RightSpin");
         }
 
         public void TurnRight()
         {
-            animatorController.SetTrigger("Spin");
+            animatorController.SetTrigger("LeftSpin");
         }
 
     }
