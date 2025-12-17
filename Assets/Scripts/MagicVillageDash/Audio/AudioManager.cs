@@ -2,9 +2,9 @@ using UnityEngine;
 using ErccDev.Foundation.Audio;
 namespace MagicVillageDash.Audio
 {
-    public sealed class MagicVillageDashAudioManager : AudioManagerBase
+    public sealed class AudioManager : AudioManagerBase
     {
-        public static MagicVillageDashAudioManager Instance { get; private set; }
+        public static AudioManager Instance { get; private set; }
 
         protected override void Awake()
         {

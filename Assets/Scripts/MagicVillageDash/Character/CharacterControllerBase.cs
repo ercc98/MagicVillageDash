@@ -1,3 +1,5 @@
+using ErccDev.Foundation.Audio;
+using MagicVillageDash.Audio;
 using MagicVillageDash.Character.CharacterAnimator;
 using MagicVillageDash.Gameplay;
 using MagicVillageDash.Runner;
@@ -36,13 +38,17 @@ namespace MagicVillageDash.Character
             selfLaneMover.MoveLeft();
             selfMovementAnimator.TurnLeft();
             if (turnLeftParticles) turnLeftParticles.Play();
+            if (turnRightParticles) turnRightParticles.Play();
+            AudioManager.Instance?.Play("ElectricSwipe", SoundCategory.SFX);
         }
 
         public virtual void TurnRight()
         {
             selfLaneMover.MoveRight();
-            selfMovementAnimator.TurnRight();            
+            selfMovementAnimator.TurnRight();
             if (turnRightParticles) turnRightParticles.Play();
+            if (turnLeftParticles) turnLeftParticles.Play();
+            AudioManager.Instance?.Play("ElectricSwipe", SoundCategory.SFX);
         }
 
         public virtual void MovingSpeed(float speed)
@@ -64,6 +70,7 @@ namespace MagicVillageDash.Character
 
         public void OnHazardHit(Vector3 hazardHitPosition)
         {
+            AudioManager.Instance?.Play("Bomb", SoundCategory.SFX);
             SpawnHitVfx(hazardHitPosition);
             OnHazardHitInternal(hazardHitPosition);
         }

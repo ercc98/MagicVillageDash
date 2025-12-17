@@ -48,7 +48,7 @@ namespace MagicVillageDash.Collectibles
             Vector3 collectedCoinPosition = new(transform.position.x, transform.position.y, collectedCoinFactory.transform.position.z);
             collectedCoinFactory.Spawn(collectedCoinFactory.transform, collectedCoinPosition, transform.rotation);
 
-            MagicVillageDashAudioManager.Instance?.Play(SfxId.Coin);
+            AudioManager.Instance?.Play(SfxId.Coin);
 
             return true;
         }

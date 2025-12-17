@@ -128,7 +128,7 @@ namespace MagicVillageDash.Runner
 
         private void OnGameStarted()
         {
-            MagicVillageDashAudioManager.Instance?.Play(MusicId.GameTheme2);
+            AudioManager.Instance?.Play(MusicId.GameTheme2);
             coinCounter?.ResetCoins(0);
             distanceTracker?.ResetDistance();
             gameSpeedController?.ResetSpeed();
@@ -156,7 +156,7 @@ namespace MagicVillageDash.Runner
 
         private void OnGameOver()
         {            
-            MagicVillageDashAudioManager.Instance?.StopLoop(SoundCategory.Music);
+            AudioManager.Instance?.StopLoop(SoundCategory.Music);
             distanceTracker?.StopRun();
             runScoreSystem?.CommitIfBest();
             gameSpeedController?.SetSpeed(0f);
@@ -188,6 +188,7 @@ namespace MagicVillageDash.Runner
             Vector3 position = new(lanePosx, mover is MonoBehaviour mb ? mb.transform.position.y : 0f, 0f);
             hitCharactersParticlesProvider.transform.SetPositionAndRotation(position, Quaternion.identity);
             hitCharactersParticlesProvider.Play();
+            AudioManager.Instance?.Play("ElectricSwipe2", SoundCategory.SFX);
         }
     }
 }
