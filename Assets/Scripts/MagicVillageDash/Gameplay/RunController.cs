@@ -65,12 +65,8 @@ namespace MagicVillageDash.Runner
             if (enemySpawner != null) enemySpawner.OnSpawned += OnEnemySpawned;
         }
 
-        
-
-
         void OnDisable()
         {
-            //UnregisterCharacter(playerLaneMoverProvider.gameObject);
             if (playerLaneMover != null) playerLaneMover.OnLaneChangeAttempt -= OnPlayerAttempt;
             if (enemySpawner != null) enemySpawner.OnSpawned -= OnEnemySpawned;
 
@@ -121,7 +117,6 @@ namespace MagicVillageDash.Runner
             other.SnapToLane(other.CurrentLane);
             cameraShaker?.Shake(1.0f, 1.0f, 0.25f);
             SpawnHitVfx(mover, other);
-            //if (hitparticlesProvider) hitparticlesProvider.Play();
         }
 
         private void DoSwap(ILaneMover mover, ILaneMover other, IMovementController otherController, int from, int to)
