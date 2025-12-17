@@ -14,6 +14,8 @@ namespace MagicVillageDash.Player
         [Header("References")]
         [SerializeField] private CharacterAnimatorController selfAnimatorControllerProvider;
         [SerializeField] private ParticleSystem hitHazardParticlesProvider;
+        [SerializeField] private ParticleSystem TurnRightParticlesProvider;
+        [SerializeField] private ParticleSystem TurnLeftParticlesProvider;
         [SerializeField] private MonoBehaviour gameSpeedProvider;
         
         ILaneMover              selfLaneMover;
@@ -44,6 +46,7 @@ namespace MagicVillageDash.Player
         {
             selfLaneMover.MoveLeft();
             movementAnimator.TurnLeft();
+            TurnLeftParticlesProvider.Play();
             
         }
 
@@ -51,6 +54,7 @@ namespace MagicVillageDash.Player
         {
             selfLaneMover.MoveRight();
             movementAnimator.TurnRight();
+            TurnRightParticlesProvider.Play();
         }
 
         public void MovingSpeed(float speed)

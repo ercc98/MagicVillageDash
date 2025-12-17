@@ -26,10 +26,10 @@ namespace MagicVillageDash.Enemy
         [SerializeField] private ParticleSystem hitHazardParticlesProvider;
         [SerializeField] private MonoBehaviour gameSpeedProvider;
         
-        private ILaneMover player;
-        private ILaneMover selfLaneMover;
-        private IMovementAnimator movementAnimator;
-        IGameSpeedController    gameSpeedController;
+        ILaneMover                    player;
+        ILaneMover                    selfLaneMover;
+        IMovementAnimator             movementAnimator;
+        IGameSpeedController          gameSpeedController;
 
 
         [Header("Safety")]
