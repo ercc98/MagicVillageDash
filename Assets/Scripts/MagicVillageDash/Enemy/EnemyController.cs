@@ -84,7 +84,7 @@ namespace MagicVillageDash.Enemy
         }
 
         protected override void OnHazardHitInternal(Vector3 hazardHitPosition)
-        {
+        {            
             Ondied?.Invoke(this);
             gameObject.SetActive(false);
         }
