@@ -586,7 +586,7 @@ GameObject:
   - component: {fileID: 73247232}
   - component: {fileID: 73247231}
   - component: {fileID: 73247235}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GoldenCoinsCollectible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13556,6 +13556,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1945466906}
     m_Modifications:
+    - target: {fileID: -8978792172716226316, guid: 4a5e35cb16830cd4ba1664ebb22b04b9, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a5e35cb16830cd4ba1664ebb22b04b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -13599,6 +13603,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4a5e35cb16830cd4ba1664ebb22b04b9, type: 3}
       propertyPath: m_Name
       value: MIXQUIC_MACETA
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4a5e35cb16830cd4ba1664ebb22b04b9, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8110740657059282031, guid: 4a5e35cb16830cd4ba1664ebb22b04b9, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14956,7 +14968,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 447
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -20899,7 +20911,7 @@ GameObject:
   - component: {fileID: 1197060793}
   - component: {fileID: 1197060792}
   - component: {fileID: 1197060791}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ConoObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21218,7 +21230,7 @@ GameObject:
   - component: {fileID: 1243754431}
   - component: {fileID: 1243754430}
   - component: {fileID: 1243754433}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GoldenCoins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21568,7 +21580,7 @@ GameObject:
   - component: {fileID: 1318932120}
   - component: {fileID: 1318932119}
   - component: {fileID: 1318932123}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CuatriObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21921,7 +21933,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 119
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
@@ -22708,9 +22720,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1007937307010671506, guid: d6b880acc692eb343ba4d50aacc9cbb5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d6b880acc692eb343ba4d50aacc9cbb5, type: 3}
       propertyPath: m_Name
       value: MOR_TEP_CUATRI
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d6b880acc692eb343ba4d50aacc9cbb5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: d6b880acc692eb343ba4d50aacc9cbb5, type: 3}
       propertyPath: m_FadeMode
@@ -22719,6 +22739,14 @@ PrefabInstance:
     - target: {fileID: 4742473837712756890, guid: d6b880acc692eb343ba4d50aacc9cbb5, type: 3}
       propertyPath: m_AnimateCrossFading
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365077477022519821, guid: d6b880acc692eb343ba4d50aacc9cbb5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270740018740565462, guid: d6b880acc692eb343ba4d50aacc9cbb5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22983,7 +23011,7 @@ GameObject:
   - component: {fileID: 1484616569}
   - component: {fileID: 1484616568}
   - component: {fileID: 1484616572}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane (1)
   m_TagString: Grounded
   m_Icon: {fileID: 0}
@@ -28252,7 +28280,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 119
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
@@ -29603,7 +29631,7 @@ GameObject:
   - component: {fileID: 1945466904}
   - component: {fileID: 1945466903}
   - component: {fileID: 1945466902}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MacetaObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29763,9 +29791,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1555663090236316036, guid: bb5bf63be915c0f4c8b1eab56dccfc7f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bb5bf63be915c0f4c8b1eab56dccfc7f, type: 3}
       propertyPath: m_Name
       value: CONO
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bb5bf63be915c0f4c8b1eab56dccfc7f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017527082164237392, guid: bb5bf63be915c0f4c8b1eab56dccfc7f, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30852,10 +30892,10 @@ SceneRoots:
   - {fileID: 323345668}
   - {fileID: 889654320}
   - {fileID: 233744221}
+  - {fileID: 873367279}
   - {fileID: 1129221472}
   - {fileID: 1813390285}
   - {fileID: 734076295}
-  - {fileID: 873367279}
   - {fileID: 662316867}
   - {fileID: 76051209}
   - {fileID: 1345973540}
