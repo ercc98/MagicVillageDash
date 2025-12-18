@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using ErccDev.Foundation.Audio;
 using ErccDev.Foundation.Camera;
@@ -63,12 +64,17 @@ namespace MagicVillageDash.Runner
 
             if (playerLaneMover != null) playerLaneMover.OnLaneChangeAttempt += OnPlayerAttempt;
             if (enemySpawner != null) enemySpawner.OnSpawned += OnEnemySpawned;
+            if (enemySpawner != null) enemySpawner.OnStartSpawn += OnEnemyStartSpawned;
         }
+
+        
+
 
         void OnDisable()
         {
             if (playerLaneMover != null) playerLaneMover.OnLaneChangeAttempt -= OnPlayerAttempt;
             if (enemySpawner != null) enemySpawner.OnSpawned -= OnEnemySpawned;
+            if (enemySpawner != null) enemySpawner.OnStartSpawn -= OnEnemyStartSpawned;
 
             if (enemyLaneMover != null) enemyLaneMover.OnLaneChangeAttempt -= OnEnemyAttempt;
 
@@ -96,6 +102,11 @@ namespace MagicVillageDash.Runner
             distanceTracker?.StopRun();
             runScoreSystem?.CommitIfBest();
             gameSpeedController?.SetSpeed(0f);
+        }
+
+        private void OnEnemyStartSpawned(int value)
+        {
+            OnEnemyAttempt(value, value);
         }
         
         private void OnEnemySpawned(EnemyController enemy)
@@ -164,6 +175,10 @@ namespace MagicVillageDash.Runner
 
         private void DoYield(ILaneMover mover, ILaneMover other, IMovementController otherController, int from, int to)
         {
+            if (to < 2)
+                otherController.TurnRight(); 
+            else
+                otherController.TurnLeft(); 
         }
 
 

@@ -2413,7 +2413,7 @@ MonoBehaviour:
   gameSpeedProvider: {fileID: 576670881}
   playerLaneMoverProvider: {fileID: 1335652204}
   enemySpawnerProvider: {fileID: 220475310}
-  behavior: 2
+  behavior: 0
   reactDelay: 0.06
   oneReactionAtATime: 1
 --- !u!4 &410814804
@@ -2961,6 +2961,8 @@ MonoBehaviour:
   baseSpeed: 7.5
   accelerationPerSecond: 0.75
   maxSpeed: 100
+  stop: 0
+  currentSpeed: 0
 --- !u!4 &576670882
 Transform:
   m_ObjectHideFlags: 0

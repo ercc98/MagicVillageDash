@@ -27,6 +27,7 @@ namespace MagicVillageDash.Enemies
         IFactory<EnemyController> enemyFactory;
         private Coroutine respawnRoutine;
         public event Action<EnemyController> OnSpawned;
+        public event Action<int> OnStartSpawn;
 
         void Awake()
         {
@@ -55,6 +56,7 @@ namespace MagicVillageDash.Enemies
         IEnumerator SpawnEnemyAfterDelay(float respawnDelay)
         {
             yield return new WaitForSeconds(respawnDelay);
+            OnStartSpawn?.Invoke(initialLane);
             float positionX = laneWidth * (initialLane - 1);
             spawnAreaParticleSystem.transform.position = new Vector3(positionX, 0.05f, 0);
             spawnAreaParticleSystem.Play();
