@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using ErccDev.Foundation.Core.Gameplay;
 using MagicVillageDash.Score;
 using TMPro;
+using System.Collections;
 
 namespace MagicVillageDash.UI
 {
@@ -65,6 +66,13 @@ namespace MagicVillageDash.UI
             if (_ended) return;
             _ended = true;
             coinText.text = string.Format(format, coinCounter.Coins);
+            StartCoroutine(WaitToGameOverPanel());
+            
+        }
+
+        IEnumerator WaitToGameOverPanel()
+        {
+            yield return new WaitForSeconds(2f);
             SetPanel(gameOverPanel, true);
             Time.timeScale = 0f;
         }
