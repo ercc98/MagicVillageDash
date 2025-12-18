@@ -5,18 +5,19 @@ namespace MagicVillageDash.World
     /// <summary>Moves its transform along -Z using GameSpeedController.</summary>
     public sealed class WorldMover : MonoBehaviour
     {
-        [SerializeField] private GameSpeedController speedSource;
+        [SerializeField] private MonoBehaviour speedSourceProvider;
         [Tooltip("Optional extra speed added/subtracted from global (e.g., conveyor).")]
         [SerializeField] private float forwardOffsetSpeed = 0f;
+        IGameSpeedController speedSource;
 
         void Awake()
         {
-            if (!speedSource) speedSource = FindAnyObjectByType<GameSpeedController>();
+            speedSource = speedSourceProvider as IGameSpeedController ?? speedSourceProvider.GetComponent<IGameSpeedController>();
         }
 
         void FixedUpdate()
         {
-            if (!speedSource) return;
+            if (speedSource == null) return;
             float speed = speedSource.CurrentSpeed + forwardOffsetSpeed;
             transform.Translate(0f, 0f, -speed * Time.deltaTime, Space.World);
         }
