@@ -8,18 +8,34 @@ namespace MagicVillageDash.World
         [SerializeField] private float baseSpeed = 8f;
         [SerializeField] private float accelerationPerSecond = 0.15f;
         [SerializeField] private float maxSpeed = 30f;
+        [SerializeField] private bool stop = false;
+        [SerializeField] private float currentSpeed;
 
-        public float CurrentSpeed { get; private set; }
-
-        void Awake() => CurrentSpeed = baseSpeed;
+        public float CurrentSpeed
+        {
+            get => currentSpeed;
+            private set => currentSpeed = value;
+        }
+        void Awake() => currentSpeed = baseSpeed;
 
         void Update()
         {
-            if (CurrentSpeed < maxSpeed)
-                CurrentSpeed = Mathf.Min(maxSpeed, CurrentSpeed + accelerationPerSecond * Time.deltaTime);
+            if (!stop && currentSpeed < maxSpeed)
+                currentSpeed = Mathf.Min(maxSpeed, currentSpeed + accelerationPerSecond * Time.deltaTime);
+
         }
 
-        public void SetSpeed(float value) => CurrentSpeed = Mathf.Max(0f, value);
-        public void ResetSpeed() => CurrentSpeed = baseSpeed;
+        public void SetSpeed(float value)
+        {
+            if (value.Equals(0))
+                stop = true;
+            currentSpeed = Mathf.Max(0f, value);  
+
+        }
+        public void ResetSpeed()
+        {
+            stop = false;
+            currentSpeed = baseSpeed;
+        }
     }
 }

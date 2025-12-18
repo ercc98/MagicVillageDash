@@ -1426,9 +1426,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.World.WorldMover
   speedSourceProvider: {fileID: 576670881}
-  forwardOffsetSpeed: 0
-  recenterThresholdZ: 1000
-  recenterStepZ: 1000
 --- !u!4 &246189701
 Transform:
   m_ObjectHideFlags: 0
@@ -21880,7 +21877,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 375
+    m_Bits: 119
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
