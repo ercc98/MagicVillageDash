@@ -77,7 +77,65 @@ namespace MagicVillageDash.Runner
             GameEvents.GameStarted -= OnGameStarted;
         }
 
-        private void OnEnemyAttempt(int from, int to)  => HandleAttempt(enemyLaneMover, playerLaneMover, playerMovementController, from, to);
+        #region Events Methods
+
+        private void OnGameStarted()
+        {
+            AudioManager.Instance?.Play(MusicId.GameTheme2);
+            coinCounter?.ResetCoins(0);
+            distanceTracker?.ResetDistance();
+            gameSpeedController?.ResetSpeed();
+            runScoreSystem?.ResetRun();
+            distanceTracker?.StartRun();
+            enemySpawner?.Spawn();
+        }
+
+        private void OnGameOver()
+        {
+            AudioManager.Instance?.StopLoop(SoundCategory.Music);
+            distanceTracker?.StopRun();
+            runScoreSystem?.CommitIfBest();
+            gameSpeedController?.SetSpeed(0f);
+        }
+        
+        private void OnEnemySpawned(EnemyController enemy)
+        {
+            enemy.Ondied += OnEnemyDespawned;
+            enemyLaneMover = enemy.SelfLaneMover;
+            enemyMovementController = enemy as IMovementController;
+            enemyLaneMover.OnLaneChangeAttempt += OnEnemyAttempt;
+        }
+
+        private void OnEnemyDespawned(EnemyController enemy)
+        {
+            enemyMovementController = null;
+            enemy.Ondied -= OnEnemyDespawned;
+            enemyLaneMover.OnLaneChangeAttempt -= OnEnemyAttempt;
+            enemyLaneMover = null;
+            enemySpawner?.Spawn();
+        }        
+
+        protected override void OnSessionStarted()
+        {
+        }
+
+        protected override void OnSessionEnded()
+        {
+            runScoreSystem?.CommitIfBest();
+            gameSpeedController?.SetSpeed(0f);
+        }
+
+        protected override void ResetSessionState()
+        {
+            runScoreSystem?.ResetRun();
+            distanceTracker?.ResetDistance();
+            coinCounter?.ResetCoins(0);
+            gameSpeedController?.ResetSpeed();
+        }
+        #endregion
+
+        #region Reaction Methods
+        private void OnEnemyAttempt(int from, int to) => HandleAttempt(enemyLaneMover, playerLaneMover, playerMovementController, from, to);
         private void OnPlayerAttempt(int from, int to) => HandleAttempt(playerLaneMover, enemyLaneMover, enemyMovementController, from, to);
 
         private void HandleAttempt(ILaneMover mover, ILaneMover other, IMovementController otherController, int from, int to)
@@ -121,65 +179,12 @@ namespace MagicVillageDash.Runner
 
         private void DoSwap(ILaneMover mover, ILaneMover other, IMovementController otherController, int from, int to)
         {
-            if (to > mover.CurrentLane)otherController.TurnLeft();
+            if (to > mover.CurrentLane) otherController.TurnLeft();
             else if (to < mover.CurrentLane) otherController.TurnRight();
         }
+        
+        #endregion
 
-
-        private void OnGameStarted()
-        {
-            AudioManager.Instance?.Play(MusicId.GameTheme2);
-            coinCounter?.ResetCoins(0);
-            distanceTracker?.ResetDistance();
-            gameSpeedController?.ResetSpeed();
-            runScoreSystem?.ResetRun();
-            distanceTracker?.StartRun();
-            enemySpawner?.Spawn();
-        }
-
-        private void OnEnemyDespawned(EnemyController enemy)
-        {
-            enemyMovementController = null;
-            enemy.Ondied -= OnEnemyDespawned;
-            enemyLaneMover.OnLaneChangeAttempt -= OnEnemyAttempt;
-            enemyLaneMover = null;
-            enemySpawner?.Spawn();
-        }
-
-        private void OnEnemySpawned(EnemyController enemy)
-        {
-            enemy.Ondied += OnEnemyDespawned;
-            enemyLaneMover = enemy.SelfLaneMover;
-            enemyMovementController = enemy as IMovementController;
-            enemyLaneMover.OnLaneChangeAttempt += OnEnemyAttempt;
-        }
-
-        private void OnGameOver()
-        {            
-            AudioManager.Instance?.StopLoop(SoundCategory.Music);
-            distanceTracker?.StopRun();
-            runScoreSystem?.CommitIfBest();
-            gameSpeedController?.SetSpeed(0f);
-            
-        }
-
-        protected override void ResetSessionState()
-        {
-            runScoreSystem?.ResetRun();
-            distanceTracker?.ResetDistance();
-            coinCounter?.ResetCoins(0);
-            gameSpeedController?.ResetSpeed();
-        }
-
-        protected override void OnSessionStarted()
-        {
-        }
-
-        protected override void OnSessionEnded()
-        {
-            runScoreSystem?.CommitIfBest();
-            gameSpeedController?.SetSpeed(0f);
-        }
 
         private void SpawnHitVfx(ILaneMover mover, ILaneMover other)
         {
