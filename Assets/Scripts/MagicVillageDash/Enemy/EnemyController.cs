@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using ErccDev.Foundation.Core.Gameplay;
 using MagicVillageDash.Character;
 using MagicVillageDash.Runner;
 using UnityEngine;
@@ -41,15 +42,16 @@ namespace MagicVillageDash.Enemy
         {
             if (player != null) player.OnLaneChangeAttempt += OnPlayerAttempt;
             if (selfLaneMover != null) selfLaneMover.OnLaneChanged += OnSelfLaneChanged;
+            GameEvents.GameOver += OnGameOver;
         }
 
         void OnDisable()
         {
             if (player != null) player.OnLaneChangeAttempt -= OnPlayerAttempt;
             if (selfLaneMover != null) selfLaneMover.OnLaneChanged -= OnSelfLaneChanged;
+            GameEvents.GameOver -= OnGameOver;
             SetCollisions(true);
         }
-
         private void OnPlayerAttempt(int from, int to)
         {
             if (to != selfLaneMover.CurrentLane) return;
@@ -84,10 +86,21 @@ namespace MagicVillageDash.Enemy
         }
 
         protected override void OnHazardHitInternal(Vector3 hazardHitPosition)
-        {            
+        {
+            StartCoroutine(WaitForDie(0.5f));
+        }
+
+        private IEnumerator WaitForDie(float t)
+        {
+            yield return new WaitForSeconds(t);
             Ondied?.Invoke(this);
             gameObject.SetActive(false);
         }
 
+        private void OnGameOver()
+        {
+            MovingSpeed(0);
+            Idle();
+        }
     }
 }

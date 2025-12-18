@@ -19,12 +19,14 @@ namespace MagicVillageDash.Character
 
         protected ILaneMover selfLaneMover;
         protected IMovementAnimator selfMovementAnimator;
+        protected IDeathAnimator selfDeathAnimator;
         protected IGameSpeedController gameSpeedController;
 
         protected virtual void Awake()
         {
             selfLaneMover = GetComponent<ILaneMover>();
             selfMovementAnimator = selfAnimatorControllerProvider;
+            selfDeathAnimator = selfAnimatorControllerProvider;
             gameSpeedController = gameSpeedProvider as IGameSpeedController
                 ?? FindAnyObjectByType<GameSpeedController>(FindObjectsInactive.Exclude);
 
@@ -67,10 +69,15 @@ namespace MagicVillageDash.Character
             selfLaneMover.Jump();
             selfMovementAnimator.Jump();
         }
+        public virtual void Idle()
+        {
+            selfMovementAnimator.Idle();
+        }
 
         public void OnHazardHit(Vector3 hazardHitPosition)
         {
             AudioManager.Instance?.Play("Bomb", SoundCategory.SFX);
+            selfDeathAnimator.Die();
             SpawnHitVfx(hazardHitPosition);
             OnHazardHitInternal(hazardHitPosition);
         }
@@ -83,5 +90,7 @@ namespace MagicVillageDash.Character
             hitHazardParticlesProvider.transform.SetPositionAndRotation(hitPosition, Quaternion.identity);
             hitHazardParticlesProvider.Play();
         }
+
+        
     }
 }
