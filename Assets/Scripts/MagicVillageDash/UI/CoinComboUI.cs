@@ -11,6 +11,7 @@ namespace MagicVillageDash.UI
         [SerializeField] private CanvasGroup liveGroup;
         [SerializeField] private CanvasGroup resultGroup;
         [SerializeField] private MonoBehaviour coinCounterProvider;
+        [SerializeField] private Animator coinComboAnimator;
 
         [Header("Timing")]
         [SerializeField, Min(0f)] private float comboTimeout = 1.5f; // seconds without a coin to end combo
@@ -48,13 +49,20 @@ namespace MagicVillageDash.UI
         }
 
         public void RegisterCoinPickup(int amount = 1)
-        {            
+        {
             _coinsInCombo++;
-            _currentCombo = _coinsInCombo / 10 + 1;
+            int currentCombo = _coinsInCombo / 10 + 1;
+            if (currentCombo > _currentCombo && coinComboAnimator != null)
+            {
+                coinComboAnimator.SetTrigger("LevelUp");
+                _currentCombo = currentCombo;
+                liveCounterText.text = $"x{_currentCombo}";
+            }
+            
             _lastCoinTime = Time.time;
             _comboActive = true;
 
-            liveCounterText.text = $"x{_currentCombo}";
+            
             if(_currentCombo > 1) 
                 ShowLive(true);
         }
