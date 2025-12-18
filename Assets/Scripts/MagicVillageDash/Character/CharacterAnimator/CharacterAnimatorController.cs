@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MagicVillageDash.Character.CharacterAnimator
 {
-    public class CharacterAnimatorController : MonoBehaviour, IMovementAnimator
+    public class CharacterAnimatorController : MonoBehaviour, IMovementAnimator, IDeathAnimator
     {
         [SerializeField] private Animator animatorController;
         [SerializeField] public Animator AnimatorController { private get => animatorController; set => animatorController = value; }
@@ -25,6 +25,9 @@ namespace MagicVillageDash.Character.CharacterAnimator
 
         public void MovingSpeed(float speed)
         {
+            if (speed > 0) animatorController.SetBool("Walk", true);
+            else animatorController.SetBool("Walk", false);
+            
             animatorController.SetFloat("Speed", speed);
         }
 
@@ -38,5 +41,24 @@ namespace MagicVillageDash.Character.CharacterAnimator
             animatorController.SetTrigger("LeftSpin");
         }
 
+        public void Die()
+        {
+            animatorController.SetBool("Dead", true);
+        }
+
+        public void Revive()
+        {
+            animatorController.SetBool("Dead", false);
+        }
+
+        public void SetDead(bool isDead)
+        {
+            animatorController.SetBool("Dead", isDead);
+        }
+
+        public void Idle()
+        {
+            animatorController.SetBool("Walk", false);
+        }
     }
 }
