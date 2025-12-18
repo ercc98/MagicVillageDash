@@ -15,6 +15,7 @@ namespace MagicVillageDash.Enemy
         {
             var spawnedEnemy = base.Spawn(position, rotation);
             spawnedEnemy.transform.SetParent(parent, worldSpace);
+            spawnedEnemy.Ondied += HandleOndied; 
             return spawnedEnemy;
         }
 
