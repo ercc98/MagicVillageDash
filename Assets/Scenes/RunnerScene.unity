@@ -1246,6 +1246,7 @@ GameObject:
   - component: {fileID: 243016404}
   - component: {fileID: 243016406}
   - component: {fileID: 243016405}
+  - component: {fileID: 243016407}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1319,7 +1320,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90.7
+  m_fontSize: 114.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1371,6 +1372,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 243016403}
   m_CullTransparentMesh: 1
+--- !u!95 &243016407
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243016403}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: be5e52df38b183f4ba284a38dbe4db59, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &248679898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22247,6 +22270,7 @@ MonoBehaviour:
   liveGroup: {fileID: 3848624}
   resultGroup: {fileID: 1000554179}
   coinCounterProvider: {fileID: 1511992652}
+  coinComboAnimator: {fileID: 2002292940}
   comboTimeout: 0.75
   resultShowSeconds: 1.25
 --- !u!1 &1484616567

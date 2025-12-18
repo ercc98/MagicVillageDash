@@ -12,6 +12,7 @@ namespace MagicVillageDash.UI
         [SerializeField] private CanvasGroup resultGroup;
         [SerializeField] private MonoBehaviour coinCounterProvider;
         [SerializeField] private Animator coinComboAnimator;
+        [SerializeField] private Animator resultCoinComboAnimator;
 
         [Header("Timing")]
         [SerializeField, Min(0f)] private float comboTimeout = 1.5f; // seconds without a coin to end combo
@@ -97,6 +98,7 @@ namespace MagicVillageDash.UI
             if (resultGroup != null) resultGroup.alpha = show ? 1f : 0f;
             if (resultGroup != null) resultGroup.blocksRaycasts = show;
             if (resultGroup != null) resultGroup.interactable = show;
+            if (resultCoinComboAnimator != null && show) resultCoinComboAnimator.SetTrigger("Show");
         }
     }
 }
