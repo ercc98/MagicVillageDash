@@ -38,3 +38,8 @@ MonoBehaviour:
     volume: 0.75
     volumeJitter: 0
     pitchJitter: 0
+  - id: ResultCombo
+    clip: {fileID: 8300000, guid: 78419f98379502c4dbfb2774bc94e7c1, type: 3}
+    volume: 0.75
+    volumeJitter: 0
+    pitchJitter: 0

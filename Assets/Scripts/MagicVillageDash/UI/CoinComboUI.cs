@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using MagicVillageDash.Score;
+using MagicVillageDash.Audio;
+using ErccDev.Foundation.Audio;
 namespace MagicVillageDash.UI
 {
     public sealed class CoinComboUI : MonoBehaviour
@@ -88,17 +90,26 @@ namespace MagicVillageDash.UI
 
         private void ShowLive(bool show)
         {
-            if (liveGroup != null) liveGroup.alpha = show ? 1f : 0f;
-            if (liveGroup != null) liveGroup.blocksRaycasts = show;
-            if (liveGroup != null) liveGroup.interactable = show;
+            if (liveGroup == null) return; 
+            
+            liveGroup.alpha = show ? 1f : 0f;
+            liveGroup.blocksRaycasts = show;
+            liveGroup.interactable = show;
         }
 
         private void ShowResult(bool show)
         {
-            if (resultGroup != null) resultGroup.alpha = show ? 1f : 0f;
-            if (resultGroup != null) resultGroup.blocksRaycasts = show;
-            if (resultGroup != null) resultGroup.interactable = show;
-            if (resultCoinComboAnimator != null && show) resultCoinComboAnimator.SetTrigger("Show");
+            if (resultGroup == null) return;
+
+            resultGroup.alpha = show ? 1f : 0f;
+            resultGroup.blocksRaycasts = show;
+            resultGroup.interactable = show;
+            if (resultCoinComboAnimator != null && show)
+            {
+                resultCoinComboAnimator.SetTrigger("Show");
+                AudioManager.Instance?.Play("ResultCombo", SoundCategory.SFX);   
+            }
+            
         }
     }
 }

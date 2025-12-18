@@ -3,6 +3,7 @@ using UnityEngine;
 using MagicVillageDash.Enemy;
 using ErccDev.Foundation.Core.Gameplay;
 using System;
+using ErccDev.Foundation.Core.Factories;
 
 namespace MagicVillageDash.Enemies
 {
@@ -18,13 +19,13 @@ namespace MagicVillageDash.Enemies
         [SerializeField] private float respawnDelay = 1.5f;
 
 
-        IEnemyFactory enemyFactory;
+        IFactory<EnemyController> enemyFactory;
         private Coroutine respawnRoutine;
         public event Action<EnemyController> OnSpawned;
 
         void Awake()
         {
-            enemyFactory = enemyFactoryProvider as IEnemyFactory ?? FindAnyObjectByType<EnemyFactory>(FindObjectsInactive.Exclude);
+            enemyFactory = enemyFactoryProvider as IFactory<EnemyController> ?? FindAnyObjectByType<EnemyFactory>(FindObjectsInactive.Exclude);
         }
 
         void OnEnable()
@@ -54,7 +55,8 @@ namespace MagicVillageDash.Enemies
 
         public EnemyController Spawn(int laneIndex)
         {
-            EnemyController spawnedEnemy = enemyFactory.Spawn(laneIndex);
+            float positionX = 2.2f * (laneIndex - 1);            
+            EnemyController spawnedEnemy = enemyFactory.Spawn(new Vector3(positionX, 1, 0), Quaternion.identity);
             return spawnedEnemy;
         }
 

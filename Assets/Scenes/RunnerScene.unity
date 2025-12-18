@@ -1320,7 +1320,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 114.8
+  m_fontSize: 90.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -22271,6 +22271,7 @@ MonoBehaviour:
   resultGroup: {fileID: 1000554179}
   coinCounterProvider: {fileID: 1511992652}
   coinComboAnimator: {fileID: 2002292940}
+  resultCoinComboAnimator: {fileID: 243016407}
   comboTimeout: 0.75
   resultShowSeconds: 1.25
 --- !u!1 &1484616567
