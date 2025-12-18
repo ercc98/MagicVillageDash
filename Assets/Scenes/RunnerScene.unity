@@ -1396,6 +1396,54 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &246189699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 246189701}
+  - component: {fileID: 246189700}
+  m_Layer: 0
+  m_Name: WorldMover
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &246189700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246189699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caefbd64ba48f854585156f29e27f1fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.World.WorldMover
+  speedSourceProvider: {fileID: 576670881}
+  forwardOffsetSpeed: 0
+  recenterThresholdZ: 1000
+  recenterStepZ: 1000
+--- !u!4 &246189701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246189699}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 100000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &248679898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8256,6 +8304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.World.ChunkFactory
   prefab: {fileID: 1668681631}
   initialPoolSize: 8
+  worldMover: {fileID: 246189699}
 --- !u!1 &723328611
 GameObject:
   m_ObjectHideFlags: 0
@@ -15006,6 +15055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.World.ChunkFactory
   prefab: {fileID: 2044815431}
   initialPoolSize: 8
+  worldMover: {fileID: 246189699}
 --- !u!1 &971227925
 GameObject:
   m_ObjectHideFlags: 0
@@ -19962,6 +20012,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.World.ChunkFactory
   prefab: {fileID: 93842586}
   initialPoolSize: 8
+  worldMover: {fileID: 246189699}
 --- !u!4 &977477089
 Transform:
   m_ObjectHideFlags: 0
@@ -21004,6 +21055,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a9a8d5d2399c4c24595aa39c342d38aa, type: 2}
     - target: {fileID: 7286309270683243099, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7286309270683243099, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
       propertyPath: speedSource
       value: 
       objectReference: {fileID: 576670881}
@@ -21825,7 +21880,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 375
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
@@ -28666,6 +28721,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a9a8d5d2399c4c24595aa39c342d38aa, type: 2}
     - target: {fileID: 7286309270683243099, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7286309270683243099, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
       propertyPath: speedSource
       value: 
       objectReference: {fileID: 576670881}
@@ -30035,6 +30094,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 313d467f3f872e2428250a3bcae60bd4, type: 2}
     - target: {fileID: 7286309270683243099, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7286309270683243099, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
       propertyPath: speedSource
       value: 
       objectReference: {fileID: 576670881}
@@ -30410,6 +30473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.World.ChunkFactory
   prefab: {fileID: 1202364387}
   initialPoolSize: 8
+  worldMover: {fileID: 246189699}
 --- !u!1 &2115544563
 GameObject:
   m_ObjectHideFlags: 0
@@ -30685,6 +30749,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a9a8d5d2399c4c24595aa39c342d38aa, type: 2}
     - target: {fileID: 7286309270683243099, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7286309270683243099, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
       propertyPath: speedSource
       value: 
       objectReference: {fileID: 576670881}
@@ -30765,6 +30833,7 @@ SceneRoots:
   - {fileID: 28972697}
   - {fileID: 407827274}
   - {fileID: 1335652199}
+  - {fileID: 246189701}
   - {fileID: 1192672712}
   - {fileID: 576670882}
   - {fileID: 628242070}

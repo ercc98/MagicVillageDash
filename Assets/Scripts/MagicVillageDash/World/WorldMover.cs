@@ -6,8 +6,7 @@ namespace MagicVillageDash.World
     public sealed class WorldMover : MonoBehaviour
     {
         [SerializeField] private MonoBehaviour speedSourceProvider;
-        [Tooltip("Optional extra speed added/subtracted from global (e.g., conveyor).")]
-        [SerializeField] private float forwardOffsetSpeed = 0f;
+        
         IGameSpeedController speedSource;
 
         void Awake()
@@ -18,8 +17,14 @@ namespace MagicVillageDash.World
         void FixedUpdate()
         {
             if (speedSource == null) return;
-            float speed = speedSource.CurrentSpeed + forwardOffsetSpeed;
+            float speed = speedSource.CurrentSpeed;
             transform.Translate(0f, 0f, -speed * Time.deltaTime, Space.World);
+            //RecenterIfNeeded();
+        }
+
+        void RecenterIfNeeded()
+        {
+            //Need to implement!
         }
     }
 }

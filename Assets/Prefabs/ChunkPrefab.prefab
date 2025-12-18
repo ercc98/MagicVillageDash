@@ -778,7 +778,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8866392018022683044}
   - component: {fileID: 1089529727572802683}
-  - component: {fileID: 7286309270683243099}
   - component: {fileID: 2566588202792660467}
   - component: {fileID: 7304946214920014692}
   m_Layer: 0
@@ -822,20 +821,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.World.ChunkRoot
   contentSpawner: {fileID: 2566588202792660467}
---- !u!114 &7286309270683243099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7764970446850298330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caefbd64ba48f854585156f29e27f1fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.World.WorldMover
-  speedSource: {fileID: 0}
-  forwardOffsetSpeed: 0
 --- !u!114 &2566588202792660467
 MonoBehaviour:
   m_ObjectHideFlags: 0
