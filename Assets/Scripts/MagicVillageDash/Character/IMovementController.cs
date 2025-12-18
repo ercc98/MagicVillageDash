@@ -4,6 +4,7 @@ namespace MagicVillageDash.Character
 {
     public interface IMovementController
     {
+        void Idle();
         void TurnLeft();
         void TurnRight();
         void MovingSpeed(float speed);
