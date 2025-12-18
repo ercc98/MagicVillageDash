@@ -56,12 +56,13 @@ namespace MagicVillageDash.Enemies
         IEnumerator SpawnEnemyAfterDelay(float respawnDelay)
         {
             yield return new WaitForSeconds(respawnDelay);
-            OnStartSpawn?.Invoke(initialLane);
+            
             float positionX = laneWidth * (initialLane - 1);
             spawnAreaParticleSystem.transform.position = new Vector3(positionX, 0.05f, 0);
             spawnAreaParticleSystem.Play();
             AudioManager.Instance?.Play("SpawnAreaEnemy", SoundCategory.SFX);
             yield return _waitForSeconds1;
+            OnStartSpawn?.Invoke(initialLane);
             OnSpawned?.Invoke(Spawn(positionX));
         }
 

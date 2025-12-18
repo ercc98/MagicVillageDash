@@ -64,7 +64,7 @@ namespace MagicVillageDash.Runner
 
             if (playerLaneMover != null) playerLaneMover.OnLaneChangeAttempt += OnPlayerAttempt;
             if (enemySpawner != null) enemySpawner.OnSpawned += OnEnemySpawned;
-            if (enemySpawner != null) enemySpawner.OnStartSpawn += OnEnemyStartSpawned;
+            if (enemySpawner != null) enemySpawner.OnStartSpawn += OnEnemySpawnedAttempt;
         }
 
         
@@ -74,7 +74,7 @@ namespace MagicVillageDash.Runner
         {
             if (playerLaneMover != null) playerLaneMover.OnLaneChangeAttempt -= OnPlayerAttempt;
             if (enemySpawner != null) enemySpawner.OnSpawned -= OnEnemySpawned;
-            if (enemySpawner != null) enemySpawner.OnStartSpawn -= OnEnemyStartSpawned;
+            if (enemySpawner != null) enemySpawner.OnStartSpawn -= OnEnemySpawnedAttempt;
 
             if (enemyLaneMover != null) enemyLaneMover.OnLaneChangeAttempt -= OnEnemyAttempt;
 
@@ -148,6 +148,12 @@ namespace MagicVillageDash.Runner
         #region Reaction Methods
         private void OnEnemyAttempt(int from, int to) => HandleAttempt(enemyLaneMover, playerLaneMover, playerMovementController, from, to);
         private void OnPlayerAttempt(int from, int to) => HandleAttempt(playerLaneMover, enemyLaneMover, enemyMovementController, from, to);
+        private void OnEnemySpawnedAttempt(int to)
+        {
+            if (to != playerLaneMover.CurrentLane) return;
+            if (oneReactionAtATime && reactionRoutine != null) return;
+            DoYield(enemyLaneMover, playerLaneMover, playerMovementController, to, to);
+        }
 
         private void HandleAttempt(ILaneMover mover, ILaneMover other, IMovementController otherController, int from, int to)
         {
