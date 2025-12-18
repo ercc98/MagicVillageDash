@@ -233,7 +233,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: COM_PER_GEN_ANIMATOR
+  m_Name: CharacterAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Walk

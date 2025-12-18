@@ -2282,7 +2282,7 @@ MonoBehaviour:
   gameSpeedProvider: {fileID: 576670881}
   playerLaneMoverProvider: {fileID: 1335652204}
   enemySpawnerProvider: {fileID: 220475310}
-  behavior: 1
+  behavior: 2
   reactDelay: 0.06
   oneReactionAtATime: 1
 --- !u!4 &410814804
