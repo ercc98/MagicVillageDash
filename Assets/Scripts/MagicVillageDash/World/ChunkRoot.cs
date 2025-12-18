@@ -44,13 +44,22 @@ namespace MagicVillageDash.World
         public void ResetForPool()
         {
             // Recycle any leftover residents without scanning transforms
+            ResetCoinsForPool();
+            ResetObstaclesForPool();
+        }
+
+        public void ResetCoinsForPool()
+        {            
             if (coinFactory != null)
             {
                 for (int i = coins.Count - 1; i >= 0; i--)
                     if (coins[i]) coinFactory.Recycle(coins[i]);
             }
             coins.Clear();
+        }
 
+        public void ResetObstaclesForPool()
+        {
             if (obstacleFactory != null)
             {
                 for (int i = obstacles.Count - 1; i >= 0; i--)

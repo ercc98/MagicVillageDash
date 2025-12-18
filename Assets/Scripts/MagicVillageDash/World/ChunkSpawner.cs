@@ -23,6 +23,9 @@ namespace MagicVillageDash.World
         void Start()
         {
             nextSpawnZ = (int)(player.position.z + startAheadDistance);
+            FillOneAhead().ResetObstaclesForPool();;
+            
+            nextSpawnZ += (int)chunkLength;
             FillAhead();
             FindAnyObjectByType<CoinRailGenerator>()?.ResetPathAt(player.position.z);
 
@@ -52,14 +55,15 @@ namespace MagicVillageDash.World
             nextSpawnZ -= 1 * (int)chunkLength;
         }
 
-        void FillOneAhead()
+        ChunkRoot FillOneAhead()
         {
             var factory = GetRandomFactory();
             ChunkRoot chunk = factory.Spawn(new Vector3(0f, 0f, nextSpawnZ), Quaternion.identity);
             // Mark the owner factory so we can recycle correctly
             chunk.OwnerFactory = factory;
-            chunk.ChunkLength = chunkLength; 
+            chunk.ChunkLength = chunkLength;
             active.Add(chunk);
+            return chunk;
         }
         
         ChunkFactory GetRandomFactory()

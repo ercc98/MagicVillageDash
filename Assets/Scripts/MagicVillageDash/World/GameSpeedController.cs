@@ -22,7 +22,6 @@ namespace MagicVillageDash.World
         {
             if (!stop && currentSpeed < maxSpeed)
                 currentSpeed = Mathf.Min(maxSpeed, currentSpeed + accelerationPerSecond * Time.deltaTime);
-
         }
 
         public void SetSpeed(float value)
