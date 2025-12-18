@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MagicVillageDash.Character.CharacterAnimator
 {
-    public class CharacterAnimatorController : MonoBehaviour, IMovementAnimator, IDeathAnimator
+    public class CharacterAnimatorController : MonoBehaviour, IMovementAnimator, IDeathAnimator, IExpressionAnimator
     {
         [SerializeField] private Animator animatorController;
         [SerializeField] public Animator AnimatorController { private get => animatorController; set => animatorController = value; }
@@ -59,6 +59,11 @@ namespace MagicVillageDash.Character.CharacterAnimator
         public void Idle()
         {
             animatorController.SetBool("Walk", false);
+        }
+
+        public void Excited(bool value)
+        {
+            animatorController.SetBool("Excited", value);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using ErccDev.Foundation.Core.Gameplay;
 using MagicVillageDash.Character;
+using MagicVillageDash.Character.CharacterAnimator;
 using MagicVillageDash.Runner;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ namespace MagicVillageDash.Enemy
         private Coroutine collisionsTimeoutCo;
 
         public ILaneMover SelfLaneMover => selfLaneMover;
+        public IExpressionAnimator selfExpressionAnimator;
         /// <summary>Raised when the enemy is death. Factory listens and recycles.</summary>
         public event Action<EnemyController> Ondied;
 
@@ -33,7 +35,7 @@ namespace MagicVillageDash.Enemy
 
             selfCharacterController = GetComponent<CharacterController>();
             player = playerLaneMoverProvider as ILaneMover ?? playerLaneMoverProvider?.GetComponent<ILaneMover>();
-
+            selfExpressionAnimator = selfAnimatorControllerProvider;
             if (player == null) Debug.LogError($"{name}: Missing player ILaneMover provider.", this);
             if (playerCharacterController == null) Debug.LogError($"{name}: Missing player CharacterController reference.", this);
         }
@@ -99,8 +101,8 @@ namespace MagicVillageDash.Enemy
 
         private void OnGameOver()
         {
-            MovingSpeed(0);
-            Idle();
+            selfExpressionAnimator.Excited(true);
+            
         }
     }
 }
