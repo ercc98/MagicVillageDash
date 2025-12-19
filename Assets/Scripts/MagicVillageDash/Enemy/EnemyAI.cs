@@ -57,7 +57,7 @@ namespace MagicVillageDash.Enemy
             GameEvents.GameOver += OnGameOver;
 
             Arrows.SetActive(false);
-            
+
             if (gameSpeedController.CurrentSpeed < gameSpeedController.MaxSpeed * changeNearSensorPorcentaje)
             {
                 //Debug.Log("Near");
@@ -128,7 +128,11 @@ namespace MagicVillageDash.Enemy
 
         private void Dodge()
         {
-            if (laneMovement.CurrentLane < 2)
+            if (laneMovement.CurrentLane == 0)
+                TryMoveRight();
+            else if (laneMovement.CurrentLane == 2)
+                TryMoveLeft();
+            else if (UnityEngine.Random.Range(0, 2) == 0)
                 TryMoveRight();
             else
                 TryMoveLeft();

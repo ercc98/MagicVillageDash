@@ -27724,7 +27724,7 @@ MonoBehaviour:
   changeNearSensorPorcentaje: 0.2
   changeFarSensorPorcentaje: 0.6
   thinkInterval: 0.2
-  moveCooldown: 0.5
+  moveCooldown: 1
   timeWithoutCoins: 4
 --- !u!1 &1535837502
 GameObject:
