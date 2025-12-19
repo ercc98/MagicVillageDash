@@ -26,10 +26,11 @@ namespace MagicVillageDash.Obstacles
             {
                 Vector3 hitPoint = other.ClosestPoint(transform.position);
                 r.OnHazardHit(hitPoint);
+                Hit?.Invoke(this);
+                gameObject.SetActive(false);
             }
 
-            Hit?.Invoke(this);
-            gameObject.SetActive(false);
+            
         }
     }
 }
