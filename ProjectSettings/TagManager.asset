@@ -8,6 +8,7 @@ TagManager:
   - Grounded
   - Hazard
   - Coin
+  - Sensor
   layers:
   - Default
   - TransparentFX
