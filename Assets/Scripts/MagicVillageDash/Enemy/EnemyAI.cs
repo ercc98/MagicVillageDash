@@ -48,7 +48,7 @@ namespace MagicVillageDash.Enemy
             nextThinkTime       = Time.time + thinkInterval     +   startDelay;
             nextMoveAllowedTime = Time.time + moveCooldown      +   startDelay;
             nextMoveNoCoinsTime = Time.time + timeWithoutCoins  +   startDelay;
-            Arrows.SetActive(false);
+            
         }
 
         void OnEnable()
@@ -56,6 +56,8 @@ namespace MagicVillageDash.Enemy
             nearSensor.OnTriggerHit += OnTriggetHit;
             GameEvents.GameOver += OnGameOver;
 
+            Arrows.SetActive(false);
+            
             if (gameSpeedController.CurrentSpeed < gameSpeedController.MaxSpeed * changeNearSensorPorcentaje)
             {
                 //Debug.Log("Near");
