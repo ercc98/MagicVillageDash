@@ -7,7 +7,10 @@ namespace MagicVillageDash.Character.CharacterAnimator
         [SerializeField] private Animator animatorController;
         [SerializeField] public Animator AnimatorController { private get => animatorController; set => animatorController = value; }
         
-        
+        bool IsJumping()
+    {
+        return animatorController.GetCurrentAnimatorStateInfo(0).IsName("Jump");
+    }
         public void Crouch(bool isCrouching)
         {
             animatorController.SetBool("IsCrouching", isCrouching);
@@ -33,11 +36,13 @@ namespace MagicVillageDash.Character.CharacterAnimator
 
         public void TurnLeft()
         {
+            if (IsJumping()) return;
             animatorController.SetTrigger("RightSpin");
         }
 
         public void TurnRight()
         {
+            if (IsJumping()) return;
             animatorController.SetTrigger("LeftSpin");
         }
 

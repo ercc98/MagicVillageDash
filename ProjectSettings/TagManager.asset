@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Grounded
+  - Hazard
+  - Coin
+  - Sensor
   layers:
   - Default
   - TransparentFX

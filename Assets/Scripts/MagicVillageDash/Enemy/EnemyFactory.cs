@@ -15,7 +15,14 @@ namespace MagicVillageDash.Enemy
         {
             var spawnedEnemy = base.Spawn(position, rotation);
             spawnedEnemy.transform.SetParent(parent, worldSpace);
-            spawnedEnemy.Ondied += HandleOndied; 
+            spawnedEnemy.Ondied += HandleOndied;
+            return spawnedEnemy;
+        }
+        public EnemyController Spawn(Vector3 position, Quaternion rotation)
+        {
+            var spawnedEnemy = base.Spawn(position, rotation);
+            spawnedEnemy.transform.SetParent(transform);
+            spawnedEnemy.Ondied += HandleOndied;
             return spawnedEnemy;
         }
 
@@ -36,5 +43,7 @@ namespace MagicVillageDash.Enemy
         }
 
         void HandleOndied(EnemyController enemy) => Recycle(enemy);
+
+        
     }
 }

@@ -33,7 +33,8 @@ namespace MagicVillageDash.Collectibles
         void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(playerTag)) cachedCounter?.Add(value);
-
+            if (other.CompareTag("Sensor")) return;
+            
             TryCollect(other.gameObject);
             
             gameObject.SetActive(false);
