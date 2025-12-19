@@ -23,6 +23,7 @@ namespace MagicVillageDash.Enemy
 
         private CharacterController selfCharacterController;
         private Coroutine collisionsTimeoutCo;
+        private Coroutine collisionsSelfCCTimeoutCo;
 
         public ILaneMover SelfLaneMover => selfLaneMover;
         public IExpressionAnimator selfExpressionAnimator;
@@ -45,7 +46,22 @@ namespace MagicVillageDash.Enemy
             if (player != null) player.OnLaneChangeAttempt += OnPlayerAttempt;
             if (selfLaneMover != null) selfLaneMover.OnLaneChanged += OnSelfLaneChanged;
             GameEvents.GameOver += OnGameOver;
+            BeginNonCollidingSelfCCWindow();
         }
+
+        private void BeginNonCollidingSelfCCWindow()
+        {
+            selfCharacterController.detectCollisions = false;
+            if (collisionsSelfCCTimeoutCo != null) StopCoroutine(collisionsSelfCCTimeoutCo);
+            collisionsSelfCCTimeoutCo = StartCoroutine(ReenableSelfCCAfterTimeout(collisionsFailSafe));
+        }
+        
+        private IEnumerator ReenableSelfCCAfterTimeout(float t)
+        {
+            yield return new WaitForSeconds(t);
+            selfCharacterController.detectCollisions = true;
+            collisionsSelfCCTimeoutCo = null;
+        }   
 
         void OnDisable()
         {
