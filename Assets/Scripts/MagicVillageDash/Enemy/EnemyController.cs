@@ -102,7 +102,6 @@ namespace MagicVillageDash.Enemy
         private void OnGameOver()
         {
             selfExpressionAnimator.Excited(true);
-            
         }
     }
 }
