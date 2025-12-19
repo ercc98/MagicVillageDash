@@ -25,14 +25,14 @@ namespace MagicVillageDash.Enemies
         [SerializeField] private ParticleSystem spawnAreaParticleSystem;
 
 
-        IFactory<EnemyController> enemyFactory;
+        IEnemyFactory enemyFactory;
         private Coroutine respawnRoutine;
         public event Action<EnemyController> OnSpawned;
         public event Action<int> OnStartSpawn;
 
         void Awake()
         {
-            enemyFactory = enemyFactoryProvider as IFactory<EnemyController> ?? FindAnyObjectByType<EnemyFactory>(FindObjectsInactive.Exclude);
+            enemyFactory = enemyFactoryProvider as IEnemyFactory ?? FindAnyObjectByType<EnemyFactory>(FindObjectsInactive.Exclude);
         }
 
         void OnEnable()
