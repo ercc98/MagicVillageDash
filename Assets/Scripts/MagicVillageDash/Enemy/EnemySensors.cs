@@ -7,10 +7,10 @@ namespace MagicVillageDash.Enemy
 {
     public class EnemySensors : MonoBehaviour
     {
-        public event Action<string> TriggerHit;
+        public event Action<string> OnTriggerHit;
         void OnTriggerEnter(Collider other)
-        {
-            TriggerHit?.Invoke(other.tag);
+        {            
+            OnTriggerHit?.Invoke(other.tag);
         }
     }
 }
