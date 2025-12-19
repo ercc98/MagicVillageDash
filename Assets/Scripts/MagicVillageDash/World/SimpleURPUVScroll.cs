@@ -19,13 +19,13 @@ namespace MagicVillageDash.World
         [Header("Material slot (for renderers with multiple materials)")]
         [SerializeField] private int materialIndex = 0;
 
-        private Renderer _ren;
+        [SerializeField ]private Renderer _ren;
         private Material _mat;
         private Vector2  _offset;
 
         void Awake()
         {
-            _ren = GetComponent<Renderer>();
+            if(_ren == null) _ren = GetComponent<Renderer>();
 
             // Simple & safe for a prototype: create a per-instance material.
             // (Shipping tip: use MaterialPropertyBlock for better batching.)
