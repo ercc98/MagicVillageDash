@@ -16,22 +16,22 @@ namespace MagicVillageDash.UI
         {
             if (!label) label = GetComponent<TMP_Text>();
             coinCounter = coinCounterProvider as ICoinCounter ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
-            
         }
 
         void OnEnable()
         {
             coinCounter?.ResetCoins(coinCounter.Coins); // fuerza actualización
-            UpdateText(coinCounter != null ? coinCounter.Coins : 0);
-            coinCounter.CoinsChanged += UpdateText;
         }
 
         void OnDisable()
         {
-            if (coinCounter == null) return;
-            coinCounter.CoinsChanged -= UpdateText;
         }
 
-        public void UpdateText(int total) { if (label) label.text = string.Format(format, coinCounter.Coins); }
+        void Update()
+        {
+            UpdateText(coinCounter.Coins);
+        }
+
+        public void UpdateText(int total) { if (label) label.SetText(format, total);}
     }
 }

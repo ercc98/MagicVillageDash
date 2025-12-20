@@ -77,7 +77,7 @@ namespace MagicVillageDash.UI
 
             if (_currentCombo > 1)
             {
-                comboResultText.text = $"+{_currentCombo * _coinsInCombo} coins!";
+                comboResultText.text = $"+{_currentCombo * _coinsInCombo}";
                 ShowResult(true);
                 Invoke(nameof(HideResult), resultShowSeconds);
                 coinCounter.Add(_currentCombo * _coinsInCombo);

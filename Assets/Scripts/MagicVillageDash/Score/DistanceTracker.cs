@@ -6,17 +6,13 @@ using UnityEngine.Events;
 namespace MagicVillageDash.Score
 {
     /// <summary>Integrates world speed to meters. Player is stationary, world moves on -Z.</summary>
-    public sealed class DistanceTracker : MonoBehaviour, IDistanceTracker
+    public sealed class DistanceTracker : MonoBehaviour, IDistanceTracker 
     {
         [SerializeField] private MonoBehaviour gameSpeedProvider;
         [SerializeField] private bool autoRun = true;
 
-        public float DistanceMeters { get; private set; }
+        public float CurrentDistance { get; private set; }
         public bool  IsRunning { get; private set; }
-
-        public event Action<float> OnDistanceChanged; // typed event
-
-        [SerializeField] private UnityEvent<float> onDistanceChanged; // for UI via Inspector
 
         IGameSpeedController gameSpeedController;
 
@@ -33,9 +29,7 @@ namespace MagicVillageDash.Score
         void Update()
         {
             if (!IsRunning || gameSpeedController == null) return;
-            DistanceMeters += gameSpeedController.CurrentSpeed * Time.deltaTime;
-            OnDistanceChanged?.Invoke(DistanceMeters);
-            onDistanceChanged?.Invoke(DistanceMeters);
+            CurrentDistance += gameSpeedController.CurrentSpeed * 0.1f * Time.deltaTime;
         }
 
         public void StartRun()
@@ -50,9 +44,7 @@ namespace MagicVillageDash.Score
 
         public void ResetDistance()
         {
-            DistanceMeters = 0f;
-            OnDistanceChanged?.Invoke(DistanceMeters);
-            onDistanceChanged?.Invoke(DistanceMeters);
+            CurrentDistance = 0f;
         }
     }
 }
