@@ -80,3 +80,5 @@ crashlytics-build.properties
 Assets/Lana Studio/Hyper Casual FX/Demo.meta
 /Assets/IgnoreFolder
 Assets/IgnoreFolder.meta
+Assets/Settings/FirebaseFiles/google-services.json
+Assets/Settings/FirebaseFiles/google-services.json.meta
