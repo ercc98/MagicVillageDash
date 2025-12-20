@@ -1,10 +1,10 @@
 using Firebase.Extensions; 
 using UnityEngine;
-namespace FireBaseScripts
+namespace MagicVillageDash.FireBaseScripts
 {
-    public class FireBaseAnalytics : MonoBehaviour
+    public class FirebaseAnalyticsService : MonoBehaviour
     {
-        public static FireBaseAnalytics Instance;
+        public static FirebaseAnalyticsService Instance;
         private bool isFirebaseReady = false;
         private Firebase.FirebaseApp app;
         private void Awake()
@@ -50,7 +50,7 @@ namespace FireBaseScripts
             
         }
 
-        public void LogPlayerDied(int distance, int coins)
+        public void LogPlayerDied(float distance, int coins)
         {
             if (!isFirebaseReady) return;
 

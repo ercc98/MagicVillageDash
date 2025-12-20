@@ -8,6 +8,7 @@ using MagicVillageDash.Camera;
 using MagicVillageDash.Character;
 using MagicVillageDash.Enemies;
 using MagicVillageDash.Enemy;
+using MagicVillageDash.FireBaseScripts;
 using MagicVillageDash.Score;
 using MagicVillageDash.World;
 using UnityEngine;
@@ -54,7 +55,7 @@ namespace MagicVillageDash.Runner
             coinCounter = coinCounterProvider as ICoinCounter ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
             gameSpeedController = gameSpeedProvider as IGameSpeedController ?? FindAnyObjectByType<GameSpeedController>(FindObjectsInactive.Exclude);
             playerLaneMover = playerLaneMoverProvider as ILaneMover ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);
-            playerMovementController = playerLaneMoverProvider as IMovementController ?? playerLaneMoverProvider.GetComponent<IMovementController>();
+            playerMovementController = playerLaneMoverProvider as IMovementController ?? playerLaneMoverProvider.GetComponent<IMovementController>();            
         }
 
         void OnEnable()
@@ -94,6 +95,7 @@ namespace MagicVillageDash.Runner
             runScoreSystem?.ResetRun();
             distanceTracker?.StartRun();
             enemySpawner?.Spawn();
+            FirebaseAnalyticsService.Instance.LogStartPlaying();
         }
 
         private void OnGameOver()
@@ -102,6 +104,7 @@ namespace MagicVillageDash.Runner
             distanceTracker?.StopRun();
             runScoreSystem?.CommitIfBest();
             gameSpeedController?.SetSpeed(0f);
+            FirebaseAnalyticsService.Instance.LogPlayerDied(distanceTracker.CurrentDistance, coinCounter.Coins);
         }
 
         private void OnEnemyStartSpawned(int value)
