@@ -15,6 +15,9 @@ namespace MagicVillageDash.UI
         [SerializeField] private TMP_Text coinText;
         [SerializeField] private CoinCounter coinCounterProvider;
         [SerializeField] private string format = "{0}";
+        [SerializeField] private TMP_Text distanceText;
+        [SerializeField] private DistanceTracker distanceCounterProvider;
+        [SerializeField] private string distanceFormat = "{0} m"; // e.g., "123 m" 
         bool _started;
         bool _ended;
         ICoinCounter coinCounter;
@@ -65,7 +68,8 @@ namespace MagicVillageDash.UI
         {
             if (_ended) return;
             _ended = true;
-            coinText.text = string.Format(format, coinCounter.Coins);
+            coinText.SetText(format, coinCounter.Coins);
+            distanceText.SetText(distanceFormat, distanceCounterProvider.CurrentDistance);
             StartCoroutine(WaitToGameOverPanel());
             
         }

@@ -18,13 +18,13 @@ namespace MagicVillageDash.UI
 
         void OnEnable()
         {
-            if (score) score.ScoreChanged += OnScoreChanged;
+            if (score) score.OnScoreChanged += OnScoreChanged;
             OnScoreChanged(score ? score.CurrentScore : 0);
         }
 
         void OnDisable()
         {
-            if (score) score.ScoreChanged -= OnScoreChanged;
+            if (score) score.OnScoreChanged -= OnScoreChanged;
         }
 
         void OnScoreChanged(int value)
