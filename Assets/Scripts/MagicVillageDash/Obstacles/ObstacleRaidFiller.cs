@@ -2,9 +2,9 @@ using MagicVillageDash.Collectibles;
 using MagicVillageDash.Obstacles;
 using UnityEngine;
 
-namespace MagicVillageDash.World
+namespace MagicVillageDash.Obstacles
 {
-    public sealed class ChunkContentSpawner : MonoBehaviour
+    public sealed class ObstacleRaidFiller : MonoBehaviour
     {
         [Header("Lane spawn points inside this chunk (center of lanes/rows)")]
         [SerializeField] Transform[] lanePoints;
@@ -12,14 +12,13 @@ namespace MagicVillageDash.World
         [Header("Factories")]
         [Tooltip("One or more obstacle factories; a random one will be used.")]
         [SerializeField] private ObstacleFactory[] obstacleFactories;
-        [SerializeField] private CoinFactory coinFactory;
+        private CoinFactory coinFactory;
 
         [Header("Rules")]
-        [Range(0,1)] [SerializeField] float obstacleChancePerLane = 0.45f;
-        [Range(0,1)] [SerializeField] private float coinChancePerLane = 0.30f;
-        [Range(1,5)] [SerializeField] private int coinLinePerChunk = 1;
+        [Range(0, 1)][SerializeField] float obstacleChancePerLane = 0.45f;
+        [Range(1, 5)][SerializeField] private int obstacleLinePerChunk = 1;
         [SerializeField] bool ensureAtLeastOneSafeLane = true;
-        public float ChunkLength { get; set; } = 24f;
+        public float ChunkLength { get; set; } = 40f;
 
 
         public void Spawn()
@@ -27,16 +26,13 @@ namespace MagicVillageDash.World
             if (lanePoints == null || lanePoints.Length == 0) return;
 
             bool[] blocked = new bool[lanePoints.Length];
-
+            float deltaObstaclePosition = ChunkLength / obstacleLinePerChunk;
             // obstacles
-            SpawnObstaclesInLane(blocked);
+            SpawnObstaclesInLane(blocked, deltaObstaclePosition);
 
             // Ensure at least one safe lane
             OneSafeLane(blocked);
-
-            float deltaCoinPosition = ChunkLength / coinLinePerChunk;
-            // 2) Coins via factory on SAFE lanes
-            //SpawnCoinsInLane(blocked, deltaCoinPosition);
+            
         }
 
         private void OneSafeLane(bool[] blocked)
@@ -70,38 +66,23 @@ namespace MagicVillageDash.World
                 }
             }
         }
-        private void SpawnObstaclesInLane(bool[] blocked)
+        private void SpawnObstaclesInLane(bool[] blocked, float deltaObstaclePosition)
         {
             for (int i = 0; i < lanePoints.Length; i++)
             {
                 if (blocked[i] || obstacleFactories == null) continue;
 
-                if (Random.value <= obstacleChancePerLane)
+                for (int j = 0; j < obstacleLinePerChunk; j++) // try twice per lane
                 {
-                    var f = obstacleFactories[Random.Range(0, obstacleFactories.Length)];
-                    if (f)
+                    if (Random.value <= obstacleChancePerLane)
                     {
-                        f.Spawn(transform, lanePoints[i].position, lanePoints[i].rotation, true);
-                        blocked[i] = true;
-                    }
-                }
-            }
-        }
-        
-        private void SpawnCoinsInLane(bool[] blocked, float deltaCoinPosition)
-        {
-            for (int i = 0; i < lanePoints.Length; i++)
-            {
-                if (blocked[i] || !coinFactory) continue;
-
-                for (int j = 0; j < coinLinePerChunk; j++) // try twice per lane
-                {
-                    if (Random.value <= coinChancePerLane)
-                    {
-                        // Slight vertical offset so coin sits above ground
-                        var pos = lanePoints[i].position + Vector3.up * 1.5f + deltaCoinPosition * j * Vector3.forward;
-                        CoinCollectible thiscoin = coinFactory.Spawn( pos, lanePoints[i].rotation);
-                        thiscoin.transform.SetParent(transform, true);
+                        var f = obstacleFactories[Random.Range(0, obstacleFactories.Length)];
+                        if (f)
+                        {
+                            var pos = lanePoints[i].position + deltaObstaclePosition * j * Vector3.forward;
+                            f.Spawn(transform, pos, lanePoints[i].rotation, true);
+                            blocked[i] = true;
+                        }
                     }
                 }
             }

@@ -10,8 +10,8 @@ namespace MagicVillageDash.World
         [SerializeField] Transform player;        // stationary
         [SerializeField] private ChunkFactory[] factories;  // multiple factories (no weights)
 
-        [Header("Layout")]
-        [SerializeField] float chunkLength = 24f;
+        //[Header("Layout")]
+        float chunkLength = 24f;
 
         [Header("Runway")]
         [SerializeField] int keepAhead = 6;
@@ -23,7 +23,7 @@ namespace MagicVillageDash.World
         void Start()
         {
             nextSpawnZ = (int)(player.position.z + startAheadDistance);
-            FillOneAhead().ResetObstaclesForPool();;
+            FillOneAhead().ResetObstaclesForPool();
             
             nextSpawnZ += (int)chunkLength;
             FillAhead();
@@ -61,7 +61,8 @@ namespace MagicVillageDash.World
             ChunkRoot chunk = factory.Spawn(new Vector3(0f, 0f, nextSpawnZ), Quaternion.identity);
             // Mark the owner factory so we can recycle correctly
             chunk.OwnerFactory = factory;
-            chunk.ChunkLength = chunkLength;
+            //chunk.ChunkLength = chunkLength;
+            chunkLength = chunk.ChunkLength;
             active.Add(chunk);
             return chunk;
         }
