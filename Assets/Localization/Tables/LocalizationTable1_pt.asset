@@ -54,6 +54,22 @@ MonoBehaviour:
     m_Localized: Moedas
     m_Metadata:
       m_Items: []
+  - m_Id: 1119312847605760
+    m_Localized: 'Recorde Moedas:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119426706182144
+    m_Localized: "Recorde Dist\xE2ncia:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119472981938176
+    m_Localized: Prepare-se!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119530024472576
+    m_Localized: Colete moedas e corra longe!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

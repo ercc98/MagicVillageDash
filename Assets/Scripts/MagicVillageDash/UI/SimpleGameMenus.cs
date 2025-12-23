@@ -13,18 +13,24 @@ namespace MagicVillageDash.UI
         [SerializeField] private GameObject startPanel;
         [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private TMP_Text coinText;
+        [SerializeField] private TMP_Text recordCoinText;
         [SerializeField] private CoinCounter coinCounterProvider;
         [SerializeField] private string format = "{0}";
         [SerializeField] private TMP_Text distanceText;
+        [SerializeField] private TMP_Text recordDistanceText;
+        [SerializeField] private TMP_Text recordDistanceText2;
         [SerializeField] private DistanceTracker distanceCounterProvider;
         [SerializeField] private string distanceFormat = "{0} m"; // e.g., "123 m" 
+        [SerializeField] private RunScoreSystem runScoreSystemProvider;
         bool _started;
         bool _ended;
         ICoinCounter coinCounter;
+        IRunScoreSystem runScoreSystem;
 
         void Awake()
         {
             coinCounter = coinCounterProvider as ICoinCounter ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
+            runScoreSystem = runScoreSystemProvider as IRunScoreSystem ?? FindAnyObjectByType<RunScoreSystem>(FindObjectsInactive.Exclude);
 
             SetPanel(startPanel,  true);
             SetPanel(gameOverPanel, false);
@@ -35,6 +41,7 @@ namespace MagicVillageDash.UI
 
             GameEvents.GameOver   += OnGameOver;
             GameEvents.GameStarted += OnGameStarted;
+            recordDistanceText2.SetText(distanceFormat, runScoreSystem.BestDistance);
         }
 
         void OnDestroy()
@@ -69,7 +76,11 @@ namespace MagicVillageDash.UI
             if (_ended) return;
             _ended = true;
             coinText.SetText(format, coinCounter.Coins);
+            recordCoinText.SetText(format, runScoreSystem.BestCoins);
+
             distanceText.SetText(distanceFormat, distanceCounterProvider.CurrentDistance);
+            recordDistanceText.SetText(distanceFormat, runScoreSystem.BestDistance);
+            recordDistanceText2.SetText(distanceFormat, runScoreSystem.BestDistance);
             StartCoroutine(WaitToGameOverPanel());
             
         }
@@ -81,7 +92,7 @@ namespace MagicVillageDash.UI
             Time.timeScale = 0f;
         }
 
-        void OnGameStarted() { /* hook if you want SFX/UI, optional */ }
+        void OnGameStarted() {  }
 
         static void SetPanel(GameObject go, bool on)
         {

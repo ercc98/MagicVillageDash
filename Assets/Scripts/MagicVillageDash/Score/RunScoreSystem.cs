@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
-using ErccDev.Foundation.Core.Save; // SaveService
+using ErccDev.Foundation.Core.Save;
+using MagicVillageDash.Data; // SaveService
 
 namespace MagicVillageDash.Score
 {
@@ -20,43 +21,32 @@ namespace MagicVillageDash.Score
         [Header("Runtime (read-only)")]
         [SerializeField] private int   currentScore;
         [SerializeField] private int   bestScore;
-        [SerializeField] private float bestDistanceMeters;
+        [SerializeField] private float bestDistance;
         [SerializeField] private int   bestCoins;
 
         public int   CurrentScore       => currentScore;
         public int   BestScore          => bestScore;
-        public float BestDistanceMeters => bestDistanceMeters;
+        public float BestDistance       => bestDistance;
         public int   BestCoins          => bestCoins;
+
 
         public event Action<int>   OnScoreChanged;
         public event Action<int>   OnBestScoreChanged;
         public event Action<float> OnBestDistanceChanged;
 
-        const string kSaveFile = "run_stats.json";
+        public RunStats runStatsData;
 
         IDistanceTracker distanceTracker;
         ICoinCounter     coinCounter;
 
-        [Serializable]
-        private class RunStatsData
-        {
-            public int   bestScore;
-            public float bestDistanceMeters;
-            public int   bestCoins;
-        }
-
         void Awake()
         {
             distanceTracker = distanceTrackerProvider   as IDistanceTracker     ?? FindAnyObjectByType<DistanceTracker>(FindObjectsInactive.Exclude);
-            coinCounter     = coinCounterProvider       as ICoinCounter         ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
-
-            // Load bests
-            if (SaveService.TryLoadObject(kSaveFile, out RunStatsData data))
-            {
-                bestScore          = data.bestScore;
-                bestDistanceMeters = data.bestDistanceMeters;
-                bestCoins          = data.bestCoins;
-            }
+            coinCounter = coinCounterProvider as ICoinCounter ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
+            SaveService.LoadSO(runStatsData, runStatsData.FileName);
+            bestCoins = runStatsData.bestCoins;
+            bestDistance = runStatsData.bestDistance;
+            bestScore = runStatsData.bestScore;
         }
 
         void OnEnable()
@@ -107,11 +97,11 @@ namespace MagicVillageDash.Score
                 OnBestScoreChanged?.Invoke(bestScore);
             }
 
-            if (dist > bestDistanceMeters)
+            if (dist > bestDistance)
             {
-                bestDistanceMeters = dist;
+                bestDistance = dist;
                 changed = true;
-                OnBestDistanceChanged?.Invoke(bestDistanceMeters);
+                OnBestDistanceChanged?.Invoke(bestDistance);
             }
 
             if (c > bestCoins)
@@ -122,13 +112,8 @@ namespace MagicVillageDash.Score
 
             if (changed)
             {
-                var data = new RunStatsData
-                {
-                    bestScore = bestScore,
-                    bestDistanceMeters = bestDistanceMeters,
-                    bestCoins = bestCoins
-                };
-                SaveService.SaveObject(data, kSaveFile);
+                runStatsData.RegisterRun(bestScore, bestDistance, bestCoins );
+                SaveService.SaveObject(runStatsData, runStatsData.FileName);
             }
         }
 
