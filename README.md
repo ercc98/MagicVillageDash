@@ -41,6 +41,7 @@ ProjectSettings/       Project-wide Unity configuration.
    ```
 2. **Open in Unity Hub**
    - Add the cloned folder and select the Unity 6000.2.6f2 editor (or newer 6.x release).
+   - The exact editor version is stored in `ProjectSettings/ProjectVersion.txt` if you need to install it first.
 3. **Install dependencies**
    - Unity will resolve packages listed in `Packages/manifest.json` automatically. No manual imports are required for the included ErccDev tooling.
 4. **Open a scene**
@@ -68,6 +69,12 @@ The project uses the Unity Input System together with the reusable `ISwipeInput`
 3. Coins collected update the HUD and contribute to the score; distance traveled adds points over time.
 4. Colliding with `ObstacleHazard` prefabs ends the run; `RunScoreSystem.CommitIfBest()` persists new records.
 5. UI menus (`SimpleGameMenus`) transition between intro, gameplay, and game-over states.
+
+## Building a Player
+
+1. Open `RunnerScene` and ensure the `IntroScene` is listed first in **File → Build Settings**.
+2. Confirm your target platform (PC, Mac, Linux, Android, or iOS) and click **Switch Platform** if needed.
+3. Press **Build** or **Build And Run**, then choose an output folder.
 
 ## Extending the Project
 
