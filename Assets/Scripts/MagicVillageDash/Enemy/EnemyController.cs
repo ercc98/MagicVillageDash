@@ -12,10 +12,12 @@ namespace MagicVillageDash.Enemy
     public class EnemyController : CharacterControllerBase
     {
         [Header("References")]
-        [SerializeField] private MonoBehaviour playerLaneMoverProvider; 
+        [SerializeField] private MonoBehaviour playerLaneMoverProvider;
         [SerializeField] private CharacterController playerCharacterController;
+        [SerializeField] private int coinsOnDeath = 1;
+        [SerializeField] private Vector3 rewardOffset = Vector3.up;
+
         
-        ILaneMover  player;
 
         [Header("Safety")]
         [Tooltip("Failsafe: if something goes wrong, collisions auto-reenable after this many seconds.")]
@@ -25,10 +27,13 @@ namespace MagicVillageDash.Enemy
         private Coroutine collisionsTimeoutCo;
         private Coroutine collisionsSelfCCTimeoutCo;
 
+        public ILaneMover player;
         public ILaneMover SelfLaneMover => selfLaneMover;
         public IExpressionAnimator selfExpressionAnimator;
+
         /// <summary>Raised when the enemy is death. Factory listens and recycles.</summary>
         public event Action<EnemyController> Ondied;
+        public event Action<int, Vector3> OnReward; 
 
         protected override void Awake()
         {
@@ -39,6 +44,7 @@ namespace MagicVillageDash.Enemy
             selfExpressionAnimator = selfAnimatorControllerProvider;
             if (player == null) Debug.LogError($"{name}: Missing player ILaneMover provider.", this);
             if (playerCharacterController == null) Debug.LogError($"{name}: Missing player CharacterController reference.", this);
+
         }
 
         void OnEnable()
@@ -105,6 +111,7 @@ namespace MagicVillageDash.Enemy
 
         protected override void OnHazardHitInternal(Vector3 hazardHitPosition)
         {
+            OnReward?.Invoke(coinsOnDeath, transform.position + rewardOffset);
             StartCoroutine(WaitForDie(0.5f));
         }
 
