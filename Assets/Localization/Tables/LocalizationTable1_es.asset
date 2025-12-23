@@ -67,7 +67,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1119530024472576
-    m_Localized: "\xA1Recoge monedas y corre lejos!"
+    m_Localized: "\xA1Recoge monedas y corre!"
     m_Metadata:
       m_Items: []
   references:
