@@ -54,6 +54,22 @@ MonoBehaviour:
     m_Localized: Coins
     m_Metadata:
       m_Items: []
+  - m_Id: 1119312847605760
+    m_Localized: 'Best Coins:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119426706182144
+    m_Localized: 'Best DIstance:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119472981938176
+    m_Localized: Get Ready!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119530024472576
+    m_Localized: Collect coins. Run far!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

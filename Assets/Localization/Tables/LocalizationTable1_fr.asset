@@ -54,6 +54,22 @@ MonoBehaviour:
     m_Localized: "Pi\uFFFDces"
     m_Metadata:
       m_Items: []
+  - m_Id: 1119312847605760
+    m_Localized: "Record Pi\xE8ces:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119426706182144
+    m_Localized: 'Record Distance:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119472981938176
+    m_Localized: "Pr\xE9pare-toi !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119530024472576
+    m_Localized: "Ramasse des pi\xE8ces, cours loin !"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

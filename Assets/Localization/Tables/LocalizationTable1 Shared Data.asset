@@ -51,6 +51,22 @@ MonoBehaviour:
     m_Key: Coins
     m_Metadata:
       m_Items: []
+  - m_Id: 1119312847605760
+    m_Key: 'Best Coins:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119426706182144
+    m_Key: 'Best DIstance:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119472981938176
+    m_Key: Get Ready!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119530024472576
+    m_Key: Collect coins. Run far!
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

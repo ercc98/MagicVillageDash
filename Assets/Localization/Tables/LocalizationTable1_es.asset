@@ -54,6 +54,22 @@ MonoBehaviour:
     m_Localized: Monedas
     m_Metadata:
       m_Items: []
+  - m_Id: 1119312847605760
+    m_Localized: "R\xE9cord Monedas:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119426706182144
+    m_Localized: "R\xE9cord Distancia:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119472981938176
+    m_Localized: "\xA1Prep\xE1rate!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1119530024472576
+    m_Localized: "\xA1Recoge monedas y corre lejos!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
