@@ -2,6 +2,8 @@ using UnityEngine;
 using ErccDev.Foundation.Input.Swipe;
 using MagicVillageDash.Character;
 using MagicVillageDash.Player;
+using ErccDev.Foundation.Core.Gameplay;
+using System;
 
 namespace MagicVillageDash.Input
 {
@@ -28,16 +30,22 @@ namespace MagicVillageDash.Input
         protected override void OnEnable()
         {
             base.OnEnable();
+            GameEvents.GameOver += OnGameOver;
             Activate();            
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
+            GameEvents.GameOver -= OnGameOver;
             Deactivate();
         }
 
-        
+        private void OnGameOver()
+        {
+            Deactivate();
+        }
+
         private void OnSwipeLeft()  => movementController.TurnLeft();
         private void OnSwipeRight() => movementController.TurnRight();
         private void OnSwipeUp()    => movementController.Jump();
