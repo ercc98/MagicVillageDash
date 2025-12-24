@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: da2629075b01a4f4f845357cb91a64da
+guid: d6b880acc692eb343ba4d50aacc9cbb5
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,18 +7,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ARBOL_01_LOD1
-    second: {fileID: 2100000, guid: c79c647cca157e4419cbd62fe33814bf, type: 2}
+      name: MOR_TEP_CUATRI_FAROS
+    second: {fileID: 2100000, guid: f6a5a6b0ac74c2a46adb3f95ecde2856, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: COM_MAP_ARBOL_01_COPA
-    second: {fileID: 2100000, guid: f69540f07cbf5834d80d31dca6ad1a5f, type: 2}
+      name: MOR_TEP_CUATRI_LOD1
+    second: {fileID: 2100000, guid: cb1876df923e96346ac2718d8765493a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: COM_MAP_ARBOL_01_TRONCO
-    second: {fileID: 2100000, guid: cdf55c87df7cb5b4496178b391765d93, type: 2}
+      name: MOR_TEP_CUATRI_LOD2
+    second: {fileID: 2100000, guid: 8b5e69514c9e2114e86ea71dc2b64955, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_CUATRI_METAL
+    second: {fileID: 2100000, guid: 349f6e5b6238a82408cda11e364b6d4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_CUATRI_RUEDAS
+    second: {fileID: 2100000, guid: fe2a43a3e3a73d244921f005453e22e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_CUATRI_VERDE
+    second: {fileID: 2100000, guid: 47c93d410a7604149b85cbc127cb0d9b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -50,18 +65,17 @@ ModelImporter:
     lODScreenPercentages:
     - 0.25
     - 0.125
-    - 0.0625
     - 0.01
-    globalScale: 5
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
     importVisibility: 1
-    importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -110,7 +124,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.049999997
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: da2629075b01a4f4f845357cb91a64da
+guid: ebc518f9b99de624dbf07357910a3ebe
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,18 +7,48 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ARBOL_01_LOD1
-    second: {fileID: 2100000, guid: c79c647cca157e4419cbd62fe33814bf, type: 2}
+      name: MOR_TEP_NIEVES_BORDESPUERTA
+    second: {fileID: 2100000, guid: ad3dcb9828b708447ab3d61a0d3a62c7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: COM_MAP_ARBOL_01_COPA
-    second: {fileID: 2100000, guid: f69540f07cbf5834d80d31dca6ad1a5f, type: 2}
+      name: MOR_TEP_NIEVES_BORDESVENTANA
+    second: {fileID: 2100000, guid: 08c937b71f6be8b4c950baa700054e52, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: COM_MAP_ARBOL_01_TRONCO
-    second: {fileID: 2100000, guid: cdf55c87df7cb5b4496178b391765d93, type: 2}
+      name: MOR_TEP_NIEVES_INTERIORES
+    second: {fileID: 2100000, guid: 33eb94c436db46740a3ab4251abce7bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_NIEVES_LAMPARA
+    second: {fileID: 2100000, guid: 5fc08a8867282304e9a16854af86d687, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_NIEVES_LETRERO
+    second: {fileID: 2100000, guid: 7521bec8dab51724abca86c4b4c85b5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_NIEVES_LOD1
+    second: {fileID: 2100000, guid: 28cb6a10780755f49a9ce454e97c0f4f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_NIEVES_NARANJA
+    second: {fileID: 2100000, guid: a429a37727748b64e96470238976e337, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_NIEVES_PAREDES
+    second: {fileID: 2100000, guid: 49592dad20b9c0a46a7309d832058f3b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_NIEVES_VENTANAS
+    second: {fileID: 2100000, guid: 2e79f2ca522d7d24d832fe4f1f51d066, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -50,18 +80,17 @@ ModelImporter:
     lODScreenPercentages:
     - 0.25
     - 0.125
-    - 0.0625
     - 0.01
-    globalScale: 5
+    globalScale: 2
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
     importVisibility: 1
-    importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -110,7 +139,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.049999997
+    globalScale: 2
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

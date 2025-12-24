@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: da2629075b01a4f4f845357cb91a64da
+guid: 4e1e6edca852d9c4a9ab663c32ba8cdf
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,18 +7,78 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ARBOL_01_LOD1
-    second: {fileID: 2100000, guid: c79c647cca157e4419cbd62fe33814bf, type: 2}
+      name: MOR_TEP_ZOCALO_AMARILLO
+    second: {fileID: 2100000, guid: 5ec96f0d238f2d149a36cc0c57e8081b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: COM_MAP_ARBOL_01_COPA
-    second: {fileID: 2100000, guid: f69540f07cbf5834d80d31dca6ad1a5f, type: 2}
+      name: MOR_TEP_ZOCALO_ARBOLES_HOJAS
+    second: {fileID: 2100000, guid: da411475a52d82d45925b339949cc396, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: COM_MAP_ARBOL_01_TRONCO
-    second: {fileID: 2100000, guid: cdf55c87df7cb5b4496178b391765d93, type: 2}
+      name: MOR_TEP_ZOCALO_ARBOLES_LOD1
+    second: {fileID: 2100000, guid: 43b89c9a5cbed5e48a1bf725b33b0118, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_ZOCALO_ARBOLES_TRONCOS
+    second: {fileID: 2100000, guid: ee6ba19748e8d2d40bf723c9e3a0fbcf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_ZOCALO_LOD1
+    second: {fileID: 2100000, guid: d3502d64abc1cc4479e627cafbcea8c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_ZOCALO_LOD2
+    second: {fileID: 2100000, guid: 373c2ae8faa0e2a45a34c765868838b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_ZOCALO_PUERTA
+    second: {fileID: 2100000, guid: 6cabf408916570944bebf4e77d63e55d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_ZOCALO_SOPORTES
+    second: {fileID: 2100000, guid: 43d0adb585ceae7448df9ce50fa1f29f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_ZOCALO_TECHO
+    second: {fileID: 2100000, guid: cfef857e65945fc479c7f6a10fac75dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_ZOCALO_TECHO_LOD1
+    second: {fileID: 2100000, guid: 44ed246a9b15e7f40895cf1c282507a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_ZOCALO_TECHO_MURO
+    second: {fileID: 2100000, guid: faee033d591f9254382420f16b1ad5a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_ZOCALO_TECHO_PILARES
+    second: {fileID: 2100000, guid: 27d389e1cf6dc63419255c1710894dbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_ZOCALO_TECHO_TECHO
+    second: {fileID: 2100000, guid: 8d805978b5d1aee4db8af6a9eb7a781c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_ZOCALO_TECHO_TIERRA
+    second: {fileID: 2100000, guid: b5efbeadb29c46247aaf6ecbf817f2cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_ZOCALO_VALLA
+    second: {fileID: 2100000, guid: a833e4094285e534aa1129f173e3c98e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -50,18 +110,17 @@ ModelImporter:
     lODScreenPercentages:
     - 0.25
     - 0.125
-    - 0.0625
     - 0.01
-    globalScale: 5
+    globalScale: 2
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
     importVisibility: 1
-    importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -110,7 +169,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.049999997
+    globalScale: 0.02
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

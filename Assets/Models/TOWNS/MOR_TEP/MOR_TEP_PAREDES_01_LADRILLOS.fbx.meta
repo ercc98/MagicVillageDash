@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: da2629075b01a4f4f845357cb91a64da
+guid: cf0c698d5f63f7d419216013e8196e87
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,18 +7,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ARBOL_01_LOD1
-    second: {fileID: 2100000, guid: c79c647cca157e4419cbd62fe33814bf, type: 2}
+      name: MOR_TEP_PAREDES_01_SINBORDE_LOD1
+    second: {fileID: 2100000, guid: 66b76de4eae5f6148acf35f763999e05, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: COM_MAP_ARBOL_01_COPA
-    second: {fileID: 2100000, guid: f69540f07cbf5834d80d31dca6ad1a5f, type: 2}
+      name: MOR_TEP_PAREDES_LADRILLOS_AZUL
+    second: {fileID: 2100000, guid: 43c9b896ba1a57a4e898b3deedb42b31, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: COM_MAP_ARBOL_01_TRONCO
-    second: {fileID: 2100000, guid: cdf55c87df7cb5b4496178b391765d93, type: 2}
+      name: MOR_TEP_PAREDES_LADRILLOS_AZULOSCURO
+    second: {fileID: 2100000, guid: f5bb8c54830c093468bede25b6b27a88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_PAREDES_LADRILLOS_MORADO
+    second: {fileID: 2100000, guid: ca46ed25c6235f841a28538130a8fe0d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_PAREDES_LADRILLOS_PARED
+    second: {fileID: 2100000, guid: a4fc9a2cc18c56d438783fd2c8cc3eb3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MOR_TEP_PAREDES_LADRILLOS_ROSA
+    second: {fileID: 2100000, guid: 8b95a9837b052a7409d008127483afc7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -49,10 +64,8 @@ ModelImporter:
   meshes:
     lODScreenPercentages:
     - 0.25
-    - 0.125
-    - 0.0625
     - 0.01
-    globalScale: 5
+    globalScale: 2
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -69,7 +82,7 @@ ModelImporter:
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
-    bakeAxisConversion: 0
+    bakeAxisConversion: 1
     preserveHierarchy: 0
     skinWeightsMode: 0
     maxBonesPerVertex: 4
@@ -110,7 +123,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.049999997
+    globalScale: 0.02
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
