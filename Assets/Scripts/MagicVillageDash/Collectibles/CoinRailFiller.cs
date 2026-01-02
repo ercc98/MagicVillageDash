@@ -6,8 +6,8 @@ namespace MagicVillageDash.Collectibles
 
     public sealed class CoinRailFiller : MonoBehaviour, IChunkFiller
     {
+        [Header("References")]
         [SerializeField] private CoinRailGenerator generator;
-
 
         void OnEnable()
         {

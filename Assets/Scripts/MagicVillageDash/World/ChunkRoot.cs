@@ -9,19 +9,23 @@ namespace MagicVillageDash.World
     public sealed class ChunkRoot : MonoBehaviour
     {
         
-        // Registries (no Transform scans)
         internal readonly List<CoinCollectible> coins = new();
-        internal readonly List<ObstacleHazard>  obstacles = new();
-        
-        // Factories are injected once by the spawner
+        internal readonly List<ObstacleHazard>  obstacles = new();        
         private CoinFactory coinFactory;
         private ObstacleFactory obstacleFactory;
         [SerializeField] private float chunkLength = 40f;
+        [SerializeField] public bool canSpawnObstacles = true;
 
         public float ChunkLength
         {
             get => chunkLength;
             set => chunkLength = value;
+        }
+
+        public bool CanSpawnObstacles
+        {
+            get => canSpawnObstacles;
+            set => canSpawnObstacles = value;
         }
         public ChunkFactory OwnerFactory { get; internal set; }
 

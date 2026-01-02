@@ -6,8 +6,7 @@ namespace MagicVillageDash.Obstacles
     public sealed class ObstacleRailFiller : MonoBehaviour, IChunkFiller
     {
         [Header("References")]
-        [SerializeField] private ObstacleRailGenerator generator;
-                
+        [SerializeField] private ObstacleRailGenerator generator;                
 
         void OnEnable()
         {

@@ -8,19 +8,18 @@ namespace MagicVillageDash.World
     public sealed class ChunkSpawner : MonoBehaviour
     {
         [Header("Refs")]
-        [SerializeField] Transform player;        // stationary
+        [SerializeField] Transform player;
         [SerializeField] CoinRailFiller coinRailFiller;
         [SerializeField] ObstacleRailFiller obstacleRailFiller;
-        [SerializeField] private ChunkFactory[] factories;  // multiple factories (no weights)
-
-        //[Header("Layout")]
-        float chunkLength = 24f;
+        [SerializeField] private ChunkFactory[] factories;
+        
 
         [Header("Runway")]
         [SerializeField] int keepAhead = 6;
         [SerializeField] float despawnBehindDistance = 40f;
         [SerializeField] float startAheadDistance = 10f;
         readonly List<ChunkRoot> active = new();
+        float chunkLength = 24f;
         int nextSpawnZ;
 
         IChunkFiller coinFiller;
@@ -75,10 +74,9 @@ namespace MagicVillageDash.World
             ChunkRoot chunk = factory.Spawn(new Vector3(0f, 0f, nextSpawnZ), Quaternion.identity);
 
             coinFiller.FillChunk(chunk);
-            if(spawnObstacles) obstacleFiller.FillChunk(chunk);
+            if(spawnObstacles && chunk.canSpawnObstacles) obstacleFiller.FillChunk(chunk);
             // Mark the owner factory so we can recycle correctly
             chunk.OwnerFactory = factory;
-            //chunk.ChunkLength = chunkLength;
             chunkLength = chunk.ChunkLength;
             active.Add(chunk);
             return chunk;

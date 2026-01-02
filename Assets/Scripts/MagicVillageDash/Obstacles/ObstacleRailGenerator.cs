@@ -2,10 +2,6 @@ using UnityEngine;
 
 namespace MagicVillageDash.Obstacles
 {
-    /// <summary>
-    /// Generates obstacles for a given Z range. Chunks call FillRange(...) to spawn
-    /// obstacles that fall within their Z span.
-    /// </summary>
     public sealed class ObstacleRailGenerator : MonoBehaviour
     {
         [Header("Factories")]
@@ -14,8 +10,8 @@ namespace MagicVillageDash.Obstacles
 
         [Header("Lanes (global, symmetric)")]
         [SerializeField, Min(2)] private int laneCount = 3;
-        [SerializeField] private float laneWidth = 2.5f;  // distance between lane centers
-        [SerializeField] private float laneCenterX = 0f;  // middle lane X
+        [SerializeField] private float laneWidth = 2.5f;
+        [SerializeField] private float laneCenterX = 0f;
 
         [Header("Rules")]
         [Range(0, 1)][SerializeField] private float obstacleChancePerLane = 0.226f;
