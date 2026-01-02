@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MagicVillageDash.Collectibles;
 using MagicVillageDash.Obstacles;
@@ -7,7 +8,6 @@ namespace MagicVillageDash.World
 {
     public sealed class ChunkRoot : MonoBehaviour
     {
-        [SerializeField] private ObstacleRaidFiller contentSpawner;
         
         // Registries (no Transform scans)
         internal readonly List<CoinCollectible> coins = new();
@@ -25,17 +25,13 @@ namespace MagicVillageDash.World
         }
         public ChunkFactory OwnerFactory { get; internal set; }
 
-        void Awake()
-        {
-            contentSpawner.ChunkLength = ChunkLength;
-        }
 
         void OnEnable()
         {
-            //contentSpawner.ChunkLength = ChunkLength;
-            contentSpawner?.Spawn();
+            
             if(coinFactory == null) coinFactory = FindAnyObjectByType<CoinFactory>();
-            if(obstacleFactory == null) obstacleFactory = FindAnyObjectByType<ObstacleFactory>();
+            if (obstacleFactory == null) obstacleFactory = FindAnyObjectByType<ObstacleFactory>();
+            
         }
 
         /// <summary>Called by ChunkSpawner right after spawning the chunk.</summary>
@@ -49,8 +45,7 @@ namespace MagicVillageDash.World
         public void Register(CoinCollectible c)   { if (c && !coins.Contains(c)) coins.Add(c); }
         public void Unregister(CoinCollectible c) { if (c) coins.Remove(c); }
         public void Register(ObstacleHazard h)    { if (h && !obstacles.Contains(h)) obstacles.Add(h); }
-        public void Unregister(ObstacleHazard h)  { if (h) obstacles.Remove(h); }
-
+        public void Unregister(ObstacleHazard h) { if (h) obstacles.Remove(h); }
 
         public void ResetForPool()
         {
@@ -78,5 +73,7 @@ namespace MagicVillageDash.World
             }
             obstacles.Clear();
         }
+
+        
     }
 }

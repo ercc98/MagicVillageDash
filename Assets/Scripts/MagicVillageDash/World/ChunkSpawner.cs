@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using MagicVillageDash.Collectibles;
+using MagicVillageDash.Obstacles;
 using UnityEngine;
 
 namespace MagicVillageDash.World
@@ -8,6 +9,8 @@ namespace MagicVillageDash.World
     {
         [Header("Refs")]
         [SerializeField] Transform player;        // stationary
+        [SerializeField] CoinRailFiller coinRailFiller;
+        [SerializeField] ObstacleRailFiller obstacleRailFiller;
         [SerializeField] private ChunkFactory[] factories;  // multiple factories (no weights)
 
         //[Header("Layout")]
@@ -20,13 +23,24 @@ namespace MagicVillageDash.World
         readonly List<ChunkRoot> active = new();
         int nextSpawnZ;
 
+        IChunkFiller coinFiller;
+        IChunkFiller obstacleFiller;
+
+        void OnEnable()
+        {
+            coinFiller = coinRailFiller;
+            obstacleFiller = obstacleRailFiller;
+        }
+
         void Start()
         {
             nextSpawnZ = (int)(player.position.z + startAheadDistance);
-            FillOneAhead().ResetObstaclesForPool();
-            
+            FillOneAhead(false);
             nextSpawnZ += (int)chunkLength;
             FillAhead();
+            //nextSpawnZ += (int)chunkLength;
+            //FillOneAhead();
+            //nextSpawnZ -= (int)chunkLength;
             FindAnyObjectByType<CoinRailGenerator>()?.ResetPathAt(player.position.z);
 
         }
@@ -55,10 +69,13 @@ namespace MagicVillageDash.World
             nextSpawnZ -= 1 * (int)chunkLength;
         }
 
-        ChunkRoot FillOneAhead()
+        ChunkRoot FillOneAhead(bool spawnObstacles = true)
         {
             var factory = GetRandomFactory();
             ChunkRoot chunk = factory.Spawn(new Vector3(0f, 0f, nextSpawnZ), Quaternion.identity);
+
+            coinFiller.FillChunk(chunk);
+            if(spawnObstacles) obstacleFiller.FillChunk(chunk);
             // Mark the owner factory so we can recycle correctly
             chunk.OwnerFactory = factory;
             //chunk.ChunkLength = chunkLength;
