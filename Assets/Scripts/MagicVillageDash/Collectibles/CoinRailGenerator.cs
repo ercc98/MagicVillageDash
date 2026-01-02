@@ -3,11 +3,7 @@ using UnityEngine;
 
 namespace MagicVillageDash.Collectibles
 {
-    /// <summary>
-    /// Generates a continuous coin rail across the world Z axis that
-    /// occasionally transitions to adjacent lanes over a smooth distance.
-    /// Chunks call FillRange(...) to spawn coins that fall within their Z span.
-    /// </summary>
+
     public sealed class CoinRailGenerator : MonoBehaviour
     {
         [Header("Factory")]
@@ -68,8 +64,8 @@ namespace MagicVillageDash.Collectibles
             {
 
                 // Advance to next segment(s) if necessary
-                //while (z > _segEndZ)
-                    //PlanNextSegment();
+                while (z > _segEndZ)
+                    PlanNextSegment();
                 
 
                 // Compute X at this Z
