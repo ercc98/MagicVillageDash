@@ -65,7 +65,7 @@ namespace MagicVillageDash.Runner
             // CharacterController.Min Move Distance = 0.0001 for precise grounding
         }
 
-        void Update()
+        void FixedUpdate()
         {
             float dt = Time.deltaTime;
 
