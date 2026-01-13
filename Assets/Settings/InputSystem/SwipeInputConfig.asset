@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: ErccDev.Input::ErccDev.Input.SwipeInputConfig
   pointerPosition: {fileID: -3996995891029121297, guid: 8e52e8ee97f164b4ab52f204fa3c81d8, type: 3}
   pointerPress: {fileID: 1752772261147298123, guid: 8e52e8ee97f164b4ab52f204fa3c81d8, type: 3}
-  minSwipePixels: 50
+  minSwipePixels: 100
   tapMaxPixels: 20
   tapMaxTime: 0.25
