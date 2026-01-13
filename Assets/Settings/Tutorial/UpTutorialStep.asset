@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b43a59b9a49574486d87f6f786e742, type: 3}
+  m_Name: UpTutorialStep
+  m_EditorClassIdentifier: ErccDev.Foundation::ErccDev.Foundation.Core.Tutorial.TutorialStep
+  stepId: 2
+  skippable: 1
+  instructionText: 
+  arrowAnimationName: UpMovement
+  condition: {fileID: 11400000, guid: 160297f047eb91e468e157c0b88b7751, type: 2}

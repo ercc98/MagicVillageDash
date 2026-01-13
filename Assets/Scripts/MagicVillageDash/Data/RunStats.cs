@@ -5,10 +5,6 @@ namespace MagicVillageDash.Data
     [CreateAssetMenu(menuName = "MagicVillageDash/Data/Run Stats", fileName = "RunStatsData")]
     public sealed class RunStats : ScriptableObject
     {
-        [Header("Persistence")]
-        [SerializeField] private string fileName = "magicvillagedash.runstats.json";
-        public string FileName => fileName;
-
         [Header("Best Records")]
         public int bestScore;
         public float bestDistance;

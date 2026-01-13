@@ -5,51 +5,80 @@ using UnityEngine;
 
 namespace MagicVillageDash.World
 {
-    public sealed class ChunkSpawner : MonoBehaviour
+    public sealed class ChunkSpawner : MonoBehaviour, IChunkSpawnerConfig, IChunkSpawnerRunner
     {
         [Header("Refs")]
         [SerializeField] Transform player;
         [SerializeField] CoinRailFiller coinRailFiller;
         [SerializeField] ObstacleRailFiller obstacleRailFiller;
         [SerializeField] private ChunkFactory[] factories;
-        
+        [SerializeField] private ChunkSpawnConfig tutorialConfig;
+        [SerializeField] private ChunkSpawnConfig normalConfig;
 
-        [Header("Runway")]
-        [SerializeField] int keepAhead = 6;
-        [SerializeField] float despawnBehindDistance = 40f;
-        [SerializeField] float startAheadDistance = 10f;
+        [Header("Config")]
+        [SerializeField] private ChunkSpawnConfig activeConfig;
         readonly List<ChunkRoot> active = new();
-        float chunkLength = 24f;
+        float chunkLength;
         int nextSpawnZ;
 
         IChunkFiller coinFiller;
         IChunkFiller obstacleFiller;
 
-        void OnEnable()
+        bool isSpawning;
+
+        public bool IsSpawning => isSpawning;
+
+        void Awake()
         {
             coinFiller = coinRailFiller;
             obstacleFiller = obstacleRailFiller;
         }
 
-        void Start()
+        public void SetConfig(ChunkSpawnConfig config)
         {
-            nextSpawnZ = (int)(player.position.z + startAheadDistance);
+            if (config == null) return;
+            activeConfig = config;
+        }
+
+        public void UseTutorialConfig()
+        {
+            SetConfig(tutorialConfig);
+        }
+
+        public void UseNormalConfig()
+        {
+            SetConfig(normalConfig);
+        }
+
+        public void StartSpawning()
+        {
+            if (isSpawning) return;
+
+            isSpawning = true;
+            nextSpawnZ = (int)(player.position.z + activeConfig.startAheadDistance);
             FillOneAhead(false);
             nextSpawnZ += (int)chunkLength;
             FillAhead();
-            //nextSpawnZ += (int)chunkLength;
-            //FillOneAhead();
-            //nextSpawnZ -= (int)chunkLength;
             FindAnyObjectByType<CoinRailGenerator>()?.ResetPathAt(player.position.z);
-
         }
+
+        public void StopSpawning()
+        {
+            if (!isSpawning) return;
+
+            isSpawning = false;
+        }
+
+        
 
         void FixedUpdate()
         {
+            if (!isSpawning) return;
+            
             if (active.Count > 0)
             {
                 var first = active[0];
-                if (player.position.z - first.transform.position.z > despawnBehindDistance)
+                if (player.position.z - first.transform.position.z > activeConfig.despawnBehindDistance)
                 {
                     active.RemoveAt(0);
                     first.OwnerFactory?.Recycle(first);  // recycle to the same factory
@@ -60,12 +89,13 @@ namespace MagicVillageDash.World
 
         void FillAhead()
         {
-            while (active.Count < keepAhead)
+            while (active.Count < activeConfig.keepAhead)
             {
                 FillOneAhead();
                 nextSpawnZ += (int)chunkLength;
             }
-            nextSpawnZ -= 1 * (int)chunkLength;
+            // Adjust nextSpawnZ to account for despawn distance
+            nextSpawnZ = ((int)chunkLength * activeConfig.keepAhead) - (int)activeConfig.despawnBehindDistance;
         }
 
         ChunkRoot FillOneAhead(bool spawnObstacles = true)
@@ -99,5 +129,6 @@ namespace MagicVillageDash.World
 
             return null;            
         }
+
     }
 }

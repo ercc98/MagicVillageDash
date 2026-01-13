@@ -6,6 +6,7 @@ namespace MagicVillageDash.Data
 {
     public sealed class GameDataService : GameDataServiceBase
     {
+        public static GameDataService _instance;
         [Header("Persistent Data")]
         [SerializeField] private PlayerProfileData playerProfile;
         [SerializeField] private RunStats runStats;
@@ -15,7 +16,17 @@ namespace MagicVillageDash.Data
         protected override void Awake()
         {
             base.Awake();
-            // Ensure profile is valid on first run and gets persisted
+            
+            if (_instance != null && _instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            _instance = this;
+
+            DontDestroyOnLoad(gameObject);
+            
+            
             if (playerProfile)
             {
                 playerProfile.EnsureInitialized();

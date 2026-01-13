@@ -43,7 +43,7 @@ namespace MagicVillageDash.Score
         {
             distanceTracker = distanceTrackerProvider   as IDistanceTracker     ?? FindAnyObjectByType<DistanceTracker>(FindObjectsInactive.Exclude);
             coinCounter = coinCounterProvider as ICoinCounter ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
-            SaveService.LoadSO(runStatsData, runStatsData.FileName);
+            GameDataService._instance.LoadAll();
             bestCoins = runStatsData.bestCoins;
             bestDistance = runStatsData.bestDistance;
             bestScore = runStatsData.bestScore;
@@ -112,8 +112,9 @@ namespace MagicVillageDash.Score
 
             if (changed)
             {
-                runStatsData.RegisterRun(bestScore, bestDistance, bestCoins );
-                SaveService.SaveObject(runStatsData, runStatsData.FileName);
+                runStatsData.RegisterRun(bestScore, bestDistance, bestCoins);
+                GameDataService._instance.SaveAll();
+                //SaveService.SaveObject(runStatsData, runStatsData.FileName);
             }
         }
 
