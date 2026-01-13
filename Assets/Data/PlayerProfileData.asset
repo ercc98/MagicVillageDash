@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053226bf002d1524faecbaeea8f2d95f, type: 3}
   m_Name: PlayerProfileData
   m_EditorClassIdentifier: ErccDev.Foundation::ErccDev.Foundation.Core.Save.PlayerProfileData
-  fileName: PlayerProfileData.json
-  playerId: 
+  playerId: 38883bb7b09c4319aca523960b03575a
   displayName: 
   languageCode: en
   countryCode: MX
-  createdAtUtcTicks: 0
-  lastLoginUtcTicks: 0
+  createdAtUtcTicks: 639020442301661070
+  lastLoginUtcTicks: 639038492977268594
   lastSaveUtcTicks: 0
-  lastAppVersion: 
+  lastAppVersion: 0.1.0
   saveSchemaVersion: 1
   analyticsConsent: 1
+  tutorialCompleted: 0

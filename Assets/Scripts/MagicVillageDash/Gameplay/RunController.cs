@@ -1,15 +1,20 @@
-using System;
 using System.Collections;
 using ErccDev.Foundation.Audio;
 using ErccDev.Foundation.Camera;
 using ErccDev.Foundation.Core.Gameplay;
+using ErccDev.Foundation.Core.Save;
+using ErccDev.Foundation.Core.Tutorial;
+using ErccDev.Foundation.Input.Swipe;
 using MagicVillageDash.Audio;
 using MagicVillageDash.Camera;
 using MagicVillageDash.Character;
+using MagicVillageDash.Data;
 using MagicVillageDash.Enemies;
 using MagicVillageDash.Enemy;
 using MagicVillageDash.FireBaseScripts;
+using MagicVillageDash.Input;
 using MagicVillageDash.Score;
+using MagicVillageDash.Tutorial;
 using MagicVillageDash.World;
 using UnityEngine;
 
@@ -27,6 +32,14 @@ namespace MagicVillageDash.Runner
         [SerializeField] private MonoBehaviour gameSpeedProvider;
         [SerializeField] private MonoBehaviour playerLaneMoverProvider;
         [SerializeField] private MonoBehaviour enemySpawnerProvider;
+        [SerializeField] private MonoBehaviour turorialManagerProvider;
+        [SerializeField] private MonoBehaviour tutorialContextBuilderProvider;
+        [SerializeField] private MonoBehaviour chunkSpawnerProvider;
+        [SerializeField] private MonoBehaviour swipeInputProvider;      // ISwipeInput
+        [SerializeField] private MonoBehaviour runnerInputControllerProvider;
+
+        [Header("Config")]
+        public PlayerProfileData playerProfileData;
 
         ICameraShaker               cameraShaker;
         IEnemySpawner               enemySpawner;
@@ -38,6 +51,12 @@ namespace MagicVillageDash.Runner
         ILaneMover                  playerLaneMover;
         IMovementController         playerMovementController;
         IMovementController         enemyMovementController;
+        ITutorialManager            tutorialManager;
+        ITutorialManagerConfig      tutorialManagerConfig;
+        ITutorialContextBuilder     tutorialContextBuilder;
+        IChunkSpawnerConfig         chunkSpawnerConfig;
+        IChunkSpawnerRunner         chunkSpawnerRunner;
+        IRunnerInputController      runnerInputController;
 
         
         [Header("Behavior")]
@@ -48,6 +67,7 @@ namespace MagicVillageDash.Runner
 
         void Awake()
         {
+            runnerInputController = runnerInputControllerProvider as IRunnerInputController ?? FindAnyObjectByType<RunnerSwipeController>(FindObjectsInactive.Exclude);
             cameraShaker = cameraShakerProvider as ICameraShaker ?? cameraShakerProvider.GetComponent<ICameraShaker>();
             enemySpawner = enemySpawnerProvider as IEnemySpawner ?? FindAnyObjectByType<EnemySpawnManager>(FindObjectsInactive.Exclude);
             runScoreSystem = runScoreSystemProvider as IRunScoreSystem ?? FindAnyObjectByType<RunScoreSystem>(FindObjectsInactive.Exclude);
@@ -55,7 +75,12 @@ namespace MagicVillageDash.Runner
             coinCounter = coinCounterProvider as ICoinCounter ?? FindAnyObjectByType<CoinCounter>(FindObjectsInactive.Exclude);
             gameSpeedController = gameSpeedProvider as IGameSpeedController ?? FindAnyObjectByType<GameSpeedController>(FindObjectsInactive.Exclude);
             playerLaneMover = playerLaneMoverProvider as ILaneMover ?? FindAnyObjectByType<LaneRunner>(FindObjectsInactive.Exclude);
-            playerMovementController = playerLaneMoverProvider as IMovementController ?? playerLaneMoverProvider.GetComponent<IMovementController>();            
+            playerMovementController = playerLaneMoverProvider as IMovementController ?? playerLaneMoverProvider.GetComponent<IMovementController>();
+            tutorialManager = turorialManagerProvider as ITutorialManager ?? FindAnyObjectByType<TutorialManager>(FindObjectsInactive.Exclude);
+            tutorialManagerConfig = turorialManagerProvider as ITutorialManagerConfig ?? turorialManagerProvider.GetComponent<ITutorialManagerConfig>();
+            tutorialContextBuilder = tutorialContextBuilderProvider as ITutorialContextBuilder ?? tutorialContextBuilderProvider.GetComponent<ITutorialContextBuilder>();            
+            chunkSpawnerConfig = chunkSpawnerProvider as IChunkSpawnerConfig ?? chunkSpawnerProvider.GetComponent<IChunkSpawnerConfig>();
+            chunkSpawnerRunner = chunkSpawnerProvider as IChunkSpawnerRunner ?? chunkSpawnerProvider.GetComponent<IChunkSpawnerRunner>();
         }
 
         void OnEnable()
@@ -66,10 +91,16 @@ namespace MagicVillageDash.Runner
             if (playerLaneMover != null) playerLaneMover.OnLaneChangeAttempt += OnPlayerAttempt;
             if (enemySpawner != null) enemySpawner.OnSpawned += OnEnemySpawned;
             if (enemySpawner != null) enemySpawner.OnStartSpawn += OnEnemySpawnedAttempt;
+            if (tutorialManager != null) tutorialManager.OnTutorialEnded += OnTutorialEnded;
+            if (chunkSpawnerConfig != null)
+            {
+                if (playerProfileData.TutorialCompleted)
+                    chunkSpawnerConfig.UseNormalConfig();
+                else
+                    chunkSpawnerConfig.UseTutorialConfig();
+            }
+            tutorialManagerConfig?.SetContext(tutorialContextBuilder.Build());
         }
-
-        
-
 
         void OnDisable()
         {
@@ -80,6 +111,8 @@ namespace MagicVillageDash.Runner
             if (enemyLaneMover != null) enemyLaneMover.OnLaneChangeAttempt -= OnEnemyAttempt;
 
             if (reactionRoutine != null) { StopCoroutine(reactionRoutine); reactionRoutine = null; }
+
+            if (tutorialManager != null ) tutorialManager.OnTutorialEnded -= OnTutorialEnded;
             GameEvents.GameOver -= OnGameOver;
             GameEvents.GameStarted -= OnGameStarted;
         }
@@ -88,14 +121,35 @@ namespace MagicVillageDash.Runner
 
         private void OnGameStarted()
         {
+            Debug.Log("RunController: OnGameStarted called");
             AudioManager.Instance?.Play(MusicId.GameTheme2);
             coinCounter?.ResetCoins(0);
             distanceTracker?.ResetDistance();
             gameSpeedController?.ResetSpeed();
             runScoreSystem?.ResetRun();
             distanceTracker?.StartRun();
-            enemySpawner?.Spawn();
+
             FirebaseAnalyticsService.Instance.LogStartPlaying();
+
+            if (playerProfileData.TutorialCompleted)
+            {
+                enemySpawner?.Spawn();
+                runnerInputController.Activate();
+            }
+            else
+            {
+                tutorialManager?.StartTutorial();
+                runnerInputController.Deactivate();
+            }
+            chunkSpawnerRunner?.StartSpawning();
+        }
+
+        private void OnTutorialEnded()
+        {
+            enemySpawner?.Spawn();
+            runnerInputController.Activate();
+            playerProfileData.TutorialCompleted = true;
+            GameDataService._instance.SaveAll();
         }
 
         private void OnGameOver()
@@ -185,9 +239,19 @@ namespace MagicVillageDash.Runner
         private void DoYield(ILaneMover mover, ILaneMover other, IMovementController otherController, int from, int to)
         {
             if (to < 2)
-                otherController.TurnRight(); 
+                otherController.TurnRight();
             else
                 otherController.TurnLeft(); 
+                
+            /*
+            if (otherController == null || other == null) return;
+
+            int target = other.CurrentLane;
+
+            // If you're on right half, yield left; otherwise yield right (simple heuristic)
+            if (target >= 1) otherController.TurnLeft();
+            else otherController.TurnRight();
+            */
         }
 
 

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RunStatsData
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Data.RunStats
   fileName: run_stats.json
-  bestScore: 0
-  bestDistanceMeters: 0
-  bestCoins: 0
-  lastScore: 0
-  lastDistanceMeters: 0
-  lastCoins: 0
+  bestScore: 360
+  bestDistance: 10.818664
+  bestCoins: 35
+  lastScore: 360
+  lastDistanceMeters: 10.818664
+  lastCoins: 35
