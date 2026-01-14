@@ -57,6 +57,7 @@ namespace MagicVillageDash.Runner
         IChunkSpawnerConfig         chunkSpawnerConfig;
         IChunkSpawnerRunner         chunkSpawnerRunner;
         IRunnerInputController      runnerInputController;
+        ISwipeInput                 swipeInput;
 
         
         [Header("Behavior")]
@@ -81,6 +82,7 @@ namespace MagicVillageDash.Runner
             tutorialContextBuilder = tutorialContextBuilderProvider as ITutorialContextBuilder ?? tutorialContextBuilderProvider.GetComponent<ITutorialContextBuilder>();            
             chunkSpawnerConfig = chunkSpawnerProvider as IChunkSpawnerConfig ?? chunkSpawnerProvider.GetComponent<IChunkSpawnerConfig>();
             chunkSpawnerRunner = chunkSpawnerProvider as IChunkSpawnerRunner ?? chunkSpawnerProvider.GetComponent<IChunkSpawnerRunner>();
+            swipeInput = swipeInputProvider as ISwipeInput ?? swipeInputProvider.GetComponent<ISwipeInput>();
         }
 
         void OnEnable()
@@ -100,6 +102,7 @@ namespace MagicVillageDash.Runner
                     chunkSpawnerConfig.UseTutorialConfig();
             }
             tutorialManagerConfig?.SetContext(tutorialContextBuilder.Build());
+            runnerInputController.Deactivate();
         }
 
         void OnDisable()
@@ -139,8 +142,8 @@ namespace MagicVillageDash.Runner
             else
             {
                 tutorialManager?.StartTutorial();
-                runnerInputController.Deactivate();
             }
+            
             chunkSpawnerRunner?.StartSpawning();
         }
 

@@ -84,3 +84,6 @@ Assets/Settings/FirebaseFiles/google-services.json
 Assets/Settings/FirebaseFiles/google-services.json.meta
 Assets/Firebase/Plugins/x86_64/
 Assets/Plugins/Android/FirebaseApp.androidlib/res/values/google-services.xml
+Assets/Settings/FirebaseFiles/google-services_old.json
+Assets/Settings/FirebaseFiles/google-services_old.json.meta
+Assets/StreamingAssets/google-services-desktop.json

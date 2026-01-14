@@ -59,7 +59,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1119426706182144
-    m_Localized: 'Best DIstance:'
+    m_Localized: 'Best Distance:'
     m_Metadata:
       m_Items: []
   - m_Id: 1119472981938176
@@ -68,6 +68,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1119530024472576
     m_Localized: Collect coins and run!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9133769657978880
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9135134258008064
+    m_Localized: Paused
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9142566019436544
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9142703600996352
+    m_Localized: Quit
     m_Metadata:
       m_Items: []
   references:

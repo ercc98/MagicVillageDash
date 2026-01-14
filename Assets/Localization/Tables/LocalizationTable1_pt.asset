@@ -70,6 +70,22 @@ MonoBehaviour:
     m_Localized: Colete moedas e corra longe!
     m_Metadata:
       m_Items: []
+  - m_Id: 9133769657978880
+    m_Localized: Retomar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9135134258008064
+    m_Localized: Pausado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9142566019436544
+    m_Localized: "Configura\xE7\xF5es"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9142703600996352
+    m_Localized: Sair
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
