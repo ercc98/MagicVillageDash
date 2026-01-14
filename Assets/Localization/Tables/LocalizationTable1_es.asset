@@ -70,6 +70,22 @@ MonoBehaviour:
     m_Localized: "\xA1Recoge monedas y corre!"
     m_Metadata:
       m_Items: []
+  - m_Id: 9133769657978880
+    m_Localized: Reanudar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9135134258008064
+    m_Localized: En pausa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9142566019436544
+    m_Localized: Ajustes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9142703600996352
+    m_Localized: Salir
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

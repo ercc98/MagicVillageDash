@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1
-    m_Localized: "D\uFFFDmarrer"
+    m_Localized: "D\xE9marrer"
     m_Metadata:
       m_Items: []
   - m_Id: 2
-    m_Localized: "Red\uFFFDmarrer"
+    m_Localized: "Red\xE9marrer"
     m_Metadata:
       m_Items: []
   - m_Id: 3
@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5
-    m_Localized: "Pi\uFFFDces:"
+    m_Localized: "Pi\xE8ces:"
     m_Metadata:
       m_Items: []
   - m_Id: 6
@@ -51,7 +51,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 28851483480064
-    m_Localized: "Pi\uFFFDces"
+    m_Localized: "Pi\xE8ces"
     m_Metadata:
       m_Items: []
   - m_Id: 1119312847605760
@@ -68,6 +68,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1119530024472576
     m_Localized: "Ramasse des pi\xE8ces, cours loin !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9133769657978880
+    m_Localized: Reprendre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9135134258008064
+    m_Localized: En pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9142566019436544
+    m_Localized: "Param\xE8tres"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9142703600996352
+    m_Localized: Quitter
     m_Metadata:
       m_Items: []
   references:

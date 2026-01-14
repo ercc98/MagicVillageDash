@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5
-    m_Localized: "M\uFFFDnzen:"
+    m_Localized: "M\xFCnzen:"
     m_Metadata:
       m_Items: []
   - m_Id: 6
@@ -51,7 +51,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 28851483480064
-    m_Localized: "M\uFFFDnzen"
+    m_Localized: "M\xFCnzen"
     m_Metadata:
       m_Items: []
   - m_Id: 1119312847605760
@@ -68,6 +68,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1119530024472576
     m_Localized: "Sammle M\xFCnzen, lauf weit!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9133769657978880
+    m_Localized: Fortsetzen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9135134258008064
+    m_Localized: Pausiert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9142566019436544
+    m_Localized: Einstellungen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9142703600996352
+    m_Localized: Beenden
     m_Metadata:
       m_Items: []
   references:
