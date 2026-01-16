@@ -3,12 +3,12 @@ using UnityEngine;
 namespace MagicVillageDash.Data
 {
     [CreateAssetMenu(menuName = "MagicVillageDash/Data/Run Stats", fileName = "RunStatsData")]
-    public sealed class RunStats : ScriptableObject
+    public sealed class RunStatsData : ScriptableObject
     {
         [Header("Best Records")]
-        public int bestScore;
-        public float bestDistance;
-        public int bestCoins;
+        public int bestScore = 0;
+        public float bestDistance = 0;
+        public int bestCoins = 0;
 
         [Header("Last Run (optional)")]
         public int lastScore;
