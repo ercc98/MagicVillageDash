@@ -49,4 +49,5 @@ MonoBehaviour:
   saveOnPause: 1
   saveOnQuit: 1
   playerProfile: {fileID: 11400000, guid: 9798c78fe431dfc4984197d9a5ee04ba, type: 2}
+  settings: {fileID: 11400000, guid: 5d5887e7fae29ff41b46f6e568d8d3cf, type: 2}
   runStats: {fileID: 11400000, guid: 0732f1a47ec684b448de93a10c0a9f12, type: 2}
