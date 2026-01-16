@@ -1,8 +1,8 @@
-using UnityEngine;
 using ErccDev.Foundation.Audio;
+
 namespace MagicVillageDash.Audio
 {
-    public sealed class AudioManager : AudioManagerBase
+    public sealed class AudioManager : AudioManagerBase, IAudioManager
     {
         public static AudioManager Instance { get; private set; }
 
@@ -31,7 +31,10 @@ namespace MagicVillageDash.Audio
 
         public void SetMusicVolume(float v01)  => SetVolume(SoundCategory.Music, v01);
         public void SetSfxVolume(float v01)    => SetVolume(SoundCategory.SFX, v01);
-        public void ToggleMusic(bool on)       => Toggle(SoundCategory.Music, on);
-        public void ToggleSfx(bool on)         => Toggle(SoundCategory.SFX, on);
+        public void SetMusicEnabled(bool on)       => Toggle(SoundCategory.Music, on);
+        public void SetSfxEnabled(bool on)         => Toggle(SoundCategory.SFX, on);
+        public void SetAmbientEnabled(bool on)     => Toggle(SoundCategory.Ambient, on);
+        public void SetUiEnabled(bool on)          => Toggle(SoundCategory.UI, on);
+        public void SetVoiceEnabled(bool on)       => Toggle(SoundCategory.Voice, on);
     }
 }
