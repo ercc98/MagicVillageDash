@@ -47,6 +47,7 @@
   <Project Path="Unity.TextMeshPro.Editor.csproj" />
   <Project Path="Unity.Rendering.LightTransport.Runtime.csproj" />
   <Project Path="Unity.Burst.Editor.csproj" />
+  <Project Path="Unity.Mobile.AndroidLogcat.Editor.csproj" />
   <Project Path="Unity.VisualScripting.State.csproj" />
   <Project Path="Unity.AI.Navigation.Updater.csproj" />
   <Project Path="UnityEditor.UI.csproj" />
@@ -59,8 +60,8 @@
   <Project Path="Unity.Collections.CodeGen.csproj" />
   <Project Path="Unity.Addressables.csproj" />
   <Project Path="Unity.Mathematics.Editor.csproj" />
-  <Project Path="Unity.VisualScripting.SettingsProvider.Editor.csproj" />
   <Project Path="GoogleMobileAds.Editor.csproj" />
+  <Project Path="Unity.VisualScripting.SettingsProvider.Editor.csproj" />
   <Project Path="Unity.Settings.Editor.csproj" />
   <Project Path="Unity.InputSystem.TestFramework.csproj" />
   <Project Path="Unity.ShaderGraph.Utilities.csproj" />

@@ -1,8 +1,8 @@
-using UnityEngine;
 using ErccDev.Foundation.Audio;
+
 namespace MagicVillageDash.Audio
 {
-    public sealed class AudioManager : AudioManagerBase
+    public sealed class AudioManager : AudioManagerBase, IAudioManager
     {
         public static AudioManager Instance { get; private set; }
 
@@ -25,13 +25,24 @@ namespace MagicVillageDash.Audio
         public void PlayLoop(SfxId     id) => PlayLoop(id, SoundCategory.SFX);
 
         public override void StopLoop(SoundCategory cat)=> base.StopLoop(cat);
-        public void StopLoop(MusicId id)                => base.StopLoop(id, SoundCategory.Music);
-        public void StopLoop(AmbientId id)              => base.StopLoop(id, SoundCategory.Ambient);
-        public void StopLoop(SfxId id)                  => base.StopLoop(id, SoundCategory.SFX);
+        public void StopLoop(MusicId id)                => StopLoop(id, SoundCategory.Music);
+        public void StopLoop(AmbientId id)              => StopLoop(id, SoundCategory.Ambient);
+        public void StopLoop(SfxId id)                  => StopLoop(id, SoundCategory.SFX);
+        public void StopLoop(UIId id)                   => StopLoop(id, SoundCategory.UI);
+        public void StopLoop(VoiceId id)                => StopLoop(id, SoundCategory.Voice);
 
-        public void SetMusicVolume(float v01)  => SetVolume(SoundCategory.Music, v01);
-        public void SetSfxVolume(float v01)    => SetVolume(SoundCategory.SFX, v01);
-        public void ToggleMusic(bool on)       => Toggle(SoundCategory.Music, on);
-        public void ToggleSfx(bool on)         => Toggle(SoundCategory.SFX, on);
+
+        public void SetMusicVolume(float v01)       => SetVolume(SoundCategory.Music, v01);
+        public void SetSfxVolume(float v01)         => SetVolume(SoundCategory.SFX, v01);
+        public void SetAmbientVolume(float v01)     => SetVolume(SoundCategory.Ambient, v01);
+        public void SetUiVolume(float v01)          => SetVolume(SoundCategory.UI, v01);
+        public void SetVoiceVolume(float v01)       => SetVolume(SoundCategory.Voice, v01);
+        
+
+        public void SetMusicEnabled(bool on)       => Toggle(SoundCategory.Music, on);
+        public void SetSfxEnabled(bool on)         => Toggle(SoundCategory.SFX, on);
+        public void SetAmbientEnabled(bool on)     => Toggle(SoundCategory.Ambient, on);
+        public void SetUiEnabled(bool on)          => Toggle(SoundCategory.UI, on);
+        public void SetVoiceEnabled(bool on)       => Toggle(SoundCategory.Voice, on);
     }
 }

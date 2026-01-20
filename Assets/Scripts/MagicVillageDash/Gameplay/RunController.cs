@@ -4,6 +4,7 @@ using ErccDev.Foundation.Camera;
 using ErccDev.Foundation.Core.Gameplay;
 using ErccDev.Foundation.Core.Save;
 using ErccDev.Foundation.Core.Tutorial;
+using ErccDev.Foundation.Data;
 using ErccDev.Foundation.Input.Swipe;
 using MagicVillageDash.Audio;
 using MagicVillageDash.Camera;

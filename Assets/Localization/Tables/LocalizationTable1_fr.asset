@@ -86,6 +86,10 @@ MonoBehaviour:
     m_Localized: Quitter
     m_Metadata:
       m_Items: []
+  - m_Id: 10221337917034496
+    m_Localized: Accepter
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using ErccDev.Foundation.Core.Save;
+using ErccDev.Foundation.Services;
+using ErccDev.Foundation.Data;
 
 namespace MagicVillageDash.Data
 {
@@ -9,7 +10,8 @@ namespace MagicVillageDash.Data
         public static GameDataService _instance;
         [Header("Persistent Data")]
         [SerializeField] private PlayerProfileData playerProfile;
-        [SerializeField] private RunStats runStats;
+        [SerializeField] private SettingsData settings;
+        [SerializeField] private RunStatsData runStats;
         //[SerializeField] private ScriptableObject progress;
         //[SerializeField] private ScriptableObject records;
 
@@ -26,16 +28,10 @@ namespace MagicVillageDash.Data
 
             DontDestroyOnLoad(gameObject);
             
-            
-            if (playerProfile)
-            {
+            if (playerProfile) 
                 playerProfile.EnsureInitialized();
-                SaveAll(pretty: true);
-            }
-            if (runStats)
-            {
-                runStats.RegisterRun(0, 0, 0 );
-            }
+            
+            SaveAll(pretty: true);
         }
         protected override List<ScriptableObject> BuildObjects()
         {
@@ -43,7 +39,7 @@ namespace MagicVillageDash.Data
             {
                 playerProfile,
                 runStats,
-                //settings,
+                settings,
                 //progress,
                 //records
             };

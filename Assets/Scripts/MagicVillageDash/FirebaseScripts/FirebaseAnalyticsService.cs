@@ -1,3 +1,5 @@
+using Firebase;
+using Firebase.Analytics;
 using Firebase.Extensions; 
 using UnityEngine;
 namespace MagicVillageDash.FireBaseScripts
@@ -6,7 +8,7 @@ namespace MagicVillageDash.FireBaseScripts
     {
         public static FirebaseAnalyticsService Instance;
         private bool isFirebaseReady = false;
-        private Firebase.FirebaseApp app;
+        private FirebaseApp app;
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -17,20 +19,23 @@ namespace MagicVillageDash.FireBaseScripts
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
             {
                 var dependencyStatus = task.Result;
-                if (dependencyStatus == Firebase.DependencyStatus.Available)
+                if (dependencyStatus == DependencyStatus.Available)
                 {
                     // Create and hold a reference to your FirebaseApp,
                     // where app is a Firebase.FirebaseApp property of your application class.
-                    app = Firebase.FirebaseApp.DefaultInstance;
+                    app = FirebaseApp.DefaultInstance;
+                    //FirebaseApp.LogLevel = LogLevel.Debug;    //Only for debug purposes
+                    //Debug.Log("VillageDash Firebase is ready to use.");
                     isFirebaseReady = true;
                     // Set a flag here to indicate whether Firebase is ready to use by your app.
+                    
                 }
                 else
                 {
-                    UnityEngine.Debug.LogError(System.String.Format(
+                    Debug.LogError(string.Format(
                     "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
                     // Firebase Unity SDK is not safe to use here.
                 }
@@ -40,13 +45,13 @@ namespace MagicVillageDash.FireBaseScripts
         public void LogAppStart()
         {
             if (!isFirebaseReady) return;
-            Firebase.Analytics.FirebaseAnalytics.LogEvent("app_start");
+            FirebaseAnalytics.LogEvent("app_start");
         }
 
         public void LogStartPlaying()
         {
             if (!isFirebaseReady) return;
-            Firebase.Analytics.FirebaseAnalytics.LogEvent("start_playing");
+            FirebaseAnalytics.LogEvent("start_playing");
             
         }
 
@@ -54,20 +59,20 @@ namespace MagicVillageDash.FireBaseScripts
         {
             if (!isFirebaseReady) return;
 
-            var parameters = new System.Collections.Generic.List<Firebase.Analytics.Parameter>
+            var parameters = new System.Collections.Generic.List<Parameter>
             {
                 new("distance", distance),
                 new("coins", coins)
             };
 
-            Firebase.Analytics.FirebaseAnalytics.LogEvent("player_died", parameters.ToArray());
+            FirebaseAnalytics.LogEvent("player_died", parameters.ToArray());
 
         }
 
         public void LogStopPlaying()
         {
             if (!isFirebaseReady) return;
-            Firebase.Analytics.FirebaseAnalytics.LogEvent("stop_playing");
+            FirebaseAnalytics.LogEvent("stop_playing");
         }
     }
 }

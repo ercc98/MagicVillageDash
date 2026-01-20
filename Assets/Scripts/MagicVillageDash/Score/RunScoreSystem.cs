@@ -34,7 +34,7 @@ namespace MagicVillageDash.Score
         public event Action<int>   OnBestScoreChanged;
         public event Action<float> OnBestDistanceChanged;
 
-        public RunStats runStatsData;
+        public RunStatsData runStatsData;
 
         IDistanceTracker distanceTracker;
         ICoinCounter     coinCounter;
