@@ -23,13 +23,16 @@ namespace MagicVillageDash.Settings
             settings.Clamp();
 
             AudioListener.volume = settings.MasterVolume;
-
-            QualitySettings.SetQualityLevel(settings.QualityLevel, applyExpensiveChanges: true);
+            
+            GraphicsQualityManager.Apply(settings.QualityLevel);
 
             if (audioManager != null)
             {
                 audioManager.SetMusicVolume(settings.MusicVolume);
                 audioManager.SetSfxVolume(settings.SfxVolume);
+                audioManager.SetAmbientVolume(settings.AmbientVolume);
+                audioManager.SetUiVolume(settings.UiVolume);
+                audioManager.SetVoiceVolume(settings.VoiceVolume);
 
                 audioManager.SetMusicEnabled(settings.MusicEnabled);
                 audioManager.SetAmbientEnabled(settings.AmbientEnabled);
