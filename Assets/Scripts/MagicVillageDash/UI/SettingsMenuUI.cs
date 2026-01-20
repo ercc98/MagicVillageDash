@@ -11,6 +11,10 @@ namespace MagicVillageDash.UI
         [SerializeField] private SettingsData settings;
         [SerializeField] private MonoBehaviour settingsApplierProvider; // ISettingsApplier
 
+        [Header("UI")]
+        [SerializeField] private GameObject settingsMenuRoot;
+        [SerializeField] private Button acceptButton;
+
         [Header("Audio")]
         [SerializeField] private Slider masterSlider;
         [SerializeField] private Slider musicSlider;
@@ -37,6 +41,7 @@ namespace MagicVillageDash.UI
         private void Awake()
         {
             applier = settingsApplierProvider as ISettingsApplier;
+            if (acceptButton != null) acceptButton.onClick.AddListener(OnCloseButtonClicked);
             if (settings == null) Debug.LogError($"{nameof(SettingsMenuUI)}: SettingsData missing.", this);
             if (applier == null) Debug.LogError($"{nameof(SettingsMenuUI)}: applierProvider must implement ISettingsApplier.", this);
         }
@@ -135,9 +140,14 @@ namespace MagicVillageDash.UI
         private void OnAmbientEnabled(bool on)  { if (suppressEvents) return; settings.AmbientEnabled = on; Apply(); }
         private void OnSfxEnabled(bool on)      { if (suppressEvents) return; settings.SfxEnabled     = on; Apply(); }
         private void OnUiEnabled(bool on)       { if (suppressEvents) return; settings.UiEnabled      = on; Apply(); }
-        private void OnVoiceEnabled(bool on)    { if (suppressEvents) return; settings.VoiceEnabled   = on; Apply(); }
-
+        private void OnVoiceEnabled(bool on) { if (suppressEvents) return; settings.VoiceEnabled = on; Apply(); }
+        
         private void OnQuality(int idx)         { if (suppressEvents) return; settings.QualityLevel = idx; Apply(); }
-        private void OnVibration(bool on)       { if (suppressEvents) return; settings.Vibration = on; Apply(); }
+        private void OnVibration(bool on) { if (suppressEvents) return; settings.Vibration = on; Apply(); }
+
+        private void OnCloseButtonClicked()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

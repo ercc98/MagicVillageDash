@@ -7,17 +7,18 @@ namespace MagicVillageDash.UI
 {
     public sealed class PauseMenuUI : MonoBehaviour
     {
-        [Header("Foundation")]
         [SerializeField] private MonoBehaviour pauseServiceProvider;
+        
+
 
         [Header("UI")]
         [SerializeField] private GameObject pauseMenuRoot;
         [SerializeField] private Button resumeButton;
         [SerializeField] private Button settingsButton;  
-        [SerializeField] private Button quitButton;      
-        [SerializeField] private Button restartButton;       
+        [SerializeField] private Button quitButton;
+        [SerializeField] private Button restartButton;    
+        [SerializeField] private GameObject settingsMenuGO; // SettingsMenuUI (optional)   
 
-        [Header("Optional: Pause behavior")]
         [SerializeField] private bool useTimeScalePause = true;
 
         private IPauseService pause;
@@ -75,7 +76,7 @@ namespace MagicVillageDash.UI
 
         private void OnSettingsClicked()
         {
-            
+            settingsMenuGO?.SetActive(true);
         }
 
         private void OnQuitClicked()

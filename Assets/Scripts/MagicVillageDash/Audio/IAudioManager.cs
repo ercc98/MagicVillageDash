@@ -6,6 +6,9 @@ namespace MagicVillageDash
     {
         void SetMusicVolume(float v);
         void SetSfxVolume(float v);
+        void SetAmbientVolume(float v);
+        void SetUiVolume(float v);
+        void SetVoiceVolume(float v);
 
         void SetMusicEnabled(bool on);
         void SetAmbientEnabled(bool on);
