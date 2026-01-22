@@ -8,6 +8,8 @@ namespace MagicVillageDash.World.Biomes
         [Header("Start")]
         [SerializeField] private BiomeDefinition startingBiome;
 
+        [SerializeField] private ChunkFactoryInstaller installer;
+
         [Header("Rules")]
         [SerializeField] private bool avoidSameBiome = true;
         [SerializeField] private bool noObstaclesInConnectors = true;
@@ -22,6 +24,11 @@ namespace MagicVillageDash.World.Biomes
 
         private void Awake()
         {
+            if (installer == null)
+                Debug.LogError($"{nameof(BiomeDirector)}: installer is not assigned.");
+
+            if (startingBiome == null)
+                Debug.LogError($"{nameof(BiomeDirector)}: startingBiome is not assigned.");
             ResetRun();
         }
 
@@ -32,6 +39,9 @@ namespace MagicVillageDash.World.Biomes
             current = startingBiome;
             remainingInBlock = current != null ? current.PickBlockSize() : 0;
             needsStartChunk = true;
+
+            // NOTE: We intentionally do NOT clear prefabToInstance.
+            // Pools should persist across runs unless you explicitly want to rebuild them.
         }
 
         public ChunkFactory GetNextFactory(out bool spawnObstacles)
@@ -55,9 +65,8 @@ namespace MagicVillageDash.World.Biomes
             if (needsStartChunk)
             {
                 needsStartChunk = false;
-                var start = current.PickStartFactory();
-                if (start != null)
-                    return start;
+                ChunkFactory start = Resolve(current.PickStartFactory());
+                if (start != null) return start;
             }
 
             // 3) block ended → transition
@@ -69,7 +78,12 @@ namespace MagicVillageDash.World.Biomes
 
             // 4) normal biome chunk
             remainingInBlock--;
-            return current.PickLoopFactory();
+
+            ChunkFactory loop = Resolve(current.PickLoopFactory());
+            if (loop == null)
+                Debug.LogError($"{nameof(BiomeDirector)}: Biome '{current.name}' returned null loop factory.");
+
+            return loop;
         }
 
         private void TransitionToNextBiome()
@@ -77,7 +91,6 @@ namespace MagicVillageDash.World.Biomes
             var transitions = current.transitions;
             if (transitions == null || transitions.Length == 0)
             {
-                // stay in same biome
                 remainingInBlock = current.PickBlockSize();
                 needsStartChunk = false;
                 return;
@@ -91,13 +104,13 @@ namespace MagicVillageDash.World.Biomes
                 return;
             }
 
-            // enqueue connectors
+            // enqueue connectors (instances)
             int connectorCount = picked.PickConnectorCount();
             for (int i = 0; i < connectorCount; i++)
             {
-                var cf = picked.PickConnectorFactory();
-                if (cf != null)
-                    connectorQueue.Enqueue(cf);
+                ChunkFactory connector = Resolve(picked.PickConnectorFactory());
+                if (connector != null)
+                    connectorQueue.Enqueue(connector);
             }
 
             // switch biome
@@ -106,72 +119,63 @@ namespace MagicVillageDash.World.Biomes
             needsStartChunk = true;
         }
 
-        private BiomeTransitionOption PickWeightedTransition(
-            BiomeTransitionOption[] options,
-            BiomeDefinition from)
+        private BiomeTransitionOption PickWeightedTransition( BiomeTransitionOption[] options, BiomeDefinition from)
         {
             float total = 0f;
 
-            // first pass (respect avoidSameBiome)
+            // pass 1: avoid same biome if enabled
             for (int i = 0; i < options.Length; i++)
             {
                 var o = options[i];
-                if (o == null || o.toBiome == null || o.weight <= 0f)
-                    continue;
-
-                if (avoidSameBiome && o.toBiome == from)
-                    continue;
-
+                if (o == null || o.toBiome == null || o.weight <= 0f) continue;
+                if (avoidSameBiome && o.toBiome == from) continue;
                 total += o.weight;
             }
 
             // fallback: allow same biome
+            bool allowSame = false;
             if (total <= 0f)
             {
+                allowSame = true;
+                total = 0f;
                 for (int i = 0; i < options.Length; i++)
                 {
                     var o = options[i];
-                    if (o == null || o.toBiome == null || o.weight <= 0f)
-                        continue;
+                    if (o == null || o.toBiome == null || o.weight <= 0f) continue;
                     total += o.weight;
                 }
-
                 if (total <= 0f) return null;
-
-                float r2 = Random.value * total;
-                float acc2 = 0f;
-
-                for (int i = 0; i < options.Length; i++)
-                {
-                    var o = options[i];
-                    if (o == null || o.toBiome == null || o.weight <= 0f)
-                        continue;
-
-                    acc2 += o.weight;
-                    if (r2 <= acc2)
-                        return o;
-                }
             }
 
-            // normal pick
             float r = Random.value * total;
             float acc = 0f;
 
             for (int i = 0; i < options.Length; i++)
             {
                 var o = options[i];
-                if (o == null || o.toBiome == null || o.weight <= 0f)
-                    continue;
-
-                if (avoidSameBiome && o.toBiome == from)
-                    continue;
+                if (o == null || o.toBiome == null || o.weight <= 0f) continue;
+                if (!allowSame && avoidSameBiome && o.toBiome == from) continue;
 
                 acc += o.weight;
-                if (r <= acc)
-                    return o;
+                if (r <= acc) return o;
             }
 
             return null;
+        }
+
+        private ChunkFactory Resolve(ChunkFactory prefab)
+        {
+            if (prefab == null) return null;
+            if (installer == null)
+            {
+                Debug.LogError($"{nameof(BiomeDirector)}: installer is not assigned.");
+                return null;
+            }
+
+            var inst = installer.Resolve(prefab);
+            if (inst == null)
+                Debug.LogError($"{nameof(BiomeDirector)}: No instance found for prefab '{prefab.name}'. Did you include its biome in installer?");
+            return inst;
         }
     }
 }
