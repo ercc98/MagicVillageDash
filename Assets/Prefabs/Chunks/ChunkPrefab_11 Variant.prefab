@@ -5503,6 +5503,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1089529727572802683, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
+      propertyPath: canSpawnEnemies
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089529727572802683, guid: ad55764724638654eafbc0b16b9fa95d, type: 3}
       propertyPath: canSpawnObstacles
       value: 0
       objectReference: {fileID: 0}
