@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using MagicVillageDash.Collectibles;
 using MagicVillageDash.Obstacles;
 using MagicVillageDash.World.Biomes;
+using System;
 
 
 namespace MagicVillageDash.World
 {
-    public sealed class ChunkSpawner : MonoBehaviour, IChunkSpawnerConfig, IChunkSpawnerRunner
+    public sealed class ChunkSpawner : MonoBehaviour, IChunkSpawnerConfig, IChunkSpawnerRunner, IEnemySpawnPermission
     {
         [Header("Refs")]
         [SerializeField] Transform player;
@@ -16,7 +17,6 @@ namespace MagicVillageDash.World
         [SerializeField] ObstacleRailFiller obstacleRailFiller;
         [SerializeField] CoinFactory coinFactory;
         [SerializeField] ObstacleFactory obstacleFactory;
-        //[SerializeField] ChunkFactory[] factories;
         [SerializeField] MonoBehaviour biomeDirectorProvider; 
         [SerializeField] ChunkSpawnConfig tutorialConfig;
         [SerializeField] ChunkSpawnConfig normalConfig;
@@ -33,7 +33,11 @@ namespace MagicVillageDash.World
 
         bool isSpawning;
 
+        public event Action OnSpawnedChunk;
+
         public bool IsSpawning => isSpawning;
+        public bool CanSpawnEnemies => isSpawning && (active.Count > 0 && active[0].CanSpawnEnemies && active[1].CanSpawnEnemies);
+
 
         void Awake()
         {
@@ -97,6 +101,7 @@ namespace MagicVillageDash.World
                     active.RemoveAt(0);
                     first.OwnerFactory?.Recycle(first);  // recycle to the same factory
                     FillOneAhead();
+                    OnSpawnedChunk?.Invoke();
                 }
             }
         }
@@ -132,7 +137,7 @@ namespace MagicVillageDash.World
             ChunkRoot chunk = factory.Spawn(new Vector3(0f, 0f, nextSpawnZ), Quaternion.identity, worldMover.transform);
             chunk.InjectFactories(coinFactory, obstacleFactory);
             coinFiller.FillChunk(chunk);
-            if (finalSpawnObstacles && chunk.canSpawnObstacles) obstacleFiller.FillChunk(chunk);
+            if (finalSpawnObstacles && chunk.CanSpawnObstacles) obstacleFiller.FillChunk(chunk);
             // Mark the owner factory so we can recycle correctly
             chunk.OwnerFactory = factory;
             chunkLength = chunk.ChunkLength;
