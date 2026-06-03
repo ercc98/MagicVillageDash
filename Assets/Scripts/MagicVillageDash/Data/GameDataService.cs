@@ -12,6 +12,7 @@ namespace MagicVillageDash.Data
         [SerializeField] private PlayerProfileData playerProfile;
         [SerializeField] private SettingsData settings;
         [SerializeField] private RunStatsData runStats;
+        [SerializeField] private AchievementData achievements;
         //[SerializeField] private ScriptableObject progress;
         //[SerializeField] private ScriptableObject records;
 
@@ -40,6 +41,7 @@ namespace MagicVillageDash.Data
                 playerProfile,
                 runStats,
                 settings,
+                achievements,   // append last: keeps existing save indices stable
                 //progress,
                 //records
             };
