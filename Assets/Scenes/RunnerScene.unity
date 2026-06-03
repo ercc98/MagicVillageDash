@@ -31147,7 +31147,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 375
+    m_Bits: 119
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
