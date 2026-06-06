@@ -93,16 +93,7 @@ namespace MagicVillageDash.Den.Placement
         private void RefreshTray()
         {
             _trayItems.Clear();
-            if (catalog != null)
-            {
-                foreach (var def in catalog.Entries)
-                {
-                    if (def is not ModelCollectionEntry entry) continue;                                         // only placeable structures
-                    if (collectionProgress != null && !collectionProgress.IsDiscovered(entry.entryId)) continue; // not owned yet
-                    if (placement != null && placement.IsPlaced(entry.entryId)) continue;                        // already built
-                    _trayItems.Add(entry);
-                }
-            }
+            _trayItems.AddRange(DenInventory.EnumerateUnplaced(catalog, collectionProgress, placement));
             tray?.Show(_trayItems, Select);
         }
 
