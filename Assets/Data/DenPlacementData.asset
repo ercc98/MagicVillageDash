@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0542d4918328fef40b8689413c6a55bf, type: 3}
   m_Name: DenPlacementData
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Data.DenPlacementData
-  placedIds: []
+  placements: []
