@@ -14336,15 +14336,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7447575459066132927, guid: 8e4a049730d71724cb2f3893ede3785f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.25
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7447575459066132927, guid: 8e4a049730d71724cb2f3893ede3785f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.25
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7447575459066132927, guid: 8e4a049730d71724cb2f3893ede3785f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.25
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7447575459066132927, guid: 8e4a049730d71724cb2f3893ede3785f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14352,7 +14352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7447575459066132927, guid: 8e4a049730d71724cb2f3893ede3785f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7447575459066132927, guid: 8e4a049730d71724cb2f3893ede3785f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21045,6 +21045,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852872482}
   m_CullTransparentMesh: 1
+--- !u!1001 &860961500
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 940515874}
+    m_Modifications:
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846737274113074935, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+      propertyPath: m_Name
+      value: Area_magic_multicolor
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
 --- !u!1 &862119905
 GameObject:
   m_ObjectHideFlags: 0
@@ -23139,10 +23212,11 @@ Transform:
   m_GameObject: {fileID: 940515869}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.30257, z: 25.3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2074464731}
   - {fileID: 2056913508}
   m_Father: {fileID: 1850114990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -31288,6 +31362,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Achievements.AchievementManager
   achievements:
   - {fileID: 11400000, guid: e2a835cc683d945428b65772093ca952, type: 2}
+  - {fileID: 11400000, guid: 5f887f7f6a827ab4bb3e7b20c78eb7a7, type: 2}
+  - {fileID: 11400000, guid: 76a942bf91296f047aeedba4a3269281, type: 2}
+  - {fileID: 11400000, guid: ef3e7f2e82884ea438d5d4d730dfd7ba, type: 2}
   contextProvider: {fileID: 913926716}
   saveFileName: achievements
   achievementData: {fileID: 11400000, guid: c2d26c1c3c06d954bb8f4b4205ed8d89, type: 2}
@@ -40219,7 +40296,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180.09009, y: -119.26868}
+  m_AnchoredPosition: {x: 180.09009, y: -119.2688}
   m_SizeDelta: {x: 360.1802, y: 238.5331}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1573209925
@@ -45830,6 +45907,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45163315b3d809b40b00edef7cbb5543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Pause.PauseServiceBehaviour
+--- !u!4 &2074464731 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8846737274113074932, guid: 81a74a0aefeb7674ca32535d1a269b4a, type: 3}
+  m_PrefabInstance: {fileID: 860961500}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2083713476
 GameObject:
   m_ObjectHideFlags: 0
@@ -51829,7 +51911,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.24578857, y: -212.26099}
+  m_AnchoredPosition: {x: -0.24584961, y: -212.26099}
   m_SizeDelta: {x: -384.38702, y: 219.41064}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &2392699478992717521
@@ -60202,7 +60284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &4500381718176130045
 GameObject:
   m_ObjectHideFlags: 0
