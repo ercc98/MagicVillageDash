@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa7484842a75ba74fb8dbdb2454d2204, type: 3}
-  m_Name: Achiev_Collect100Coins
+  m_Name: Achiev_Collect500Coins
   m_EditorClassIdentifier: ErccDev.Foundation::ErccDev.Foundation.Core.Achievements.AchievementDefinition
   achievementId: collect_100_coins
   hidden: 0
   title: First Coins
   description: Collect 100 coins in a run.
-  icon: {fileID: 21300000, guid: 7f3a647e928c406ba48f629d98ad77b3, type: 3}
-  condition: {fileID: 11400000, guid: 88049330932aa6343bfed58d42b4bdc3, type: 2}
+  icon: {fileID: 21300000, guid: 790e37e27ea8499992f7b342b73c9dbb, type: 3}
+  condition: {fileID: 11400000, guid: 26c4268236694bb4aa551c94c9901444, type: 2}
   rewards:
-  - {fileID: 11400000, guid: 91ea3903e2b5e2a40a41305f8f53c860, type: 2}
+  - {fileID: 11400000, guid: 3875fc9209d943841b9652865a55758d, type: 2}
