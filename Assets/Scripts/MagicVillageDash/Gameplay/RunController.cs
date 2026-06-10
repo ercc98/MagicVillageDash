@@ -136,6 +136,7 @@ namespace MagicVillageDash.Runner
         {
             Debug.Log("RunController: OnGameStarted called");
             AudioManager.Instance?.PlayLoop(MusicId.GameTheme3);
+            AudioManager.Instance?.PlayLoop(AmbientId.Ambient1);
             coinCounter?.ResetCoins(0);
             distanceTracker?.ResetDistance();
             gameSpeedController?.ResetSpeed();
@@ -178,6 +179,7 @@ namespace MagicVillageDash.Runner
         private void OnGameOver()
         {
             AudioManager.Instance?.StopLoop(SoundCategory.Music);
+            AudioManager.Instance?.StopLoop(SoundCategory.Ambient);
             distanceTracker?.StopRun();
             runScoreSystem?.CommitIfBest();
             gameSpeedController?.SetSpeed(0f);

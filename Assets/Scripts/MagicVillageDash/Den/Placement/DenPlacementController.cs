@@ -11,8 +11,9 @@ namespace MagicVillageDash.Den.Placement
     /// <summary>
     /// The brain of the den's "earn it → place it" loop. Builds the tray (owned − placed) from the
     /// collection, feeds it to the carousel, and runs the place flow: tap a tray item → arrows light
-    /// up on every free slot → tap an arrow → the structure is built there and saved. Already-placed
-    /// structures are rebuilt into their saved slots on load.
+    /// up on every free slot → tap an arrow → the structure is built there and saved. Tapping a built
+    /// structure with nothing armed sends it back to the tray. Already-placed structures are rebuilt
+    /// into their saved slots on load.
     ///
     /// Reward-agnostic and read-only against the collection: ownership/discovery is decided elsewhere
     /// (relic pickups, achievements); this only decides WHERE owned structures sit, in <see cref="DenPlacementData"/>.
@@ -61,16 +62,17 @@ namespace MagicVillageDash.Den.Placement
 
         void Update()
         {
-            // Only listen for a slot tap while an item is armed for placement.
-            if (_selected == null) return;
-
             var pointer = Pointer.current;
             if (pointer == null || !pointer.press.wasPressedThisFrame) return;
 
             // Don't steal taps meant for the tray / paging buttons.
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
 
-            TryPlaceAtPointer(pointer.position.ReadValue());
+            var screenPos = pointer.position.ReadValue();
+
+            // Item armed → drop it on a free slot. Nothing armed → pick a built structure back up.
+            if (_selected != null) TryPlaceAtPointer(screenPos);
+            else                   TryPickUpAtPointer(screenPos);
         }
 
         // ---------- Tray ----------
@@ -121,6 +123,24 @@ namespace MagicVillageDash.Den.Placement
 
             _selected = null;
             ShowArrows(false);
+            RefreshTray();
+        }
+
+        /// <summary>Tap a built structure (with nothing armed) to tear it down and return it to the tray.</summary>
+        private void TryPickUpAtPointer(Vector2 screenPos)
+        {
+            if (raycastCamera == null) return;
+
+            var ray = raycastCamera.ScreenPointToRay(screenPos);
+            if (!Physics.Raycast(ray, out var hit, rayMaxDistance, slotMask, QueryTriggerInteraction.Collide))
+                return;
+
+            var slot = hit.collider.GetComponentInParent<DenSlot>();
+            if (slot == null || !slot.IsOccupied) return;
+
+            slot.Clear();
+            placement?.ClearSlot(slot.SlotId);
+            GameDataService._instance?.SaveAll();
             RefreshTray();
         }
 

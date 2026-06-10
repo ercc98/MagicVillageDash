@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27949cd58b5ca140800cd497311fde3, type: 3}
   m_Name: Ambient
   m_EditorClassIdentifier: ErccDev.Audio::ErccDev.Audio.SoundGroup
-  entries: []
+  entries:
+  - id: Ambient1
+    clip: {fileID: 8300000, guid: 68d1e448501da2340bf526e127165fb1, type: 3}
+    volume: 0.5
+    volumeJitter: 0
+    pitchJitter: 0

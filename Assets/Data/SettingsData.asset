@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: SettingsData
   m_EditorClassIdentifier: ErccDev.Foundation::ErccDev.Foundation.Data.SettingsData
   masterVolume: 1
+  ambientVolume: 0.5060481
   musicVolume: 1
   sfxVolume: 1
+  uiVolume: 1
+  voiceVolume: 1
+  musicEnabled: 1
+  ambientEnabled: 1
+  sfxEnabled: 1
+  uiEnabled: 1
+  voiceEnabled: 1
   vibration: 1
   qualityLevel: 2

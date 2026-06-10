@@ -27,6 +27,11 @@ namespace MagicVillageDash.Den.Placement
         public bool IsOccupied => Placed != null;
         public GameObject Placed { get; private set; }
 
+        // Invisible box wrapped around the built structure so a tap can pick it back up, even when the
+        // model prefab ships no collider of its own. Lives on the arrow's layer so the controller's slot
+        // raycast catches it; torn down with the structure.
+        private GameObject _tapBody;
+
         void Awake() => ShowArrow(false);
 
         public void ShowArrow(bool show)
@@ -44,14 +49,45 @@ namespace MagicVillageDash.Den.Placement
 
             var at = anchor != null ? anchor : transform;
             Placed = Instantiate(prefab, at.position, at.rotation, at);
+            BuildTapBody();
             return Placed;
         }
 
         /// <summary>Tears down whatever is built here (does not touch the saved data).</summary>
         public void Clear()
         {
+            if (_tapBody != null) Destroy(_tapBody);
+            _tapBody = null;
             if (Placed != null) Destroy(Placed);
             Placed = null;
+        }
+
+        /// <summary>
+        /// Fits an axis-aligned trigger box around the built structure's renderers so it can be tapped to
+        /// pick up, regardless of the model prefab's own colliders. Assumes the slot marker is unscaled.
+        /// </summary>
+        private void BuildTapBody()
+        {
+            if (Placed == null) return;
+
+            var rends = Placed.GetComponentsInChildren<Renderer>();
+            if (rends.Length == 0) return;
+
+            var bounds = rends[0].bounds;
+            for (int i = 1; i < rends.Length; i++)
+                bounds.Encapsulate(rends[i].bounds);
+
+            _tapBody = new GameObject("TapBody");
+            var t = _tapBody.transform;
+            t.SetParent(transform, worldPositionStays: false);
+            t.position = bounds.center;
+            t.rotation = Quaternion.identity;
+            t.localScale = Vector3.one;
+            _tapBody.layer = arrowIndicator != null ? arrowIndicator.layer : gameObject.layer;
+
+            var box = _tapBody.AddComponent<BoxCollider>();
+            box.isTrigger = true;
+            box.size = bounds.size;
         }
     }
 }

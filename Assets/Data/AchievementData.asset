@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AchievementData
   m_EditorClassIdentifier: MagicVillageDash::MagicVillageDash.Data.AchievementData
   unlockedIds: []
-  lastUnlockedId: 0
+  lastUnlockedId: 

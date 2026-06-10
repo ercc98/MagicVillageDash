@@ -7,7 +7,7 @@ fighting/avoiding enemies, and chasing best runs. This is also the real-world **
 the `com.erccdev.foundation` package — game systems are built on top of that shared library.
 
 - Repo: `https://github.com/ercc98/MagicVillageDash.git` (MIT licensed)
-- Company / Product: **ErccPlay / MagicVillageDash** · `bundleVersion 0.1.0` (pre-release)
+- Company / Product: **ErccPlay / MagicVillageDash** · `bundleVersion 0.1.1` (pre-release, `AndroidBundleVersionCode 1`)
 - Unity Editor: **6000.2.6f2** (Unity 6) or newer · URP rendering
 - Sole author: Ernesto Refugio Cabrera Cerón
 
@@ -70,8 +70,9 @@ There is **no** `Assets/Scripts/ErccDev/` folder anymore — that tooling now co
     `NotificationManagerBase`/`NotificationViewBase`), `NotificationTester` (dev-only harness). Achievement/Collection
     toasts come via Foundation's source bridges. Tintable toast art lives in `Assets/Images/Notifications/`.
   - `AdMobScripts/` — `Interstitial`. `FirebaseScripts/` — `FirebaseAnalyticsService`. `Boostrap/` — `LogoSceneController`.
-- `Assets/Scenes/` — `IntroScene` (title) → `RunnerScene` (core gameplay); `DenScene` (meta-progression
-  den, see below).
+- `Assets/Scenes/` — `IntroScene` (title) → `RunnerScene` (core gameplay) → `DenScene` (meta-progression
+  den, see below). All three are in the build settings; `SampleScene` is disabled. Den ↔ Runner navigation
+  was wired on the `ConnectDenWithRunnerScenes` branch (commit `9df1cb1`).
 - `Assets/IgnoreFolder/` — gitignored; holds **licensed third-party asset packs** not in the repo
   (wolf pack, low-poly environment, ambient effects, UI sound packs). The project won't fully open
   without these placed manually (see commit `a35daf4`).
@@ -97,21 +98,24 @@ There is **no** `Assets/Scripts/ErccDev/` folder anymore — that tooling now co
 ## Working in this repo
 - ⚠️ The `unity-mcp` MCP server no longer works — do not rely on it for driving the Unity editor.
 - Current dev happens on feature branches (`ChangingVisuals`, `BiomeImplementation`, `enemyBehavoir`,
-  `Localization`, `MakingTutorial`, `mobilePolish`, `DenSystem`, …); `main` is the integration branch.
+  `Localization`, `MakingTutorial`, `mobilePolish`, `DenSystem`, `game-comfort-fixes`, …); `main` is the
+  integration branch. The den/collection/achievement/notification systems are all merged to `main`;
+  active polish lives on `game-comfort-fixes`.
 - ⚠️ **Security:** history contains a branch named `GoogleAPIKeyLeaked` — a Google API key was likely
   committed at some point. If still live, rotate/revoke it and scrub it from history; never commit keys.
 - When adding gameplay tuning knobs, expose them on the relevant controller (`GameSpeedController`,
   `RunScoreSystem`) rather than hardcoding.
 
-## Den System (In Progress)
-A cozy meta-progression layer on top of the runner loop.
+## Den System (Built — merged to `main`)
+A cozy meta-progression layer on top of the runner loop. The MVP loop (earn → place) is functional;
+remaining work is content (more structures/slots) and the post-MVP ideas below.
 
 ### Core Concept
 Fixed view of a forest clearing ("Wolfland") that grows as the player earns rewards from races.
 Race → earn a structure drop → place it in the den. No shop or currency conversion — the reward IS
 the structure.
 
-### How it's wired (built, on `DenSystem` branch)
+### How it's wired (built, merged to `main`)
 The MVP plan's separate "DenResourceData inventory" was folded into the **collection** instead — there's
 one source of ownership, not two:
 - **Ownership = discovery.** Picking up a relic or unlocking an achievement discovers a `ModelCollectionEntry`
@@ -123,6 +127,8 @@ one source of ownership, not two:
   flow (tap a tray item → free `DenSlot` arrows light up → tap one → structure spawns from `modelPrefab`
   and saves), and rebuilds saved placements on load. `DenTrayCarouselUI`/`DenTrayItemView` are the tray;
   `DenSlot` (tag `DenSlot`) marks each buildable spot.
+- Tapping a built structure with nothing armed tears it down and returns it to the tray (the placement is
+  cleared and re-saved) — `DenPlacementController.TryPickUpAtPointer` (added on `game-comfort-fixes`).
 - Persistence rides `GameDataService`'s SO save list (`collectionProgress` + `denPlacement` wired on the
   `GameDataService` prefab). Structures so far: Campfire, Swing, Tent, Well, OutlookPost.
 
