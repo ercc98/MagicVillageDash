@@ -15235,7 +15235,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -15552,6 +15552,7 @@ MonoBehaviour:
   playAmbient: 1
   ambient: 0
   maxWaitFrames: 30
+  stopOnSceneExit: 1
 --- !u!4 &1884923431
 Transform:
   m_ObjectHideFlags: 0
