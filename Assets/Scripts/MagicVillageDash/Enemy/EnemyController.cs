@@ -49,8 +49,9 @@ namespace MagicVillageDash.Enemy
 
         }
 
-        void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             if (player != null) player.OnLaneChangeAttempt += OnPlayerAttempt;
             if (selfLaneMover != null) selfLaneMover.OnLaneChanged += OnSelfLaneChanged;
             GameEvents.GameOver += OnGameOver;

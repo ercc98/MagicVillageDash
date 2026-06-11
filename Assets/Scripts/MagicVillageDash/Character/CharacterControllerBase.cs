@@ -35,6 +35,11 @@ namespace MagicVillageDash.Character
             if (gameSpeedController == null) Debug.LogError($"{name}: Missing gameSpeedProvider / GameSpeedController.", this);
         }
 
+        protected virtual void OnEnable()
+        {
+            selfMovementAnimator.Walk(true);
+        }
+
         public virtual void TurnLeft()
         {
             selfLaneMover.MoveLeft();
