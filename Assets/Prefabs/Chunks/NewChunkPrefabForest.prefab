@@ -8484,7 +8484,7 @@ GameObject:
   - component: {fileID: 7608787199448600657}
   - component: {fileID: 2126506850072526222}
   m_Layer: 0
-  m_Name: NewChunkPrefab
+  m_Name: NewChunkPrefabForest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

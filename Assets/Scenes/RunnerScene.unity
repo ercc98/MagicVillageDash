@@ -380,7 +380,7 @@ Canvas:
   m_GameObject: {fileID: 12038401}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -2326,7 +2326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &187129428
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2636,7 +2636,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 337.31, y: -208.53113}
+  m_AnchoredPosition: {x: 337.31, y: -196.53113}
   m_SizeDelta: {x: 674.62, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &195829743
@@ -24681,6 +24681,7 @@ MonoBehaviour:
     m_Bits: 1024
   cooldown: 0.5
   rayMaxDistance: 100
+  idleIntervalRange: {x: 10, y: 20}
   requiredPanels:
   - {fileID: 187129427}
   - {fileID: 2090966779}
@@ -31481,7 +31482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 337.31, y: -367.06226}
+  m_AnchoredPosition: {x: 337.31, y: -343.06226}
   m_SizeDelta: {x: 674.62, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &831609197
@@ -42205,7 +42206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 337.31, y: -525.5934}
+  m_AnchoredPosition: {x: 337.31, y: -489.59338}
   m_SizeDelta: {x: 674.62, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1253791679
@@ -45077,6 +45078,72 @@ MonoBehaviour:
   resultCoinComboAnimator: {fileID: 1587962785}
   comboTimeout: 0.75
   resultShowSeconds: 1.25
+--- !u!1001 &1440093266
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1515748477}
+    m_Modifications:
+    - target: {fileID: 7608787199448600657, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608787199448600657, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608787199448600657, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608787199448600657, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608787199448600657, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608787199448600657, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608787199448600657, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608787199448600657, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608787199448600657, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608787199448600657, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745603785228718127, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+      propertyPath: m_Name
+      value: NewChunkPrefabLeaflessForest
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745603785228718127, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+--- !u!4 &1440093267 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7608787199448600657, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
+  m_PrefabInstance: {fileID: 1440093266}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1444085181
 GameObject:
   m_ObjectHideFlags: 0
@@ -45710,6 +45777,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 201868290}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1515748476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1515748477}
+  m_Layer: 0
+  m_Name: LeaflessForest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1515748477
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515748476}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1440093267}
+  m_Father: {fileID: 1681949421}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1517870787
 GameObject:
@@ -51688,7 +51787,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1578255148
 Transform:
   m_ObjectHideFlags: 0
@@ -53015,6 +53114,7 @@ Transform:
   - {fileID: 194251694}
   - {fileID: 1716153238}
   - {fileID: 1037695739}
+  - {fileID: 1515748477}
   m_Father: {fileID: 1850114990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1682103331
@@ -55030,7 +55130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 337.31, y: -684.1245}
+  m_AnchoredPosition: {x: 337.31, y: -636.1245}
   m_SizeDelta: {x: 674.62, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1835039116
@@ -55576,7 +55676,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5397439606117475602, guid: 1f902061d4db2074fab204cd6a289def, type: 3}
       propertyPath: m_Name
-      value: NewChunkPrefab 1
+      value: NewChunkPrefabForest 1
       objectReference: {fileID: 0}
     - target: {fileID: 5397439606117475602, guid: 1f902061d4db2074fab204cd6a289def, type: 3}
       propertyPath: m_IsActive
@@ -57668,7 +57768,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: ebf50a980a75076449f6c88bc720cf48, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: d7dc17d68a0d0f94eb0d6f208c7cf402, type: 2}
+      objectReference: {fileID: 9100000, guid: e62ec928c41b4c54fbf49636f5adfa55, type: 2}
     - target: {fileID: 5866666021909216657, guid: ebf50a980a75076449f6c88bc720cf48, type: 3}
       propertyPath: m_UpdateMode
       value: 2
@@ -58417,7 +58517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2090966780
 RectTransform:
   m_ObjectHideFlags: 0
@@ -59234,7 +59334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5839058376955939345, guid: b47ccee5e8f12ed489ac6ec7d2d23dcf, type: 3}
       propertyPath: m_Name
-      value: NewChunkPrefab 4
+      value: NewChunkPrefabRiver 1
       objectReference: {fileID: 0}
     - target: {fileID: 5839058376955939345, guid: b47ccee5e8f12ed489ac6ec7d2d23dcf, type: 3}
       propertyPath: m_IsActive
@@ -59699,7 +59799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7282015893167677601, guid: 0903f5d8e0a84124e808bc9636d34ac6, type: 3}
       propertyPath: m_Name
-      value: NewChunkPrefab 5
+      value: NewChunkPrefabRiver 2
       objectReference: {fileID: 0}
     - target: {fileID: 7282015893167677601, guid: 0903f5d8e0a84124e808bc9636d34ac6, type: 3}
       propertyPath: m_IsActive
@@ -61638,11 +61738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8674863430305308013, guid: 76cbab0cb5e604a4199d429ad63e0ded, type: 3}
       propertyPath: m_Name
-      value: NewChunkPrefab 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8674863430305308013, guid: 76cbab0cb5e604a4199d429ad63e0ded, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      value: NewChunkPrefabRiver
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -69352,7 +69448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8767416460214839330, guid: ecf9b74792dfe9b479898c79ee0c92c1, type: 3}
       propertyPath: m_Name
-      value: NewChunkPrefab 8
+      value: NewChunkPrefabIceForest 2
       objectReference: {fileID: 0}
     - target: {fileID: 8767416460214839330, guid: ecf9b74792dfe9b479898c79ee0c92c1, type: 3}
       propertyPath: m_IsActive
@@ -73874,7 +73970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8745603785228718127, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
       propertyPath: m_Name
-      value: NewChunkPrefab
+      value: NewChunkPrefabForest
       objectReference: {fileID: 0}
     - target: {fileID: 8745603785228718127, guid: 333991e31e4f7fa49bfe35a2c6c3442a, type: 3}
       propertyPath: m_IsActive
@@ -74882,11 +74978,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 43210419584558933, guid: a673cbd54ed53e14197725031ff40743, type: 3}
       propertyPath: m_Name
-      value: NewChunkPrefab 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 43210419584558933, guid: a673cbd54ed53e14197725031ff40743, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      value: NewChunkPrefabIceForest
       objectReference: {fileID: 0}
     - target: {fileID: 6459290396745626039, guid: a673cbd54ed53e14197725031ff40743, type: 3}
       propertyPath: m_LocalPosition.x
@@ -76935,7 +77027,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5347527931096171101, guid: 0da4c0239ced60143a7ad8aa977b129f, type: 3}
       propertyPath: m_Name
-      value: NewChunkPrefab 7
+      value: NewChunkPrefabIceForest 1
       objectReference: {fileID: 0}
     - target: {fileID: 5347527931096171101, guid: 0da4c0239ced60143a7ad8aa977b129f, type: 3}
       propertyPath: m_IsActive
@@ -80736,7 +80828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8459645861472767506, guid: 60194b2a3789f0d4a956e34a326957db, type: 3}
       propertyPath: m_Name
-      value: NewChunkPrefab 2
+      value: NewChunkPrefabForest 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

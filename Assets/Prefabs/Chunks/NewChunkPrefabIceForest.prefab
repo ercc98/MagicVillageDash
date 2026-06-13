@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 6459290396745626039}
   - component: {fileID: 6004790731023834154}
   m_Layer: 0
-  m_Name: NewChunkPrefab 6
+  m_Name: NewChunkPrefabIceForest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6459290396745626039
 Transform:
   m_ObjectHideFlags: 0

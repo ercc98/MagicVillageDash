@@ -3623,7 +3623,7 @@ GameObject:
   - component: {fileID: 4707256832656779405}
   - component: {fileID: 2598968156849754005}
   m_Layer: 0
-  m_Name: NewChunkPrefab 4
+  m_Name: NewChunkPrefabRiver 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
